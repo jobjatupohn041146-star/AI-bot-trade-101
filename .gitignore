@@ -13,3 +13,4 @@ data/runs/*.db
 data/runs/*.log
 data/live_state.json
 data/live_journal.db
+data/dashboard/

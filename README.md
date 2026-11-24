@@ -4,7 +4,7 @@
 **1. จิตวิทยาการเทรด → 2. Technical Analysis → 3. Money Management**
 ส่วน Take Profit / Stop Loss จะ **ให้ AI หาเองจากสถิติ** ที่เก็บระหว่างเทรด
 
-> ⚠️ ตอนนี้ทำงานเป็น **Paper trading / Backtest เท่านั้น** ยังไม่ส่งออเดอร์เงินจริง
+> ⚠️ ค่าเริ่มต้นคือ Backtest / Paper / **Testnet / Demo** — เงินจริงต้องเปิด 2 ชั้นเอง (ดูหัวข้อ "เทรดจริง")
 > การเทรดมีความเสี่ยงสูง ผลลัพธ์ในอดีตไม่รับประกันอนาคต
 
 ## ภาพรวมการทำงาน
@@ -14,13 +14,14 @@
 knowledge/*.md ──► study ──► data/playbook.md  (ถ้าความรู้เปลี่ยน ต้องเรียนใหม่)
                                        │  ยังไม่เรียน = บอทปฏิเสธการเทรด
                                        ▼
-แท่งเทียนใหม่ ─► ด่าน 1a จิตวิทยา (tilt / revenge / overtrade / daily loss)
+แท่งเทียนใหม่ ─► มุมมอง TF ใหญ่ (เช่น 4h) จากแท่งที่ปิดแล้วเท่านั้น
+              ─► ด่าน 1a จิตวิทยา (tilt / revenge / overtrade / daily loss)
               ─► ด่าน 2  วิเคราะห์ 4 สำนัก → คะแนน confluence → (Claude ตัดสินใจ)
               ─► ด่าน 1b จิตวิทยา ณ จุดเข้า (FOMO / ความมั่นใจ)
               ─► ด่าน 3  Money Management (size จาก invalidation, drawdown, kill-switch)
               ─► เข้าออเดอร์ที่ open แท่งถัดไป ─► บันทึก journal + เส้นทางราคา (MFE/MAE)
                                                         │
-                       learn-exits: จำลองทุกคู่ SL/TP ◄──┘ → เลือกคู่ที่ expectancy ดีสุดต่อ setup
+        learn-exits: fit บนเทรดเก่า 70% → ตรวจบนเทรดใหม่ 30% ◄──┘ → ผ่านถึงใช้จริง
 ```
 
 ## โครงสร้าง
@@ -36,6 +37,7 @@ knowledge/*.md ──► study ──► data/playbook.md  (ถ้าควา�
 | `tradebot/decision/claude_agent.py` | Claude ตัดสินใจขั้นสุดท้าย (BUY/SELL/HOLD) พร้อมเหตุผลครบ 3 เสา |
 | `tradebot/exits.py` | Learning mode → Optimized mode ของ SL/TP |
 | `tradebot/journal.py` | บันทึกทุกเทรด (SQLite) รวมเส้นทางราคารายแท่ง |
+| `tradebot/brokers/` | `SimBroker` (backtest/paper), `CCXTBroker` (คริปโต, testnet), `MT5Broker` (Forex/ทองคำ, demo) |
 | `tradebot/engine.py` | ลูปแท่งต่อแท่ง (ไม่มี lookahead: ตัดสินใจตอนปิดแท่ง, เข้าที่ open แท่งถัดไป) |
 
 ## เริ่มใช้งาน
@@ -57,8 +59,10 @@ python -m tradebot backtest --csv data.csv --ai        # ให้ Claude เป
 python -m tradebot learn-exits
 python -m tradebot stats
 
-# 4) Paper trading แบบสด
-python -m tradebot paper --yf GC=F --interval 1h --ai
+# 4) เทรดสด (เริ่มที่ paper → testnet/demo)
+python -m tradebot live --broker sim  --yf GC=F --timeframe 1h --ai                  # paper
+python -m tradebot live --broker ccxt --exchange bybit --symbol BTC/USDT:USDT --ai   # testnet
+python -m tradebot live --broker mt5  --symbol XAUUSD --ai                           # MT5 demo
 ```
 
 ไม่ระบุข้อมูล → ใช้ข้อมูลสังเคราะห์ (สำหรับทดสอบระบบเท่านั้น ไม่มี edge จริง)
@@ -70,6 +74,8 @@ python -m tradebot paper --yf GC=F --interval 1h --ai
    - ถือตามเวลา (`learning_hold_bars`, ค่าเริ่มต้น 24 แท่ง) แล้วบันทึก *เส้นทางราคาทุกแท่ง* (กำไร/ขาดทุนสูงสุดในหน่วย R)
 2. **Optimized mode** — เมื่อ setup ใดมีอย่างน้อย 30 เทรด (`min_trades_to_optimize`)
    - `learn-exits` จะ replay ทุกคู่ SL (50–100% ของ stop โครงสร้าง) × TP (0.5R–5R) บนเส้นทางจริง
+   - **กัน overfit (walk-forward)**: หาคู่ที่ดีที่สุดจากเทรดเก่า 70% แล้วทดสอบกับเทรดใหม่ 30% ที่ไม่เคยเห็น
+     ใช้จริงก็ต่อเมื่อผลบนชุดทดสอบ > 0 และไม่แย่กว่าการออกแบบเดิม ไม่ผ่าน → แสดงใน `rejected_overfit_or_no_edge`
    - ถ้าแท่งเดียวโดนทั้ง SL และ TP ให้นับว่าโดน SL (มองแง่ร้ายไว้ก่อน)
    - เลือกคู่ที่ expectancy สูงสุดและเป็นบวกเท่านั้น → บันทึกใน `data/sltp_policy.json` แล้วบอทใช้อัตโนมัติ
    - Setup ที่ expectancy ติดลบหลัง 30 เทรด → ถูกปิด (Money Management)
@@ -98,7 +104,28 @@ python -m tradebot paper --yf GC=F --interval 1h --ai
 python -m pytest -q
 ```
 
+## Multi-timeframe
+- ตั้งใน `config.py`: `htf = "4h"` (ปิดได้ด้วย `None`)
+- บอท resample TF เล็กเป็น TF ใหญ่ แล้วใช้ **เฉพาะแท่ง TF ใหญ่ที่ปิดแล้ว** (ไม่แอบดูอนาคต)
+- bias ของ TF ใหญ่ = โครงสร้าง (BOS/CHoCH) + EMA50/200 → เทรดตาม bias ได้ +2 คะแนน, สวน bias −2.5 คะแนน
+
+## เทรดจริง / Demo / Testnet
+
+| Broker | ตลาด | ค่าเริ่มต้น | ตั้งค่า |
+|---|---|---|---|
+| `sim` | อะไรก็ได้ที่ yfinance มี | paper | — |
+| `ccxt` | คริปโต (Bybit, OKX, Binance Futures …) | **testnet** | env `TRADEBOT_API_KEY`, `TRADEBOT_API_SECRET` (`TRADEBOT_API_PASSWORD` สำหรับ OKX) |
+| `mt5` | Forex / ทองคำ / CFD (Windows + MT5 terminal) | **ปฏิเสธบัญชี real** | login ใน terminal หรือ env `MT5_LOGIN`, `MT5_PASSWORD`, `MT5_SERVER`; `MT5_SERVER_UTC_OFFSET` = เวลาเซิร์ฟเวอร์โบรกเกอร์ต่าง UTC กี่ชั่วโมง (ให้ killzone ตรง) |
+
+ระบบความปลอดภัย:
+- **เงินจริงต้องเปิด 2 ชั้น**: ใส่ `--real` และตั้ง env `TRADEBOT_I_UNDERSTAND_RISK=YES`
+- Stop loss ถูกส่งไปอยู่ที่โบรกเกอร์/exchange พร้อมออเดอร์ (บอทดับ stop ก็ยังอยู่)
+  ถ้าตั้ง stop ไม่สำเร็จ บอทจะปิด position ทันที — ไม่มีวันถือโดยไม่มี stop
+- ขนาด position ถูกปัด **ลง** ตามขั้นต่ำของโบรกเกอร์ (ไม่มีวันเสี่ยงเกินที่คำนวณ)
+- ถ้ามี position ค้างอยู่ก่อนเริ่มบอท → บอทไม่ยอมเริ่ม (ไม่รับ position ที่ไม่รู้ที่มา)
+- Kill-switch (DD ≥ 20%) → หยุดลูปทันที
+- ข้อจำกัด: สถานะจิตวิทยา (แพ้ติดกัน ฯลฯ) อยู่ในหน่วยความจำ ถ้ารีสตาร์ทบอทจะเริ่มนับใหม่
+
 ## ขั้นต่อไปที่แนะนำ
-- เก็บสถิติด้วยข้อมูลจริงหลายปี/หลายตลาด ก่อนเชื่อผล optimize (ระวัง overfit — ควรแยก train/test)
-- เพิ่ม Multi-timeframe (HTF bias + LTF entry)
-- เชื่อมโบรกเกอร์จริง (MT5 / ccxt) — ควรเริ่มจาก demo account
+- เก็บสถิติด้วยข้อมูลจริงหลายปี/หลายตลาด แล้วรัน `learn-exits`
+- รันบน testnet/demo อย่างน้อย 1–3 เดือน เทียบผลกับ backtest ก่อนคิดถึงเงินจริง

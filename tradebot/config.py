@@ -36,6 +36,7 @@ class MoneyConfig:
 class ExitConfig:
     learning_hold_bars: int = 24          # time exit while collecting stats
     min_trades_to_optimize: int = 30      # per setup
+    train_fraction: float = 0.7           # walk-forward split (older 70% fit, newer 30% verify)
     sl_grid: tuple = (0.5, 0.6, 0.7, 0.8, 0.9, 1.0)          # fraction of structural stop
     tp_grid: tuple = (0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0)  # in R of structural stop
 
@@ -55,6 +56,8 @@ class BotConfig:
     initial_equity: float = 10_000.0
     commission_pct: float = 0.0
     lookback_bars: int = 300
+    htf: str | None = "4h"            # higher timeframe for bias (None = off)
+    htf_lookback_bars: int = 1600     # LTF bars resampled for the HTF view
     min_score: float = 0.55
     require_learning: bool = True
     db_path: Path = DATA_DIR / "journal.db"

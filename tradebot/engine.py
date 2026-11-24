@@ -11,7 +11,8 @@ from dataclasses import dataclass, field
 
 import pandas as pd
 
-from .analysis import analyze
+from .analysis import analyze, htf_context
+from .brokers import Broker, Fill, SimBroker
 from .config import BotConfig
 from .decision.rules import Signal, confidence_from_score, evaluate, structural_stop
 from .exits import ExitPolicy
@@ -37,6 +38,7 @@ class Position:
     mode: str
     components: dict
     decision: dict
+    fill: Fill | None = None
     path: list = field(default_factory=list)
 
 
@@ -51,14 +53,17 @@ class PendingOrder:
 
 class TradingEngine:
     def __init__(self, cfg: BotConfig, journal: Journal, ai=None, exit_policy: ExitPolicy | None = None,
-                 intraday: bool = True, run_id: str | None = None):
+                 intraday: bool = True, run_id: str | None = None, broker: Broker | None = None):
         self.cfg = cfg
         self.journal = journal
         self.ai = ai
         self.exits = exit_policy or ExitPolicy(cfg.exits)
         self.intraday = intraday
         self.run_id = run_id or uuid.uuid4().hex[:8]
+        self.broker = broker or SimBroker()
         self.equity = cfg.initial_equity
+        if self.broker.live and self.broker.equity() is not None:
+            self.equity = self.broker.equity()
         self.psych = PsychologyGate(cfg.psychology)
         self.mm = MoneyManager(cfg.money, self.equity)
         self.position: Position | None = None
@@ -66,15 +71,18 @@ class TradingEngine:
         self.blocked = Counter()
         self.decisions: list[dict] = []
         self.equity_curve: list[tuple] = []
+        self._htf_key = None
+        self._htf_ctx = None
 
     # ---------------------------------------------------------------- helpers
     def _setup_disabled(self, setup: str) -> bool:
         st = self.journal.stats().get(setup)
         return bool(st and st["trades"] >= self.cfg.money.disable_setup_after and st["expectancy_r"] < 0)
 
-    def _fill(self, df: pd.DataFrame, i: int, atr_now: float) -> None:
+    def _fill(self, df: pd.DataFrame, i: int, atr_now: float, price_hint: float | None = None,
+              first_bar: int | None = None) -> None:
         po, self.pending = self.pending, None
-        entry = float(df["open"].iloc[i])
+        entry = float(df["open"].iloc[i]) if price_hint is None else price_hint
         sign = 1 if po.direction == "long" else -1
         r0 = (entry - po.structural_stop) * sign
         if r0 <= 0:
@@ -82,17 +90,44 @@ class TradingEngine:
             return
         plan = self.exits.plan_for(po.setup)
         stop = entry - sign * plan.sl_mult * r0
-        open_risk = 0.0
-        sd = self.mm.size(self.equity, entry, stop, atr_now, open_risk, 0, self._setup_disabled(po.setup))
+        venue_positions = self.broker.open_positions() if self.broker.live else 0
+        sd = self.mm.size(self.equity, entry, stop, atr_now, 0.0, venue_positions, self._setup_disabled(po.setup))
         if not sd.ok:
             for r in sd.reasons:
                 self.blocked[f"MM: {r}"] += 1
             return
         tp = entry + sign * plan.tp_r * r0 if plan.tp_r else None
-        self.position = Position(po.direction, po.setup, entry, i, df.index[i].isoformat(), r0, stop, tp,
-                                 sd.size, sd.risk_amount, sd.risk_pct, plan.max_bars, plan.mode,
-                                 po.components, po.decision)
+        size = self.broker.normalize_size(sd.size, entry)
+        if size <= 0:
+            self.blocked["MM: size below broker minimum"] += 1
+            return
+        fill = self.broker.open(po.direction, size, entry, stop, tp)
+        entry = fill.price
+        r0 = (entry - po.structural_stop) * sign
+        if r0 <= 0:  # slipped through the invalidation level: get out
+            self.broker.close(fill, po.direction, entry)
+            self.blocked["slippage through invalidation"] += 1
+            return
+        risk_amount = abs(entry - stop) * fill.size
+        start = i if first_bar is None else first_bar
+        self.position = Position(po.direction, po.setup, entry, start, df.index[i].isoformat(), r0, stop, tp,
+                                 fill.size, risk_amount, sd.risk_pct, plan.max_bars, plan.mode,
+                                 po.components, po.decision, fill)
         self.psych.record_entry()
+
+    def _htf(self, df: pd.DataFrame, i: int) -> dict | None:
+        """Higher-timeframe bias from COMPLETED higher-timeframe bars only."""
+        rule = self.cfg.htf
+        if not rule or i < 1:
+            return None
+        ts, step = df.index[i], df.index[i] - df.index[i - 1]
+        complete_upto = (ts + step).floor(rule)          # first HTF bucket not yet complete
+        if complete_upto == self._htf_key:
+            return self._htf_ctx
+        src = df.iloc[max(0, i - self.cfg.htf_lookback_bars + 1): i + 1]
+        src = src[src.index < complete_upto]
+        self._htf_key, self._htf_ctx = complete_upto, htf_context(src, rule)
+        return self._htf_ctx
 
     def _manage(self, df: pd.DataFrame, i: int) -> None:
         p = self.position
@@ -113,7 +148,11 @@ class TradingEngine:
             reason = "take_profit"
         elif i - p.entry_bar + 1 >= p.max_bars:
             exit_px, reason = c, "time"
+        if exit_px is None and self.broker.live and not self.broker.has_position(p.fill):
+            exit_px, reason = c, "broker_closed"  # SL/TP filled on the venue intrabar
         if exit_px is not None:
+            if self.broker.live:
+                exit_px = self.broker.close(p.fill, p.direction, exit_px)
             self._close(df, i, exit_px, reason)
 
     def _close(self, df: pd.DataFrame, i: int, px: float, reason: str) -> None:
@@ -137,6 +176,8 @@ class TradingEngine:
             "bars_held": len(p.path), "path": p.path, "components": p.components, "decision": p.decision,
         })
         self.psych.record_trade(i, pnl, p.risk_pct)
+        if self.broker.live and self.broker.equity() is not None:
+            self.equity = self.broker.equity()
 
     # ------------------------------------------------------------------- step
     def step(self, df: pd.DataFrame, i: int) -> dict | None:
@@ -164,6 +205,7 @@ class TradingEngine:
 
         # Gate 2: technical analysis (rules) and optional Claude judgement.
         ctx = analyze(window, intraday=self.intraday)
+        ctx["htf"] = self._htf(df, i)
         sig: Signal | None = evaluate(ctx)
         if sig is None:
             return None
@@ -205,6 +247,8 @@ class TradingEngine:
 
         # Gate 3 runs at fill time (needs the real entry price).
         self.pending = PendingOrder(direction, setup, stop, sig.components, decision)
+        if self.broker.live:  # live: the next bar is starting now, send the order immediately
+            self._fill(df, i, ctx["indicators"]["atr"], price_hint=ctx["close"], first_bar=i + 1)
         return decision
 
     def run(self, df: pd.DataFrame, progress: bool = False) -> dict:
@@ -213,7 +257,10 @@ class TradingEngine:
             if progress and i % 250 == 0:
                 print(f"  bar {i}/{len(df)} equity={self.equity:,.2f}")
         if self.position is not None:
-            self._close(df, len(df) - 1, float(df["close"].iloc[-1]), "end_of_data")
+            px = float(df["close"].iloc[-1])
+            if self.broker.live:
+                px = self.broker.close(self.position.fill, self.position.direction, px)
+            self._close(df, len(df) - 1, px, "end_of_data")
         return self.report()
 
     def report(self) -> dict:

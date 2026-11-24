@@ -6,6 +6,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 WEIGHTS = {
+    "htf_bias": 2.0, "htf_counter": -2.5,
     "structure_bias": 2.0, "ema_bias": 1.0, "counter_trend": -2.0,
     "order_block": 2.0, "fvg": 1.0, "premium_discount": 1.0, "sr_zone": 1.0,
     "liquidity_sweep": 2.0, "choch_mss": 1.5, "candle": 1.0, "killzone": 0.5, "ote": 1.0,
@@ -37,6 +38,9 @@ def _components(ctx: dict, d: str) -> dict:
     st, pa, smc, ict, ew = (ctx[k] for k in ("structure", "price_action", "smc", "ict", "elliott"))
     comp: dict[str, bool] = {}
     trend = st["break_state"] if st["break_state"] != "range" else st["swing_trend"]
+    htf = ctx.get("htf") or {}
+    comp["htf_bias"] = htf.get("bias") == d
+    comp["htf_counter"] = htf.get("bias") not in (None, "range", d)
     comp["structure_bias"] = trend == d
     comp["counter_trend"] = trend not in (d, "range")
     comp["ema_bias"] = pa["ema_trend"] == d

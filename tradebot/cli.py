@@ -3,7 +3,9 @@
   python -m tradebot status                    # learned? stats? exit policy?
   python -m tradebot backtest [--csv f] [--ai] # paper-trade history bar by bar
   python -m tradebot learn-exits               # fit SL/TP from journal stats
-  python -m tradebot paper --yf GC=F --ai      # live PAPER trading loop
+  python -m tradebot live --broker sim --yf GC=F          # paper (simulated fills)
+  python -m tradebot live --broker ccxt --exchange bybit --symbol BTC/USDT:USDT   # testnet
+  python -m tradebot live --broker mt5 --symbol XAUUSD    # MT5 demo account
   python -m tradebot stats
 """
 from __future__ import annotations
@@ -43,11 +45,16 @@ def main(argv: list[str] | None = None) -> None:
     b.add_argument("--ai", action="store_true", help="Claude makes the final decision")
     b.add_argument("--daily", action="store_true", help="data is daily (disables killzones)")
     b.add_argument("--db", default=str(DATA_DIR / "journal.db"))
-    pp = sub.add_parser("paper", help="poll live data and paper-trade the newest closed bar")
-    pp.add_argument("--yf", required=True)
-    pp.add_argument("--interval", default="1h")
-    pp.add_argument("--poll", type=int, default=60, help="seconds between polls")
-    pp.add_argument("--ai", action="store_true")
+    lv = sub.add_parser("live", help="trade the newest closed bar on a loop")
+    lv.add_argument("--broker", choices=["sim", "ccxt", "mt5"], default="sim")
+    lv.add_argument("--yf", help="data source for --broker sim (yfinance ticker)")
+    lv.add_argument("--exchange", default="bybit")
+    lv.add_argument("--symbol")
+    lv.add_argument("--timeframe", default="1h")
+    lv.add_argument("--poll", type=int, default=60, help="seconds between polls")
+    lv.add_argument("--ai", action="store_true")
+    lv.add_argument("--real", action="store_true",
+                    help="REAL money. Also requires env TRADEBOT_I_UNDERSTAND_RISK=YES")
     a = ap.parse_args(argv)
 
     if a.cmd == "study":
@@ -64,10 +71,12 @@ def main(argv: list[str] | None = None) -> None:
         return
     if a.cmd == "learn-exits":
         cfg = BotConfig()
-        plans = ExitPolicy(cfg.exits, POLICY).learn(Journal(cfg.db_path))
-        if not plans:
+        pol = ExitPolicy(cfg.exits, POLICY)
+        plans = pol.learn(Journal(cfg.db_path))
+        if not plans and not pol.rejected:
             print(f"Not enough learning-mode trades yet (need {cfg.exits.min_trades_to_optimize} per setup).")
-        _print({k: v.__dict__ for k, v in plans.items()})
+        _print({"adopted": {k: v.__dict__ for k, v in plans.items()},
+                "rejected_overfit_or_no_edge": pol.rejected})
         return
 
     cfg = BotConfig()
@@ -79,8 +88,8 @@ def main(argv: list[str] | None = None) -> None:
         from .decision.claude_agent import ClaudeTrader
 
         ai = ClaudeTrader(curriculum.load_playbook(), cfg.ai.model, cfg.ai.effort)
-    if a.cmd == "paper":
-        return paper_loop(cfg, a, ai)
+    if a.cmd == "live":
+        return live_loop(cfg, a, ai)
     if a.csv:
         df = load_csv(a.csv)
     elif a.yf:
@@ -93,28 +102,66 @@ def main(argv: list[str] | None = None) -> None:
     _print(eng.run(df, progress=True))
 
 
-def paper_loop(cfg: BotConfig, a, ai) -> None:
-    """Paper trading only: no real orders are sent anywhere."""
+def make_broker(a):
+    """Build the broker. Real money needs two explicit opt-ins."""
+    import os
+
+    real = bool(a.real)
+    if real and os.environ.get("TRADEBOT_I_UNDERSTAND_RISK") != "YES":
+        sys.exit("--real needs env TRADEBOT_I_UNDERSTAND_RISK=YES (start on testnet/demo first!)")
+    if a.broker == "sim":
+        if not a.yf:
+            sys.exit("--broker sim needs --yf TICKER for data")
+        from .brokers import SimBroker
+
+        b = SimBroker()
+        b.fetch_ohlcv = lambda limit=1500: load_yfinance(a.yf, period="60d", interval=a.timeframe)
+        return b
+    if not a.symbol:
+        sys.exit("--symbol is required")
+    if a.broker == "ccxt":
+        from .brokers.ccxt_broker import CCXTBroker
+
+        return CCXTBroker(a.exchange, a.symbol, a.timeframe, sandbox=not real)
+    from .brokers.mt5_broker import MT5Broker
+
+    return MT5Broker(a.symbol, a.timeframe, allow_real=real)
+
+
+def live_loop(cfg: BotConfig, a, ai) -> None:
     import time
 
+    broker = make_broker(a)
+    if broker.live and broker.open_positions():
+        sys.exit("Broker already has an open position for this symbol — close it or manage it "
+                 "manually before starting the bot (the bot does not adopt unknown positions).")
+    cfg.symbol = a.symbol or a.yf
+    cfg.timeframe = a.timeframe
     eng = TradingEngine(cfg, Journal(cfg.db_path), ai=ai, exit_policy=ExitPolicy(cfg.exits, POLICY),
-                        intraday=a.interval not in ("1d", "1wk"))
+                        intraday=a.timeframe not in ("1d", "1w", "1wk"), broker=broker)
+    mode = "REAL MONEY" if a.real else ("testnet/demo" if broker.live else "paper")
+    print(f"[{mode}] {broker.name} {cfg.symbol} {a.timeframe} — Ctrl+C to stop")
     last = None
-    print(f"PAPER trading {a.yf} {a.interval} — Ctrl+C to stop")
     while True:
         try:
-            df = load_yfinance(a.yf, period="60d", interval=a.interval)
+            df = broker.fetch_ohlcv(1500)
             i = len(df) - 2  # newest fully closed bar
             if i > 0 and df.index[i] != last:
                 last = df.index[i]
                 d = eng.step(df, i)
-                pos = eng.position.__dict__ if eng.position else None
+                pos = eng.position
                 _print({"bar": str(last), "equity": round(eng.equity, 2), "decision": d,
-                        "position": {k: pos[k] for k in ("direction", "setup", "entry", "stop", "take_profit", "size")} if pos else None})
+                        "htf": eng._htf_ctx,
+                        "position": None if pos is None else {
+                            "direction": pos.direction, "setup": pos.setup, "entry": pos.entry,
+                            "stop": pos.stop, "take_profit": pos.take_profit, "size": pos.size}})
+            if eng.mm.halted:
+                print("KILL SWITCH active — stopping.")
+                break
         except KeyboardInterrupt:
             break
         except Exception as e:  # keep the loop alive on data hiccups
-            print("poll error:", e)
+            print("poll error:", type(e).__name__, e)
         try:
             time.sleep(a.poll)
         except KeyboardInterrupt:

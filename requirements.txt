@@ -2,6 +2,7 @@ numpy>=1.26
 pandas>=2.0
 anthropic>=2.13
 pytest>=8.0
-# optional: live data
-# yfinance
-# ccxt
+# optional — install what you use:
+# yfinance          # free market data (backtest / paper)
+# ccxt              # crypto exchanges (testnet by default)
+# MetaTrader5       # MT5 terminal, Windows only (Forex / Gold)

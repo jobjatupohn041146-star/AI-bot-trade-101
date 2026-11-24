@@ -41,3 +41,27 @@ def analyze(df: pd.DataFrame, intraday: bool = True) -> dict:
         "ict": ict.analyze(df, swings, events, ind, intraday),
         "elliott": elliott.analyze(swings),
     }
+
+
+def resample(df: pd.DataFrame, rule: str) -> pd.DataFrame:
+    agg = {"open": "first", "high": "max", "low": "min", "close": "last", "volume": "sum"}
+    return df.resample(rule, label="left", closed="left").agg(agg).dropna()
+
+
+def htf_context(ltf: pd.DataFrame, rule: str) -> dict | None:
+    """Multi-timeframe bias: structure + EMA trend + premium/discount on the HTF."""
+    htf = resample(ltf, rule)
+    if len(htf) < 60:
+        return None
+    swings = find_swings(htf)
+    events, state = structure_events(htf, swings)
+    close = htf["close"]
+    e50, e200 = float(ema(close, 50).iloc[-1]), float(ema(close, 200).iloc[-1])
+    c = float(close.iloc[-1])
+    ema_trend = "bull" if e50 > e200 and c > e50 else "bear" if e50 < e200 and c < e50 else "range"
+    st = state if state != "range" else swing_trend(label_swings(swings))
+    bias = st if st == ema_trend or ema_trend == "range" else "range"
+    pd_zone = smc.premium_discount(htf, swings)
+    return {"timeframe": rule, "structure": st, "ema_trend": ema_trend, "bias": bias,
+            "zone": pd_zone["zone"] if pd_zone else None, "bars": len(htf),
+            "last_event": events[-1].kind if events else None}

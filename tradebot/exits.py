@@ -23,8 +23,10 @@ class ExitPlan:
     tp_r: float | None      # target in R of the structural stop; None = learning
     max_bars: int
     mode: str               # "learning" | "optimized"
-    expectancy: float | None = None
+    expectancy: float | None = None       # in-sample (train)
     samples: int = 0
+    test_expectancy: float | None = None  # out-of-sample check
+    test_samples: int = 0
 
 
 def simulate(path: list[list[float]], final_r: float, sl: float, tp: float) -> float:
@@ -39,15 +41,20 @@ def simulate(path: list[list[float]], final_r: float, sl: float, tp: float) -> f
     return max(final_r, -sl) / sl
 
 
-def optimize_setup(trades: list[dict], cfg: ExitConfig) -> tuple[float, float, float] | None:
+def expectancy(trades: list[dict], sl: float, tp: float) -> float:
+    res = [simulate(t["path"], t["r_multiple_raw"], sl, tp) for t in trades]
+    return sum(res) / len(res) if res else 0.0
+
+
+def optimize_setup(trades: list[dict], cfg: ExitConfig, min_trades: int | None = None
+                   ) -> tuple[float, float, float] | None:
     usable = [t for t in trades if t.get("path")]
-    if len(usable) < cfg.min_trades_to_optimize:
+    if len(usable) < (cfg.min_trades_to_optimize if min_trades is None else min_trades):
         return None
     best = None
     for sl in cfg.sl_grid:
         for tp in cfg.tp_grid:
-            res = [simulate(t["path"], t["r_multiple_raw"], sl, tp) for t in usable]
-            exp = sum(res) / len(res)
+            exp = expectancy(usable, sl, tp)
             if best is None or exp > best[2]:
                 best = (sl, tp, exp)
     return best
@@ -58,6 +65,7 @@ class ExitPolicy:
         self.cfg = cfg
         self.store = store
         self.plans: dict[str, ExitPlan] = {}
+        self.rejected: dict[str, dict] = {}
         if store and Path(store).exists():
             for k, v in json.loads(Path(store).read_text()).items():
                 self.plans[k] = ExitPlan(**v)
@@ -73,11 +81,25 @@ class ExitPolicy:
             t["path"] = [p[:2] for p in t["path"] or []]
             by_setup.setdefault(t["setup"], []).append(t)
         for setup, ts in by_setup.items():
-            best = optimize_setup(ts, self.cfg)
-            if best and best[2] > 0:
-                sl, tp, exp = best
-                self.plans[setup] = ExitPlan(setup, sl, tp, self.cfg.learning_hold_bars * 3,
-                                             "optimized", round(exp, 4), len(ts))
+            if len(ts) < self.cfg.min_trades_to_optimize:
+                continue
+            # Walk-forward: fit on the older trades, verify on the newer ones.
+            ts.sort(key=lambda t: t["entry_time"])
+            cut = int(len(ts) * self.cfg.train_fraction)
+            train, test = ts[:cut], ts[cut:]
+            best = optimize_setup(train, self.cfg, min_trades=1)
+            if not best:
+                continue
+            sl, tp, exp = best
+            test_exp = expectancy(test, sl, tp)
+            baseline = expectancy(test, 1.0, float("inf"))  # learning-mode exits
+            if exp > 0 and test_exp > 0 and test_exp >= baseline:
+                self.plans[setup] = ExitPlan(setup, sl, tp, self.cfg.learning_hold_bars * 3, "optimized",
+                                             round(exp, 4), len(train), round(test_exp, 4), len(test))
+            else:
+                self.plans.pop(setup, None)
+                self.rejected[setup] = {"train_exp": round(exp, 4), "test_exp": round(test_exp, 4),
+                                        "baseline_test_exp": round(baseline, 4)}
         if self.store:
             Path(self.store).parent.mkdir(parents=True, exist_ok=True)
             Path(self.store).write_text(json.dumps({k: asdict(v) for k, v in self.plans.items()}, indent=2))

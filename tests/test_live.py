@@ -146,3 +146,31 @@ def test_real_money_requires_explicit_env(monkeypatch):
                            timeframe="1h", yf=None)
     with pytest.raises(SystemExit):
         make_broker(args)
+
+
+def test_live_clock_time_exit_and_state_roundtrip(tmp_path):
+    """In live mode the newest index i is constant; holding time must still advance."""
+    from tradebot.engine import PendingOrder, load_state, save_state
+
+    df = synthetic(400, seed=9)
+    b = FakeLiveBroker()
+    cfg = BotConfig()
+    cfg.exits.learning_hold_bars = 3
+    eng = TradingEngine(cfg, Journal(), broker=b)
+    i = 300
+    eng.step(df, i)
+    from tradebot.indicators import atr
+    close, a = float(df["close"].iloc[i]), float(atr(df.iloc[:i + 1]).iloc[-1])
+    eng.pending = PendingOrder("long", "TEST", close - 30 * a, {}, {})  # far stop: no stop-out
+    eng.cfg.money.max_stop_atr = 100
+    eng._fill(df, i, atr_now=a, price_hint=close)
+    assert eng.position is not None
+    eng.last_bar = str(df.index[i])
+    save_state(eng, tmp_path / "s.json")
+    e2 = TradingEngine(cfg, Journal(), broker=b)
+    assert load_state(e2, tmp_path / "s.json")
+    assert e2.position.setup == "TEST" and e2.position.fill.ref == "1" and e2.last_bar == eng.last_bar
+    for _ in range(3):  # same i every time, as in the live loop
+        e2.step(df, i)
+    assert e2.position is None and b.closed == 1
+    assert e2.journal.trades()[0]["exit_reason"] == "time"

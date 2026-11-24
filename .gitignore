@@ -8,3 +8,8 @@ data/learned.json
 data/sltp_policy.json
 .env
 .venv/
+data/market/
+data/runs/*.db
+data/runs/*.log
+data/live_state.json
+data/live_journal.db

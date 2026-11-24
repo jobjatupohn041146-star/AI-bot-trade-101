@@ -11,6 +11,8 @@
 from __future__ import annotations
 
 import argparse
+
+import pandas as pd
 import json
 import sys
 
@@ -34,8 +36,11 @@ def main(argv: list[str] | None = None) -> None:
     s = sub.add_parser("study")
     s.add_argument("--claude", action="store_true", help="let Claude read and distil the curriculum")
     sub.add_parser("status")
-    sub.add_parser("stats")
-    sub.add_parser("learn-exits")
+    st = sub.add_parser("stats")
+    st.add_argument("--db", default=str(DATA_DIR / "journal.db"))
+    le = sub.add_parser("learn-exits")
+    le.add_argument("--db", default=str(DATA_DIR / "journal.db"))
+    le.add_argument("--policy", default=str(POLICY))
     b = sub.add_parser("backtest")
     b.add_argument("--csv")
     b.add_argument("--yf", help="yfinance ticker, e.g. GC=F")
@@ -45,6 +50,10 @@ def main(argv: list[str] | None = None) -> None:
     b.add_argument("--ai", action="store_true", help="Claude makes the final decision")
     b.add_argument("--daily", action="store_true", help="data is daily (disables killzones)")
     b.add_argument("--db", default=str(DATA_DIR / "journal.db"))
+    b.add_argument("--policy", default=str(POLICY), help="SL/TP policy file to trade with")
+    b.add_argument("--htf", help="higher timeframe, e.g. 4h, or 'none' (default from config)")
+    b.add_argument("--start", help="only bars from this date (e.g. 2024-01-01)")
+    b.add_argument("--end", help="only bars before this date")
     lv = sub.add_parser("live", help="trade the newest closed bar on a loop")
     lv.add_argument("--broker", choices=["sim", "ccxt", "mt5"], default="sim")
     lv.add_argument("--yf", help="data source for --broker sim (yfinance ticker)")
@@ -53,6 +62,9 @@ def main(argv: list[str] | None = None) -> None:
     lv.add_argument("--timeframe", default="1h")
     lv.add_argument("--poll", type=int, default=60, help="seconds between polls")
     lv.add_argument("--ai", action="store_true")
+    lv.add_argument("--state", default=str(DATA_DIR / "live_state.json"), help="resume file")
+    lv.add_argument("--db", default=str(DATA_DIR / "live_journal.db"))
+    lv.add_argument("--policy", default=str(POLICY))
     lv.add_argument("--real", action="store_true",
                     help="REAL money. Also requires env TRADEBOT_I_UNDERSTAND_RISK=YES")
     a = ap.parse_args(argv)
@@ -67,12 +79,12 @@ def main(argv: list[str] | None = None) -> None:
         _print({"learned": ok, "detail": msg, "exit_policy": {k: v.__dict__ for k, v in ExitPolicy(BotConfig().exits, POLICY).plans.items()}})
         return
     if a.cmd == "stats":
-        _print(Journal(DATA_DIR / "journal.db").stats())
+        _print(Journal(a.db).stats())
         return
     if a.cmd == "learn-exits":
         cfg = BotConfig()
-        pol = ExitPolicy(cfg.exits, POLICY)
-        plans = pol.learn(Journal(cfg.db_path))
+        pol = ExitPolicy(cfg.exits, a.policy)
+        plans = pol.learn(Journal(a.db))
         if not plans and not pol.rejected:
             print(f"Not enough learning-mode trades yet (need {cfg.exits.min_trades_to_optimize} per setup).")
         _print({"adopted": {k: v.__dict__ for k, v in plans.items()},
@@ -80,6 +92,8 @@ def main(argv: list[str] | None = None) -> None:
         return
 
     cfg = BotConfig()
+    if getattr(a, "htf", None):
+        cfg.htf = None if a.htf.lower() == "none" else a.htf
     ok, msg = curriculum.is_learned()
     if cfg.require_learning and not ok:
         sys.exit(f"Refusing to trade: {msg}")
@@ -97,7 +111,12 @@ def main(argv: list[str] | None = None) -> None:
     else:
         print("No data source given: using SYNTHETIC data (for testing only).")
         df = synthetic(a.bars, a.seed)
-    eng = TradingEngine(cfg, Journal(a.db), ai=ai, exit_policy=ExitPolicy(cfg.exits, POLICY),
+    if a.start:
+        df = df[df.index >= pd.Timestamp(a.start, tz="UTC")]
+    if a.end:
+        df = df[df.index < pd.Timestamp(a.end, tz="UTC")]
+    print(f"Data: {len(df)} bars {df.index[0]} -> {df.index[-1]}")
+    eng = TradingEngine(cfg, Journal(a.db), ai=ai, exit_policy=ExitPolicy(cfg.exits, a.policy),
                         intraday=not a.daily)
     _print(eng.run(df, progress=True))
 
@@ -131,24 +150,31 @@ def make_broker(a):
 def live_loop(cfg: BotConfig, a, ai) -> None:
     import time
 
+    from .engine import load_state, save_state
+
     broker = make_broker(a)
-    if broker.live and broker.open_positions():
-        sys.exit("Broker already has an open position for this symbol — close it or manage it "
-                 "manually before starting the bot (the bot does not adopt unknown positions).")
     cfg.symbol = a.symbol or a.yf
     cfg.timeframe = a.timeframe
-    eng = TradingEngine(cfg, Journal(cfg.db_path), ai=ai, exit_policy=ExitPolicy(cfg.exits, POLICY),
+    eng = TradingEngine(cfg, Journal(a.db), ai=ai, exit_policy=ExitPolicy(cfg.exits, a.policy),
                         intraday=a.timeframe not in ("1d", "1w", "1wk"), broker=broker)
+    resumed = load_state(eng, a.state)
+    if broker.live and broker.open_positions() and eng.position is None:
+        sys.exit("Broker already has an open position the bot does not know about — close it or "
+                 "manage it manually before starting (the bot never adopts unknown positions).")
+    if resumed:
+        print(f"Resumed state from {a.state} (equity {eng.equity:,.2f}, "
+              f"position: {eng.position.direction if eng.position else 'none'})")
     mode = "REAL MONEY" if a.real else ("testnet/demo" if broker.live else "paper")
     print(f"[{mode}] {broker.name} {cfg.symbol} {a.timeframe} — Ctrl+C to stop")
-    last = None
+    last = eng.last_bar
     while True:
         try:
             df = broker.fetch_ohlcv(1500)
             i = len(df) - 2  # newest fully closed bar
-            if i > 0 and df.index[i] != last:
-                last = df.index[i]
+            if i > 0 and str(df.index[i]) != last:
+                last = eng.last_bar = str(df.index[i])
                 d = eng.step(df, i)
+                save_state(eng, a.state)
                 pos = eng.position
                 _print({"bar": str(last), "equity": round(eng.equity, 2), "decision": d,
                         "htf": eng._htf_ctx,

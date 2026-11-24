@@ -73,6 +73,8 @@ class TradingEngine:
         self.equity_curve: list[tuple] = []
         self._htf_key = None
         self._htf_ctx = None
+        self.bar_clock = 0
+        self.last_bar: str | None = None   # newest bar processed (live resume)
 
     # ---------------------------------------------------------------- helpers
     def _setup_disabled(self, setup: str) -> bool:
@@ -146,7 +148,7 @@ class TradingEngine:
         elif tp_hit:
             exit_px = max(o, p.take_profit) if sign > 0 else min(o, p.take_profit)
             reason = "take_profit"
-        elif i - p.entry_bar + 1 >= p.max_bars:
+        elif len(p.path) >= p.max_bars:
             exit_px, reason = c, "time"
         if exit_px is None and self.broker.live and not self.broker.has_position(p.fill):
             exit_px, reason = c, "broker_closed"  # SL/TP filled on the venue intrabar
@@ -175,17 +177,20 @@ class TradingEngine:
             "mae_r": max((x[1] for x in p.path), default=0.0),
             "bars_held": len(p.path), "path": p.path, "components": p.components, "decision": p.decision,
         })
-        self.psych.record_trade(i, pnl, p.risk_pct)
+        self.psych.record_trade(self.bar_clock, pnl, p.risk_pct)
         if self.broker.live and self.broker.equity() is not None:
             self.equity = self.broker.equity()
 
     # ------------------------------------------------------------------- step
     def step(self, df: pd.DataFrame, i: int) -> dict | None:
+        # bar_clock counts processed bars; it keeps growing in live mode where the
+        # newest bar index i stays ~constant, so cooldowns and holding time work.
+        self.bar_clock += 1
         window = df.iloc[max(0, i - self.cfg.lookback_bars + 1): i + 1]
         if len(window) < 60:
             return None
         ts = df.index[i]
-        self.psych.new_bar(i, ts.strftime("%Y-%m-%d"), self.equity)
+        self.psych.new_bar(self.bar_clock, ts.strftime("%Y-%m-%d"), self.equity)
 
         if self.pending is not None:
             from .indicators import atr
@@ -197,7 +202,7 @@ class TradingEngine:
             return None
 
         # Gate 1a: psychological state, before looking at the chart.
-        ok, why = self.psych.check_state(i)
+        ok, why = self.psych.check_state(self.bar_clock)
         if not ok:
             for r in why:
                 self.blocked[f"PSY: {r.split(':')[0]}"] += 1
@@ -281,3 +286,50 @@ class TradingEngine:
             "blocked": dict(self.blocked.most_common()),
             "by_setup": self.journal.stats(),
         }
+
+
+# ------------------------------------------------------------- persistence
+def save_state(eng: TradingEngine, path) -> None:
+    """Persist everything needed to resume after a restart (live runs)."""
+    import json
+    from dataclasses import asdict
+    from pathlib import Path
+
+    s = eng.psych.state
+    state = {
+        "run_id": eng.run_id, "equity": eng.equity,
+        "mm": {"peak": eng.mm.peak, "halted": eng.mm.halted},
+        "psych": {k: getattr(s, k) for k in ("consecutive_losses", "consecutive_wins", "last_loss_bar",
+                                              "tilt_until_bar", "day", "trades_today", "pnl_today",
+                                              "equity_day_start", "last_risk_pct")},
+        "position": asdict(eng.position) if eng.position else None,
+        "bar_clock": eng.bar_clock,
+        "last_bar": eng.last_bar,
+    }
+    p = Path(path)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    tmp = p.with_suffix(".tmp")
+    tmp.write_text(json.dumps(state, default=str, indent=2))
+    tmp.replace(p)  # atomic
+
+
+def load_state(eng: TradingEngine, path) -> bool:
+    import json
+    from pathlib import Path
+
+    p = Path(path)
+    if not p.exists():
+        return False
+    st = json.loads(p.read_text())
+    eng.run_id = st["run_id"]
+    eng.equity = st["equity"]
+    eng.mm.peak, eng.mm.halted = st["mm"]["peak"], st["mm"]["halted"]
+    for k, v in st["psych"].items():
+        setattr(eng.psych.state, k, v)
+    eng.bar_clock = st.get("bar_clock", 0)
+    eng.last_bar = st.get("last_bar")
+    if st["position"]:
+        pos = dict(st["position"])
+        pos["fill"] = Fill(**pos["fill"]) if pos.get("fill") else None
+        eng.position = Position(**pos)
+    return True

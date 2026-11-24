@@ -92,6 +92,11 @@ class TradingEngine:
             return
         plan = self.exits.plan_for(po.setup)
         stop = entry - sign * plan.sl_mult * r0
+        if self.cfg.money.max_fee_r is not None:
+            fee_r = 2 * self.cfg.commission_pct / 100 * entry / abs(entry - stop)
+            if fee_r > self.cfg.money.max_fee_r:
+                self.blocked["MM: fees too large vs stop"] += 1
+                return
         venue_positions = self.broker.open_positions() if self.broker.live else 0
         sd = self.mm.size(self.equity, entry, stop, atr_now, 0.0, venue_positions, self._setup_disabled(po.setup))
         if not sd.ok:
@@ -211,7 +216,8 @@ class TradingEngine:
         # Gate 2: technical analysis (rules) and optional Claude judgement.
         ctx = analyze(window, intraday=self.intraday)
         ctx["htf"] = self._htf(df, i)
-        sig: Signal | None = evaluate(ctx)
+        sig: Signal | None = evaluate(ctx, self.cfg.enabled_setups, self.cfg.stop_min_atr,
+                                         self.cfg.require_htf_alignment)
         if sig is None:
             return None
         direction, setup, stop = sig.direction, sig.setup, sig.stop
@@ -236,7 +242,7 @@ class TradingEngine:
             direction = "long" if d["action"] == "BUY" else "short"
             setup = d["setup"] or sig.setup
             confidence = d["confidence"]
-            stop = structural_stop(ctx, "bull" if direction == "long" else "bear")
+            stop = structural_stop(ctx, "bull" if direction == "long" else "bear", self.cfg.stop_min_atr)
             inv = d.get("invalidation_price")
             if inv and ((direction == "long" and inv < ctx["close"]) or (direction == "short" and inv > ctx["close"])):
                 stop = float(inv)

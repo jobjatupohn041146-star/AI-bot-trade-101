@@ -28,6 +28,7 @@ class MoneyConfig:
     max_open_risk_pct: float = 3.0
     max_positions: int = 1
     min_stop_atr: float = 0.5
+    max_fee_r: float | None = None        # skip trades whose round-trip fee costs more than this many R
     max_stop_atr: float = 4.0
     disable_setup_after: int = 30         # trades before a losing setup is disabled
 
@@ -59,6 +60,9 @@ class BotConfig:
     htf: str | None = "4h"            # higher timeframe for bias (None = off)
     htf_lookback_bars: int = 1600     # LTF bars resampled for the HTF view
     min_score: float = 0.55
+    stop_min_atr: float = 0.6             # structural stop at least this far (ATR)
+    enabled_setups: tuple | None = None   # None = all setups
+    require_htf_alignment: bool = False   # only trade in the direction of the HTF bias
     require_learning: bool = True
     db_path: Path = DATA_DIR / "journal.db"
     psychology: PsychologyConfig = field(default_factory=PsychologyConfig)

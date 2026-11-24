@@ -1,0 +1,116 @@
+Data: 16080 bars 2024-01-01 00:00:00+00:00 -> 2025-10-31 23:00:00+00:00
+  bar 0/16080 equity=10,000.00
+  bar 250/16080 equity=9,889.70
+  bar 500/16080 equity=9,726.20
+  bar 750/16080 equity=9,423.90
+  bar 1000/16080 equity=10,341.11
+  bar 1250/16080 equity=11,454.36
+  bar 1500/16080 equity=11,046.04
+  bar 1750/16080 equity=10,693.52
+  bar 2000/16080 equity=10,677.78
+  bar 2250/16080 equity=10,566.55
+  bar 2500/16080 equity=12,043.52
+  bar 2750/16080 equity=12,782.72
+  bar 3000/16080 equity=12,652.93
+  bar 3250/16080 equity=11,967.58
+  bar 3500/16080 equity=11,638.59
+  bar 3750/16080 equity=11,652.21
+  bar 4000/16080 equity=11,303.05
+  bar 4250/16080 equity=12,099.44
+  bar 4500/16080 equity=12,016.52
+  bar 4750/16080 equity=11,641.52
+  bar 5000/16080 equity=11,686.21
+  bar 5250/16080 equity=11,492.31
+  bar 5500/16080 equity=11,243.60
+  bar 5750/16080 equity=11,383.84
+  bar 6000/16080 equity=11,447.91
+  bar 6250/16080 equity=11,626.61
+  bar 6500/16080 equity=11,744.85
+  bar 6750/16080 equity=11,535.82
+  bar 7000/16080 equity=11,329.75
+  bar 7250/16080 equity=11,197.21
+  bar 7500/16080 equity=11,742.58
+  bar 7750/16080 equity=11,737.86
+  bar 8000/16080 equity=11,973.92
+  bar 8250/16080 equity=11,704.40
+  bar 8500/16080 equity=11,640.89
+  bar 8750/16080 equity=11,719.86
+  bar 9000/16080 equity=11,656.72
+  bar 9250/16080 equity=11,526.57
+  bar 9500/16080 equity=11,505.39
+  bar 9750/16080 equity=11,224.30
+  bar 10000/16080 equity=11,083.17
+  bar 10250/16080 equity=11,641.64
+  bar 10500/16080 equity=11,660.13
+  bar 10750/16080 equity=11,393.23
+  bar 11000/16080 equity=11,202.98
+  bar 11250/16080 equity=11,301.82
+  bar 11500/16080 equity=12,010.01
+  bar 11750/16080 equity=11,845.30
+  bar 12000/16080 equity=11,725.24
+  bar 12250/16080 equity=11,748.81
+  bar 12500/16080 equity=11,607.63
+  bar 12750/16080 equity=11,410.81
+  bar 13000/16080 equity=11,273.65
+  bar 13250/16080 equity=11,532.52
+  bar 13500/16080 equity=11,612.89
+  bar 13750/16080 equity=11,484.49
+  bar 14000/16080 equity=11,420.71
+  bar 14250/16080 equity=11,303.71
+  bar 14500/16080 equity=11,523.05
+  bar 14750/16080 equity=11,252.07
+  bar 15000/16080 equity=11,107.55
+  bar 15250/16080 equity=10,889.24
+  bar 15500/16080 equity=11,430.24
+  bar 15750/16080 equity=11,300.08
+  bar 16000/16080 equity=11,236.73
+{
+  "run_id": "82b96420",
+  "trades": 183,
+  "final_equity": 11240.75,
+  "return_pct": 12.41,
+  "max_drawdown_pct": 17.29,
+  "win_rate": 0.262,
+  "expectancy_r": 0.164,
+  "kill_switch": false,
+  "blocked": {
+    "PSY: TILT": 744,
+    "PSY: REVENGE": 405,
+    "MM: setup disabled: negative expectancy in journal": 49,
+    "PSY: FOMO": 6
+  },
+  "by_setup": {
+    "LIQ_SWEEP_REVERSAL": {
+      "trades": 31,
+      "win_rate": 0.194,
+      "avg_r": -0.023,
+      "expectancy_r": -0.023,
+      "profit_factor": 0.97,
+      "total_r": -0.71
+    },
+    "SMC_OB_FVG": {
+      "trades": 117,
+      "win_rate": 0.239,
+      "avg_r": 0.073,
+      "expectancy_r": 0.073,
+      "profit_factor": 1.08,
+      "total_r": 8.55
+    },
+    "PA_SR_CANDLE": {
+      "trades": 26,
+      "win_rate": 0.423,
+      "avg_r": 0.387,
+      "expectancy_r": 0.387,
+      "profit_factor": 1.62,
+      "total_r": 10.06
+    },
+    "ICT_OTE_KILLZONE": {
+      "trades": 9,
+      "win_rate": 0.333,
+      "avg_r": 1.352,
+      "expectancy_r": 1.352,
+      "profit_factor": 2.71,
+      "total_r": 12.17
+    }
+  }
+}

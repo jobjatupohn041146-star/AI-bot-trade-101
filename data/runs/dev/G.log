@@ -1,0 +1,211 @@
+Data: 43765 bars 2019-01-01 00:00:00+00:00 -> 2023-12-31 23:00:00+00:00
+  bar 0/43765 equity=10,000.00
+  bar 250/43765 equity=10,000.00
+  bar 500/43765 equity=9,767.38
+  bar 750/43765 equity=9,645.51
+  bar 1000/43765 equity=9,645.51
+  bar 1250/43765 equity=9,598.55
+  bar 1500/43765 equity=9,488.63
+  bar 1750/43765 equity=9,422.53
+  bar 2000/43765 equity=9,591.57
+  bar 2250/43765 equity=9,717.07
+  bar 2500/43765 equity=9,717.07
+  bar 2750/43765 equity=9,693.79
+  bar 3000/43765 equity=9,693.79
+  bar 3250/43765 equity=9,856.17
+  bar 3500/43765 equity=9,740.23
+  bar 3750/43765 equity=9,637.30
+  bar 4000/43765 equity=9,966.02
+  bar 4250/43765 equity=9,966.02
+  bar 4500/43765 equity=9,756.03
+  bar 4750/43765 equity=9,655.50
+  bar 5000/43765 equity=9,549.44
+  bar 5250/43765 equity=9,449.33
+  bar 5500/43765 equity=9,449.33
+  bar 5750/43765 equity=9,137.28
+  bar 6000/43765 equity=9,024.17
+  bar 6250/43765 equity=8,853.12
+  bar 6500/43765 equity=8,913.94
+  bar 6750/43765 equity=8,959.91
+  bar 7000/43765 equity=8,908.47
+  bar 7250/43765 equity=8,804.26
+  bar 7500/43765 equity=8,804.26
+  bar 7750/43765 equity=8,700.90
+  bar 8000/43765 equity=8,700.90
+  bar 8250/43765 equity=8,815.62
+  bar 8500/43765 equity=8,766.75
+  bar 8750/43765 equity=8,713.46
+  bar 9000/43765 equity=8,713.46
+  bar 9250/43765 equity=8,713.46
+  bar 9500/43765 equity=8,664.24
+  bar 9750/43765 equity=8,664.24
+  bar 10000/43765 equity=8,664.24
+  bar 10250/43765 equity=8,618.76
+  bar 10500/43765 equity=8,618.76
+  bar 10750/43765 equity=8,574.24
+  bar 11000/43765 equity=8,574.24
+  bar 11250/43765 equity=8,555.87
+  bar 11500/43765 equity=8,555.87
+  bar 11750/43765 equity=8,555.87
+  bar 12000/43765 equity=8,555.87
+  bar 12250/43765 equity=8,555.87
+  bar 12500/43765 equity=8,555.87
+  bar 12750/43765 equity=8,555.87
+  bar 13000/43765 equity=8,555.87
+  bar 13250/43765 equity=8,504.79
+  bar 13500/43765 equity=8,504.79
+  bar 13750/43765 equity=8,504.79
+  bar 14000/43765 equity=8,504.79
+  bar 14250/43765 equity=8,863.48
+  bar 14500/43765 equity=8,762.36
+  bar 14750/43765 equity=8,871.90
+  bar 15000/43765 equity=8,871.90
+  bar 15250/43765 equity=8,819.96
+  bar 15500/43765 equity=8,819.96
+  bar 15750/43765 equity=8,761.16
+  bar 16000/43765 equity=8,761.16
+  bar 16250/43765 equity=8,761.16
+  bar 16500/43765 equity=8,927.95
+  bar 16750/43765 equity=8,927.95
+  bar 17000/43765 equity=8,927.95
+  bar 17250/43765 equity=8,927.95
+  bar 17500/43765 equity=8,927.95
+  bar 17750/43765 equity=8,881.11
+  bar 18000/43765 equity=8,833.29
+  bar 18250/43765 equity=8,833.29
+  bar 18500/43765 equity=8,786.44
+  bar 18750/43765 equity=8,786.44
+  bar 19000/43765 equity=8,920.36
+  bar 19250/43765 equity=8,871.11
+  bar 19500/43765 equity=8,871.11
+  bar 19750/43765 equity=8,871.11
+  bar 20000/43765 equity=8,871.11
+  bar 20250/43765 equity=8,871.11
+  bar 20500/43765 equity=8,822.75
+  bar 20750/43765 equity=8,822.75
+  bar 21000/43765 equity=8,822.75
+  bar 21250/43765 equity=8,822.75
+  bar 21500/43765 equity=8,776.46
+  bar 21750/43765 equity=8,776.46
+  bar 22000/43765 equity=8,776.46
+  bar 22250/43765 equity=8,776.46
+  bar 22500/43765 equity=8,776.46
+  bar 22750/43765 equity=8,776.46
+  bar 23000/43765 equity=8,776.46
+  bar 23250/43765 equity=8,776.46
+  bar 23500/43765 equity=8,776.46
+  bar 23750/43765 equity=8,776.46
+  bar 24000/43765 equity=8,776.46
+  bar 24250/43765 equity=8,776.46
+  bar 24500/43765 equity=8,776.46
+  bar 24750/43765 equity=8,776.46
+  bar 25000/43765 equity=8,776.46
+  bar 25250/43765 equity=8,776.46
+  bar 25500/43765 equity=8,776.46
+  bar 25750/43765 equity=8,776.46
+  bar 26000/43765 equity=8,776.46
+  bar 26250/43765 equity=8,776.46
+  bar 26500/43765 equity=8,776.46
+  bar 26750/43765 equity=8,776.46
+  bar 27000/43765 equity=8,776.46
+  bar 27250/43765 equity=8,776.46
+  bar 27500/43765 equity=8,776.46
+  bar 27750/43765 equity=8,776.46
+  bar 28000/43765 equity=8,776.46
+  bar 28250/43765 equity=8,776.46
+  bar 28500/43765 equity=8,776.46
+  bar 28750/43765 equity=8,776.46
+  bar 29000/43765 equity=8,776.46
+  bar 29250/43765 equity=8,776.46
+  bar 29500/43765 equity=8,776.46
+  bar 29750/43765 equity=8,776.46
+  bar 30000/43765 equity=8,776.46
+  bar 30250/43765 equity=8,776.46
+  bar 30500/43765 equity=8,776.46
+  bar 30750/43765 equity=8,776.46
+  bar 31000/43765 equity=8,776.46
+  bar 31250/43765 equity=8,776.46
+  bar 31500/43765 equity=8,776.46
+  bar 31750/43765 equity=8,776.46
+  bar 32000/43765 equity=8,776.46
+  bar 32250/43765 equity=8,776.46
+  bar 32500/43765 equity=8,776.46
+  bar 32750/43765 equity=8,776.46
+  bar 33000/43765 equity=8,776.46
+  bar 33250/43765 equity=8,776.46
+  bar 33500/43765 equity=8,776.46
+  bar 33750/43765 equity=8,776.46
+  bar 34000/43765 equity=8,776.46
+  bar 34250/43765 equity=8,776.46
+  bar 34500/43765 equity=8,776.46
+  bar 34750/43765 equity=8,776.46
+  bar 35000/43765 equity=8,776.46
+  bar 35250/43765 equity=8,776.46
+  bar 35500/43765 equity=8,776.46
+  bar 35750/43765 equity=8,776.46
+  bar 36000/43765 equity=8,776.46
+  bar 36250/43765 equity=8,776.46
+  bar 36500/43765 equity=8,776.46
+  bar 36750/43765 equity=8,776.46
+  bar 37000/43765 equity=8,776.46
+  bar 37250/43765 equity=8,776.46
+  bar 37500/43765 equity=8,776.46
+  bar 37750/43765 equity=8,776.46
+  bar 38000/43765 equity=8,776.46
+  bar 38250/43765 equity=8,776.46
+  bar 38500/43765 equity=8,776.46
+  bar 38750/43765 equity=8,776.46
+  bar 39000/43765 equity=8,776.46
+  bar 39250/43765 equity=8,776.46
+  bar 39500/43765 equity=8,776.46
+  bar 39750/43765 equity=8,776.46
+  bar 40000/43765 equity=8,776.46
+  bar 40250/43765 equity=8,776.46
+  bar 40500/43765 equity=8,776.46
+  bar 40750/43765 equity=8,776.46
+  bar 41000/43765 equity=8,776.46
+  bar 41250/43765 equity=8,776.46
+  bar 41500/43765 equity=8,776.46
+  bar 41750/43765 equity=8,776.46
+  bar 42000/43765 equity=8,776.46
+  bar 42250/43765 equity=8,776.46
+  bar 42500/43765 equity=8,776.46
+  bar 42750/43765 equity=8,776.46
+  bar 43000/43765 equity=8,776.46
+  bar 43250/43765 equity=8,776.46
+  bar 43500/43765 equity=8,776.46
+  bar 43750/43765 equity=8,776.46
+{
+  "run_id": "7156ace6",
+  "trades": 60,
+  "final_equity": 8776.46,
+  "return_pct": -12.24,
+  "max_drawdown_pct": 14.95,
+  "win_rate": 0.3,
+  "expectancy_r": -0.233,
+  "kill_switch": false,
+  "blocked": {
+    "MM: setup disabled: negative expectancy in journal": 327,
+    "PSY: TILT": 192,
+    "PSY: REVENGE": 126,
+    "PSY: FOMO": 13
+  },
+  "by_setup": {
+    "SMC_OB_FVG": {
+      "trades": 30,
+      "win_rate": 0.333,
+      "avg_r": -0.289,
+      "expectancy_r": -0.289,
+      "profit_factor": 0.62,
+      "total_r": -8.66
+    },
+    "LIQ_SWEEP_REVERSAL": {
+      "trades": 30,
+      "win_rate": 0.267,
+      "avg_r": -0.178,
+      "expectancy_r": -0.178,
+      "profit_factor": 0.79,
+      "total_r": -5.35
+    }
+  }
+}

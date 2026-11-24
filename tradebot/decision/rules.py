@@ -66,7 +66,7 @@ def _components(ctx: dict, d: str) -> dict:
     return comp
 
 
-def structural_stop(ctx: dict, d: str) -> float:
+def structural_stop(ctx: dict, d: str, min_atr: float = 0.6) -> float:
     """Invalidation: beyond the zone / swept wick / last swing, plus a buffer."""
     a = ctx["indicators"]["atr"]
     close, smc = ctx["close"], ctx["smc"]
@@ -80,7 +80,7 @@ def structural_stop(ctx: dict, d: str) -> float:
         if lows:
             cands.append(lows[-1])
         stop = min(cands) - 0.2 * a if cands else close - 1.5 * a
-        return max(min(stop, close - 0.6 * a), close - 3.5 * a)
+        return max(min(stop, close - min_atr * a), close - 3.5 * a)
     if smc["in_bear_ob"]:
         cands.append(smc["in_bear_ob"]["top"])
     if smc["liquidity"]["buyside_sweep"]:
@@ -89,22 +89,28 @@ def structural_stop(ctx: dict, d: str) -> float:
     if highs:
         cands.append(highs[-1])
     stop = max(cands) + 0.2 * a if cands else close + 1.5 * a
-    return min(max(stop, close + 0.6 * a), close + 3.5 * a)
+    return min(max(stop, close + min_atr * a), close + 3.5 * a)
 
 
-def evaluate(ctx: dict) -> Signal | None:
+def evaluate(ctx: dict, enabled: tuple | None = None, stop_min_atr: float = 0.6,
+             require_htf: bool = False) -> Signal | None:
     best = None
     for d in ("bull", "bear"):
+        if require_htf and (ctx.get("htf") or {}).get("bias") != d:
+            continue
         comp = _components(ctx, d)
         raw = sum(WEIGHTS[k] for k, on in comp.items() if on)
         score = max(0.0, raw) / MAX_SCORE
         # The dominant setup = group with the most weight switched on.
-        group_w = {g: sum(WEIGHTS[k] for k in ks if comp[k]) for g, ks in SETUP_GROUPS.items()}
+        group_w = {g: sum(WEIGHTS[k] for k in ks if comp[k]) for g, ks in SETUP_GROUPS.items()
+                   if enabled is None or g in enabled}
+        if not group_w:
+            continue
         setup = max(group_w, key=group_w.get)
         if group_w[setup] == 0:
             continue
         sig = Signal("long" if d == "bull" else "short", score, setup, comp,
-                     structural_stop(ctx, d), [k for k, on in comp.items() if on])
+                     structural_stop(ctx, d, stop_min_atr), [k for k, on in comp.items() if on])
         if best is None or sig.score > best.score:
             best = sig
     return best

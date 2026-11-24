@@ -53,6 +53,12 @@ def main(argv: list[str] | None = None) -> None:
     b.add_argument("--policy", default=str(POLICY), help="SL/TP policy file to trade with")
     b.add_argument("--htf", help="higher timeframe, e.g. 4h, or 'none' (default from config)")
     b.add_argument("--commission", type=float, default=0.05, help="fee %% per side (default 0.05)")
+    b.add_argument("--stop-min-atr", type=float)
+    b.add_argument("--hold", type=int, help="learning-mode holding bars")
+    b.add_argument("--min-score", type=float)
+    b.add_argument("--require-htf", action="store_true")
+    b.add_argument("--max-fee-r", type=float)
+    b.add_argument("--setups", help="comma-separated setup whitelist")
     b.add_argument("--start", help="only bars from this date (e.g. 2024-01-01)")
     b.add_argument("--end", help="only bars before this date")
     lv = sub.add_parser("live", help="trade the newest closed bar on a loop")
@@ -95,6 +101,18 @@ def main(argv: list[str] | None = None) -> None:
     cfg = BotConfig()
     if getattr(a, "commission", None) is not None:
         cfg.commission_pct = a.commission
+    if getattr(a, "stop_min_atr", None) is not None:
+        cfg.stop_min_atr = a.stop_min_atr
+    if getattr(a, "hold", None):
+        cfg.exits.learning_hold_bars = a.hold
+    if getattr(a, "min_score", None):
+        cfg.min_score = a.min_score
+    if getattr(a, "require_htf", False):
+        cfg.require_htf_alignment = True
+    if getattr(a, "max_fee_r", None) is not None:
+        cfg.money.max_fee_r = a.max_fee_r
+    if getattr(a, "setups", None):
+        cfg.enabled_setups = tuple(x.strip() for x in a.setups.split(","))
     if getattr(a, "htf", None):
         cfg.htf = None if a.htf.lower() == "none" else a.htf
     ok, msg = curriculum.is_learned()

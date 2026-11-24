@@ -1,0 +1,7 @@
+numpy>=1.26
+pandas>=2.0
+anthropic>=2.13
+pytest>=8.0
+# optional: live data
+# yfinance
+# ccxt

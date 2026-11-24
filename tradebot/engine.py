@@ -1,0 +1,236 @@
+"""Bar-by-bar trading engine (shared by backtest and paper trading).
+
+At the close of bar i the engine decides; orders fill at the open of bar i+1.
+Pipeline per bar:  psychology(state) -> analysis -> rules (+Claude) ->
+psychology(entry) -> money management -> order."""
+from __future__ import annotations
+
+import uuid
+from collections import Counter
+from dataclasses import dataclass, field
+
+import pandas as pd
+
+from .analysis import analyze
+from .config import BotConfig
+from .decision.rules import Signal, confidence_from_score, evaluate, structural_stop
+from .exits import ExitPolicy
+from .journal import Journal
+from .money import MoneyManager
+from .psychology import PsychologyGate
+
+
+@dataclass
+class Position:
+    direction: str
+    setup: str
+    entry: float
+    entry_bar: int
+    entry_time: str
+    r0: float                  # structural stop distance
+    stop: float
+    take_profit: float | None
+    size: float
+    risk_amount: float
+    risk_pct: float
+    max_bars: int
+    mode: str
+    components: dict
+    decision: dict
+    path: list = field(default_factory=list)
+
+
+@dataclass
+class PendingOrder:
+    direction: str
+    setup: str
+    structural_stop: float
+    components: dict
+    decision: dict
+
+
+class TradingEngine:
+    def __init__(self, cfg: BotConfig, journal: Journal, ai=None, exit_policy: ExitPolicy | None = None,
+                 intraday: bool = True, run_id: str | None = None):
+        self.cfg = cfg
+        self.journal = journal
+        self.ai = ai
+        self.exits = exit_policy or ExitPolicy(cfg.exits)
+        self.intraday = intraday
+        self.run_id = run_id or uuid.uuid4().hex[:8]
+        self.equity = cfg.initial_equity
+        self.psych = PsychologyGate(cfg.psychology)
+        self.mm = MoneyManager(cfg.money, self.equity)
+        self.position: Position | None = None
+        self.pending: PendingOrder | None = None
+        self.blocked = Counter()
+        self.decisions: list[dict] = []
+        self.equity_curve: list[tuple] = []
+
+    # ---------------------------------------------------------------- helpers
+    def _setup_disabled(self, setup: str) -> bool:
+        st = self.journal.stats().get(setup)
+        return bool(st and st["trades"] >= self.cfg.money.disable_setup_after and st["expectancy_r"] < 0)
+
+    def _fill(self, df: pd.DataFrame, i: int, atr_now: float) -> None:
+        po, self.pending = self.pending, None
+        entry = float(df["open"].iloc[i])
+        sign = 1 if po.direction == "long" else -1
+        r0 = (entry - po.structural_stop) * sign
+        if r0 <= 0:
+            self.blocked["gap through invalidation"] += 1
+            return
+        plan = self.exits.plan_for(po.setup)
+        stop = entry - sign * plan.sl_mult * r0
+        open_risk = 0.0
+        sd = self.mm.size(self.equity, entry, stop, atr_now, open_risk, 0, self._setup_disabled(po.setup))
+        if not sd.ok:
+            for r in sd.reasons:
+                self.blocked[f"MM: {r}"] += 1
+            return
+        tp = entry + sign * plan.tp_r * r0 if plan.tp_r else None
+        self.position = Position(po.direction, po.setup, entry, i, df.index[i].isoformat(), r0, stop, tp,
+                                 sd.size, sd.risk_amount, sd.risk_pct, plan.max_bars, plan.mode,
+                                 po.components, po.decision)
+        self.psych.record_entry()
+
+    def _manage(self, df: pd.DataFrame, i: int) -> None:
+        p = self.position
+        o, h, l, c = (float(df[k].iloc[i]) for k in ("open", "high", "low", "close"))
+        sign = 1 if p.direction == "long" else -1
+        fav = ((h - p.entry) if sign > 0 else (p.entry - l)) / p.r0
+        adv = ((p.entry - l) if sign > 0 else (h - p.entry)) / p.r0
+        close_r = (c - p.entry) * sign / p.r0
+        p.path.append([round(fav, 4), round(adv, 4), round(close_r, 4)])
+        exit_px = reason = None
+        stop_hit = (l <= p.stop) if sign > 0 else (h >= p.stop)
+        tp_hit = p.take_profit is not None and ((h >= p.take_profit) if sign > 0 else (l <= p.take_profit))
+        if stop_hit:  # conservative: stop first when both are touched
+            exit_px = min(o, p.stop) if sign > 0 else max(o, p.stop)
+            reason = "stop"
+        elif tp_hit:
+            exit_px = max(o, p.take_profit) if sign > 0 else min(o, p.take_profit)
+            reason = "take_profit"
+        elif i - p.entry_bar + 1 >= p.max_bars:
+            exit_px, reason = c, "time"
+        if exit_px is not None:
+            self._close(df, i, exit_px, reason)
+
+    def _close(self, df: pd.DataFrame, i: int, px: float, reason: str) -> None:
+        p, self.position = self.position, None
+        sign = 1 if p.direction == "long" else -1
+        gross = (px - p.entry) * sign * p.size
+        fees = (p.entry + px) * p.size * self.cfg.commission_pct / 100
+        pnl = gross - fees
+        self.equity += pnl
+        r_mult = pnl / p.risk_amount if p.risk_amount else 0.0
+        if p.path and reason == "stop" and p.mode == "learning":
+            p.path[-1][2] = -1.0  # realised at the structural stop
+        self.journal.add({
+            "run_id": self.run_id, "symbol": self.cfg.symbol, "setup": p.setup, "direction": p.direction,
+            "mode": p.mode, "entry_time": p.entry_time, "entry": p.entry, "stop": p.stop,
+            "take_profit": p.take_profit, "size": p.size, "risk_amount": p.risk_amount,
+            "exit_time": df.index[i].isoformat(), "exit": px, "exit_reason": reason,
+            "pnl": pnl, "r_multiple": r_mult,
+            "mfe_r": max((x[0] for x in p.path), default=0.0),
+            "mae_r": max((x[1] for x in p.path), default=0.0),
+            "bars_held": len(p.path), "path": p.path, "components": p.components, "decision": p.decision,
+        })
+        self.psych.record_trade(i, pnl, p.risk_pct)
+
+    # ------------------------------------------------------------------- step
+    def step(self, df: pd.DataFrame, i: int) -> dict | None:
+        window = df.iloc[max(0, i - self.cfg.lookback_bars + 1): i + 1]
+        if len(window) < 60:
+            return None
+        ts = df.index[i]
+        self.psych.new_bar(i, ts.strftime("%Y-%m-%d"), self.equity)
+
+        if self.pending is not None:
+            from .indicators import atr
+            self._fill(df, i, float(atr(window).iloc[-1]))
+        if self.position is not None:
+            self._manage(df, i)
+        self.equity_curve.append((ts, self.equity))
+        if self.position is not None or self.mm.halted:
+            return None
+
+        # Gate 1a: psychological state, before looking at the chart.
+        ok, why = self.psych.check_state(i)
+        if not ok:
+            for r in why:
+                self.blocked[f"PSY: {r.split(':')[0]}"] += 1
+            return None
+
+        # Gate 2: technical analysis (rules) and optional Claude judgement.
+        ctx = analyze(window, intraday=self.intraday)
+        sig: Signal | None = evaluate(ctx)
+        if sig is None:
+            return None
+        direction, setup, stop = sig.direction, sig.setup, sig.stop
+        confidence = confidence_from_score(sig.score, self.cfg.min_score)
+        decision = {"source": "rules", "score": round(sig.score, 3), "components": sig.reasons}
+
+        if self.ai is not None:
+            if sig.score < self.cfg.ai.prefilter_score:
+                return None
+            d = self.ai.decide(
+                ctx, {"direction": sig.direction, "setup": sig.setup, "score": sig.score,
+                      "components": sig.reasons, "structural_stop": sig.stop},
+                self.psych.summary(),
+                {"equity": round(self.equity, 2), "drawdown_pct": round(self.mm.drawdown_pct(self.equity), 2),
+                 "risk_pct_next": self.mm.risk_pct(self.equity)},
+                self.journal.stats(), self.exits.plan_for(sig.setup).__dict__)
+            decision = {"source": "claude", **d}
+            self.decisions.append({"time": ts.isoformat(), **decision})
+            if d["action"] == "HOLD":
+                self.blocked["AI: HOLD"] += 1
+                return decision
+            direction = "long" if d["action"] == "BUY" else "short"
+            setup = d["setup"] or sig.setup
+            confidence = d["confidence"]
+            stop = structural_stop(ctx, "bull" if direction == "long" else "bear")
+            inv = d.get("invalidation_price")
+            if inv and ((direction == "long" and inv < ctx["close"]) or (direction == "short" and inv > ctx["close"])):
+                stop = float(inv)
+        elif sig.score < self.cfg.min_score:
+            return None
+
+        # Gate 1b: psychology at the moment of entry (FOMO, confidence).
+        ok, why = self.psych.check_entry(ctx, confidence)
+        if not ok:
+            for r in why:
+                self.blocked[f"PSY: {r.split(':')[0]}"] += 1
+            return decision
+
+        # Gate 3 runs at fill time (needs the real entry price).
+        self.pending = PendingOrder(direction, setup, stop, sig.components, decision)
+        return decision
+
+    def run(self, df: pd.DataFrame, progress: bool = False) -> dict:
+        for i in range(len(df)):
+            self.step(df, i)
+            if progress and i % 250 == 0:
+                print(f"  bar {i}/{len(df)} equity={self.equity:,.2f}")
+        if self.position is not None:
+            self._close(df, len(df) - 1, float(df["close"].iloc[-1]), "end_of_data")
+        return self.report()
+
+    def report(self) -> dict:
+        trades = self.journal.trades()
+        trades = [t for t in trades if t["run_id"] == self.run_id]
+        eq = pd.Series([e for _, e in self.equity_curve]) if self.equity_curve else pd.Series([self.equity])
+        max_dd = float(((eq.cummax() - eq) / eq.cummax()).max() * 100)
+        rs = [t["r_multiple"] for t in trades]
+        return {
+            "run_id": self.run_id,
+            "trades": len(trades),
+            "final_equity": round(self.equity, 2),
+            "return_pct": round((self.equity / self.cfg.initial_equity - 1) * 100, 2),
+            "max_drawdown_pct": round(max_dd, 2),
+            "win_rate": round(sum(r > 0 for r in rs) / len(rs), 3) if rs else None,
+            "expectancy_r": round(sum(rs) / len(rs), 3) if rs else None,
+            "kill_switch": self.mm.halted,
+            "blocked": dict(self.blocked.most_common()),
+            "by_setup": self.journal.stats(),
+        }

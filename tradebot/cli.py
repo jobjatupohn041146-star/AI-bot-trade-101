@@ -52,6 +52,7 @@ def main(argv: list[str] | None = None) -> None:
     b.add_argument("--db", default=str(DATA_DIR / "journal.db"))
     b.add_argument("--policy", default=str(POLICY), help="SL/TP policy file to trade with")
     b.add_argument("--htf", help="higher timeframe, e.g. 4h, or 'none' (default from config)")
+    b.add_argument("--commission", type=float, default=0.05, help="fee %% per side (default 0.05)")
     b.add_argument("--start", help="only bars from this date (e.g. 2024-01-01)")
     b.add_argument("--end", help="only bars before this date")
     lv = sub.add_parser("live", help="trade the newest closed bar on a loop")
@@ -92,6 +93,8 @@ def main(argv: list[str] | None = None) -> None:
         return
 
     cfg = BotConfig()
+    if getattr(a, "commission", None) is not None:
+        cfg.commission_pct = a.commission
     if getattr(a, "htf", None):
         cfg.htf = None if a.htf.lower() == "none" else a.htf
     ok, msg = curriculum.is_learned()

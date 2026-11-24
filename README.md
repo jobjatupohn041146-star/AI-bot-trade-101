@@ -1,5 +1,7 @@
 # AI Bot Trade 101 — บอทเทรดที่ให้ Claude เทรดแทน
 
+📊 **หน้าเว็บผลทดสอบ:** https://jobjatupohn041146-star.github.io/AI-bot-trade-101/ (ไฟล์ `docs/index.html` สร้างใหม่ด้วย `python scripts/export_dashboard.py && python scripts/build_site.py`)
+
 บอทที่ **ต้องไปเรียนก่อน** (ICT, Elliott Wave, Price Action, SMC) แล้วจึงเทรดโดยผ่าน Logic 3 เสาหลัก:
 **1. จิตวิทยาการเทรด → 2. Technical Analysis → 3. Money Management**
 ส่วน Take Profit / Stop Loss จะ **ให้ AI หาเองจากสถิติ** ที่เก็บระหว่างเทรด

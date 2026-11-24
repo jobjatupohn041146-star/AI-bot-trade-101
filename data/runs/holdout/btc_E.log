@@ -1,0 +1,86 @@
+Data: 8760 bars 2025-11-01 00:00:00+00:00 -> 2026-10-31 23:00:00+00:00
+  bar 0/8760 equity=10,000.00
+  bar 250/8760 equity=9,893.09
+  bar 500/8760 equity=10,164.27
+  bar 750/8760 equity=10,009.37
+  bar 1000/8760 equity=9,667.36
+  bar 1250/8760 equity=9,538.21
+  bar 1500/8760 equity=9,285.39
+  bar 1750/8760 equity=9,457.95
+  bar 2000/8760 equity=11,735.34
+  bar 2250/8760 equity=11,536.81
+  bar 2500/8760 equity=12,509.81
+  bar 2750/8760 equity=12,361.19
+  bar 3000/8760 equity=12,239.28
+  bar 3250/8760 equity=11,972.53
+  bar 3500/8760 equity=13,030.42
+  bar 3750/8760 equity=12,784.87
+  bar 4000/8760 equity=12,354.79
+  bar 4250/8760 equity=12,132.91
+  bar 4500/8760 equity=11,642.00
+  bar 4750/8760 equity=11,211.04
+  bar 5000/8760 equity=11,523.65
+  bar 5250/8760 equity=12,005.28
+  bar 5500/8760 equity=11,657.49
+  bar 5750/8760 equity=12,299.73
+  bar 6000/8760 equity=13,437.89
+  bar 6250/8760 equity=13,623.99
+  bar 6500/8760 equity=13,171.34
+  bar 6750/8760 equity=13,488.43
+  bar 7000/8760 equity=13,119.27
+  bar 7250/8760 equity=16,937.24
+  bar 7500/8760 equity=16,138.10
+  bar 7750/8760 equity=15,948.98
+  bar 8000/8760 equity=17,411.91
+  bar 8250/8760 equity=17,027.44
+  bar 8500/8760 equity=16,330.38
+  bar 8750/8760 equity=15,576.67
+{
+  "run_id": "ef60bfd2",
+  "trades": 107,
+  "final_equity": 15576.67,
+  "return_pct": 55.77,
+  "max_drawdown_pct": 14.91,
+  "win_rate": 0.234,
+  "expectancy_r": 0.561,
+  "kill_switch": false,
+  "blocked": {
+    "PSY: TILT": 480,
+    "PSY: REVENGE": 246,
+    "PSY: FOMO": 2
+  },
+  "by_setup": {
+    "SMC_OB_FVG": {
+      "trades": 63,
+      "win_rate": 0.206,
+      "avg_r": 0.172,
+      "expectancy_r": 0.172,
+      "profit_factor": 1.19,
+      "total_r": 10.83
+    },
+    "PA_SR_CANDLE": {
+      "trades": 11,
+      "win_rate": 0.364,
+      "avg_r": 0.413,
+      "expectancy_r": 0.413,
+      "profit_factor": 1.65,
+      "total_r": 4.54
+    },
+    "LIQ_SWEEP_REVERSAL": {
+      "trades": 32,
+      "win_rate": 0.25,
+      "avg_r": 1.44,
+      "expectancy_r": 1.44,
+      "profit_factor": 2.7,
+      "total_r": 46.07
+    },
+    "ICT_OTE_KILLZONE": {
+      "trades": 1,
+      "win_rate": 0.0,
+      "avg_r": -1.388,
+      "expectancy_r": -1.388,
+      "profit_factor": 0.0,
+      "total_r": -1.39
+    }
+  }
+}

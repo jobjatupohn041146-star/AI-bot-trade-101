@@ -121,3 +121,14 @@ def confidence_from_score(score: float, min_score: float) -> float:
     if score <= 0:
         return 0.0
     return min(1.0, 0.55 * score / max(min_score, 1e-9))
+
+
+def evaluate_strategy(ctx: dict, required: tuple, stop_min_atr: float = 0.6) -> Signal | None:
+    """Signal only when every required component is active for one direction."""
+    hits = []
+    for d in ("bull", "bear"):
+        comp = _components(ctx, d)
+        if all(comp.get(k) for k in required):
+            hits.append(Signal("long" if d == "bull" else "short", 1.0, "STRAT:" + "+".join(required), comp,
+                               structural_stop(ctx, d, stop_min_atr), list(required)))
+    return hits[0] if len(hits) == 1 else None

@@ -14,7 +14,7 @@ import pandas as pd
 from .analysis import analyze, htf_context
 from .brokers import Broker, Fill, SimBroker
 from .config import BotConfig
-from .decision.rules import Signal, confidence_from_score, evaluate, structural_stop
+from .decision.rules import Signal, confidence_from_score, evaluate, evaluate_strategy, structural_stop
 from .exits import ExitPolicy
 from .journal import Journal
 from .money import MoneyManager
@@ -90,7 +90,7 @@ class TradingEngine:
         if r0 <= 0:
             self.blocked["gap through invalidation"] += 1
             return
-        plan = self.exits.plan_for(po.setup)
+        plan = self._plan(po.setup)
         stop = entry - sign * plan.sl_mult * r0
         if self.cfg.money.max_fee_r is not None:
             fee_r = 2 * self.cfg.commission_pct / 100 * entry / abs(entry - stop)
@@ -121,6 +121,13 @@ class TradingEngine:
                                  fill.size, risk_amount, sd.risk_pct, plan.max_bars, plan.mode,
                                  po.components, po.decision, fill)
         self.psych.record_entry()
+
+    def _plan(self, setup: str):
+        from .exits import ExitPlan
+
+        if self.cfg.fixed_rr:
+            return ExitPlan(setup, 1.0, self.cfg.fixed_rr, self.cfg.max_hold_bars, "fixed_rr")
+        return self.exits.plan_for(setup)
 
     def _htf(self, df: pd.DataFrame, i: int) -> dict | None:
         """Higher-timeframe bias from COMPLETED higher-timeframe bars only."""
@@ -216,8 +223,10 @@ class TradingEngine:
         # Gate 2: technical analysis (rules) and optional Claude judgement.
         ctx = analyze(window, intraday=self.intraday)
         ctx["htf"] = self._htf(df, i)
-        sig: Signal | None = evaluate(ctx, self.cfg.enabled_setups, self.cfg.stop_min_atr,
-                                         self.cfg.require_htf_alignment)
+        if self.cfg.strategy:
+            sig = evaluate_strategy(ctx, tuple(self.cfg.strategy), self.cfg.stop_min_atr)
+        else:
+            sig = evaluate(ctx, self.cfg.enabled_setups, self.cfg.stop_min_atr, self.cfg.require_htf_alignment)
         if sig is None:
             return None
         direction, setup, stop = sig.direction, sig.setup, sig.stop
@@ -233,7 +242,7 @@ class TradingEngine:
                 self.psych.summary(),
                 {"equity": round(self.equity, 2), "drawdown_pct": round(self.mm.drawdown_pct(self.equity), 2),
                  "risk_pct_next": self.mm.risk_pct(self.equity)},
-                self.journal.stats(), self.exits.plan_for(sig.setup).__dict__)
+                self.journal.stats(), self._plan(sig.setup).__dict__)
             decision = {"source": "claude", **d}
             self.decisions.append({"time": ts.isoformat(), **decision})
             if d["action"] == "HOLD":

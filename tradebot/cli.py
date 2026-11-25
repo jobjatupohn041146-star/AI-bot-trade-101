@@ -57,6 +57,8 @@ def main(argv: list[str] | None = None) -> None:
     b.add_argument("--hold", type=int, help="learning-mode holding bars")
     b.add_argument("--min-score", type=float)
     b.add_argument("--require-htf", action="store_true")
+    b.add_argument("--strategy", help="components that must all agree, comma-separated")
+    b.add_argument("--rr", type=float, help="fixed risk:reward target, e.g. 2 or 3")
     b.add_argument("--max-fee-r", type=float)
     b.add_argument("--setups", help="comma-separated setup whitelist")
     b.add_argument("--start", help="only bars from this date (e.g. 2024-01-01)")
@@ -103,6 +105,10 @@ def main(argv: list[str] | None = None) -> None:
         cfg.commission_pct = a.commission
     if getattr(a, "stop_min_atr", None) is not None:
         cfg.stop_min_atr = a.stop_min_atr
+    if getattr(a, "strategy", None):
+        cfg.strategy = tuple(x.strip() for x in a.strategy.split(","))
+    if getattr(a, "rr", None):
+        cfg.fixed_rr = a.rr
     if getattr(a, "hold", None):
         cfg.exits.learning_hold_bars = a.hold
     if getattr(a, "min_score", None):

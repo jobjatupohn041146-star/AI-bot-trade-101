@@ -63,6 +63,9 @@ class BotConfig:
     stop_min_atr: float = 0.6             # structural stop at least this far (ATR)
     enabled_setups: tuple | None = None   # None = all setups
     require_htf_alignment: bool = False   # only trade in the direction of the HTF bias
+    strategy: tuple | None = None         # trade ONLY when all these components agree (research result)
+    fixed_rr: float | None = None         # fixed take profit at N × risk (e.g. 2 or 3)
+    max_hold_bars: int = 240              # time stop used with fixed_rr
     require_learning: bool = True
     db_path: Path = DATA_DIR / "journal.db"
     psychology: PsychologyConfig = field(default_factory=PsychologyConfig)

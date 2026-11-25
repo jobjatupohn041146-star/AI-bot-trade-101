@@ -165,3 +165,32 @@ def test_claude_refusal_becomes_hold():
     fake.beta.messages.create = lambda **kw: SimpleNamespace(stop_reason="refusal", content=[])
     d = ClaudeTrader("pb", client=fake).decide({}, {}, {}, {}, {}, {})
     assert d["action"] == "HOLD"
+
+
+def test_strategy_mode_fixed_rr():
+    cfg = BotConfig()
+    cfg.strategy = ("structure_bias",)
+    cfg.fixed_rr = 2.0
+    j = Journal()
+    rep = TradingEngine(cfg, j).run(synthetic(1200, seed=3))
+    ts = j.trades()
+    assert rep["trades"] > 0 and all(t["setup"].startswith("STRAT:") for t in ts)
+    for t in ts:
+        assert t["take_profit"] is not None
+        risk = abs(t["entry"] - t["stop"])
+        assert abs(abs(t["take_profit"] - t["entry"]) - 2 * risk) < 1e-6 * t["entry"]
+        assert t["exit_reason"] in ("stop", "take_profit", "time", "end_of_data")
+
+
+def test_simulator_rr_math():
+    from tradebot.research.simulate import Market, simulate
+    n = 10
+    idx = pd.date_range("2024-01-01", periods=n, freq="1h", tz="UTC")
+    o = np.full(n, 100.0); c = o.copy(); h = o + 0.5; l = o - 0.5
+    h[3] = 121  # target hit on bar 3 for a long with risk 10 at RR 2
+    sc = pd.DataFrame({"i": [1], "time": [idx[1]], "L_x": [True], "S_x": [False], "L_stop": [90.0], "S_stop": [110.0]})
+    tr = simulate(Market("t", o, h, l, c, idx, sc), ("x",), 2.0, fee_pct=0.0)
+    assert len(tr) == 1 and tr.iloc[0]["exit"] == "tp" and tr.iloc[0]["r"] == 2.0
+    l[2] = 89  # now the stop is hit first
+    tr = simulate(Market("t", o, h, l, c, idx, sc), ("x",), 2.0, fee_pct=0.0)
+    assert tr.iloc[0]["exit"] == "sl" and tr.iloc[0]["r"] == -1.0

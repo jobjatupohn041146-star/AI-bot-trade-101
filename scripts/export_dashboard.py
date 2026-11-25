@@ -79,3 +79,41 @@ r1 = [("BTC 1h", "2019–2023", "btc_learn"), ("BTC 1h", "2024 – ต.ค. 2025
 write("round1", [{"id": db, "market": m, "period": p, **summary(RUNS / f"{db}.db", fees_in_backtest=False)}
                  for m, p, db in r1], ["data/runs/*.db"])
 print("ok", [p.name for p in OUT.iterdir()])
+
+# ---- Round 3: technique research (fixed RR) ----
+RES = Path("data/research")
+if (RES / "techniques.json").exists():
+    tech = json.loads((RES / "techniques.json").read_text())
+    pos = {}
+    for r in tech:
+        if r["market"] != "ALL" and r.get("trades"):
+            pos.setdefault((r["technique"], r["rr"]), 0)
+            pos[(r["technique"], r["rr"])] += r["exp_r"] > 0
+    rows = [{"technique": r["technique"], "label": r["label"], "rr": r["rr"], "trades": r["trades"],
+             "win_rate": r["win_rate"], "breakeven": r["breakeven_win_rate"], "exp_r": r["exp_r"],
+             "profit_factor": r["profit_factor"], "positive_markets": pos.get((r["technique"], r["rr"]), 0)}
+            for r in tech if r["market"] == "ALL" and r.get("trades")]
+    write("techniques", rows, ["data/research/techniques.json"])
+if (RES / "final.json").exists():
+    sel = {tuple(s["req"]) + (s["rr"],): s for s in json.loads((RES / "selection.json").read_text())["selected"]}
+    rows = []
+    for k, f in enumerate(json.loads((RES / "final.json").read_text()), 1):
+        s = sel[tuple(f["req"]) + (f["rr"],)]
+        rows.append({"rank": k, "label": f["label"], "rr": f["rr"], "passed": f["passed"],
+                     "train_win": s["train_win_rate"], "train_exp": s["train_exp_r"], "train_n": s["train_trades"],
+                     "val_win": s["val_win_rate"], "val_exp": s["val_exp_r"], "val_n": s["val_trades"],
+                     "final_win": f["pooled"]["win_rate"], "final_exp": f["pooled"]["exp_r"],
+                     "final_n": f["pooled"]["trades"], "final_pf": f["pooled"]["profit_factor"],
+                     "losing_streak": f["pooled"]["max_losing_streak"], "positive_markets": f["positive_markets"],
+                     **{f"m_{m}": v["exp_r"] for m, v in f["per_market"].items()}})
+    write("strategies", rows, ["data/research/selection.json", "data/research/final.json"])
+eng = []
+for tag, folder in (("ตามแผนเดิม (ปิด setup หลังแพ้ 30 ไม้แรก)", "strat"),
+                    ("ปรับหลังเห็นผล (ตัดสินจาก 100 ไม้ล่าสุด)", "strat2")):
+    for m in ("SOLUSDT", "XRPUSDT", "BNBUSDT", "GOLD"):
+        db = RUNS / folder / f"{m}.db"
+        if db.exists():
+            eng.append({"id": f"{folder}-{m}", "variant": tag, "market": m.replace("USDT", ""), **summary(db)})
+if eng:
+    write("engine_runs", eng, ["data/runs/strat/*.db", "data/runs/strat2/*.db"])
+print("round 3 exported")

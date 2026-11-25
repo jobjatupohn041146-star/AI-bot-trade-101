@@ -59,6 +59,8 @@ def main(argv: list[str] | None = None) -> None:
     b.add_argument("--require-htf", action="store_true")
     b.add_argument("--strategy", help="components that must all agree, comma-separated")
     b.add_argument("--rr", type=float, help="fixed risk:reward target, e.g. 2 or 3")
+    b.add_argument("--disable-after", type=int, help="min trades before a losing setup is paused")
+    b.add_argument("--disable-window", type=int, help="judge a setup on its last N trades only")
     b.add_argument("--max-fee-r", type=float)
     b.add_argument("--setups", help="comma-separated setup whitelist")
     b.add_argument("--start", help="only bars from this date (e.g. 2024-01-01)")
@@ -109,6 +111,10 @@ def main(argv: list[str] | None = None) -> None:
         cfg.strategy = tuple(x.strip() for x in a.strategy.split(","))
     if getattr(a, "rr", None):
         cfg.fixed_rr = a.rr
+    if getattr(a, "disable_after", None):
+        cfg.money.disable_setup_after = a.disable_after
+    if getattr(a, "disable_window", None):
+        cfg.money.disable_window = a.disable_window
     if getattr(a, "hold", None):
         cfg.exits.learning_hold_bars = a.hold
     if getattr(a, "min_score", None):

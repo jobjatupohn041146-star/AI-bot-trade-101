@@ -31,6 +31,7 @@ class MoneyConfig:
     max_fee_r: float | None = None        # skip trades whose round-trip fee costs more than this many R
     max_stop_atr: float = 4.0
     disable_setup_after: int = 30         # trades before a losing setup is disabled
+    disable_window: int | None = None     # judge only the last N trades (None = all trades)
 
 
 @dataclass

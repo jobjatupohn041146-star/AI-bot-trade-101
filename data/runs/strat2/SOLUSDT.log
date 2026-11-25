@@ -1,0 +1,235 @@
+Data: 51682 bars 2021-01-01 00:00:00+00:00 -> 2026-11-24 23:00:00+00:00
+  bar 0/51682 equity=10,000.00
+  bar 250/51682 equity=10,000.00
+  bar 500/51682 equity=9,899.20
+  bar 750/51682 equity=9,599.53
+  bar 1000/51682 equity=10,798.52
+  bar 1250/51682 equity=10,786.41
+  bar 1500/51682 equity=10,996.22
+  bar 1750/51682 equity=10,762.02
+  bar 2000/51682 equity=10,418.44
+  bar 2250/51682 equity=10,937.31
+  bar 2500/51682 equity=11,118.40
+  bar 2750/51682 equity=11,335.05
+  bar 3000/51682 equity=11,107.04
+  bar 3250/51682 equity=10,555.07
+  bar 3500/51682 equity=10,239.03
+  bar 3750/51682 equity=10,249.41
+  bar 4000/51682 equity=10,238.21
+  bar 4250/51682 equity=10,125.42
+  bar 4500/51682 equity=10,074.21
+  bar 4750/51682 equity=10,119.97
+  bar 5000/51682 equity=10,093.09
+  bar 5250/51682 equity=10,487.95
+  bar 5500/51682 equity=11,340.14
+  bar 5750/51682 equity=11,485.48
+  bar 6000/51682 equity=12,419.61
+  bar 6250/51682 equity=12,209.11
+  bar 6500/51682 equity=11,963.75
+  bar 6750/51682 equity=11,963.75
+  bar 7000/51682 equity=11,711.02
+  bar 7250/51682 equity=12,167.26
+  bar 7500/51682 equity=12,402.64
+  bar 7750/51682 equity=12,139.46
+  bar 8000/51682 equity=12,218.27
+  bar 8250/51682 equity=12,094.27
+  bar 8500/51682 equity=11,775.96
+  bar 8750/51682 equity=11,655.98
+  bar 9000/51682 equity=11,536.84
+  bar 9250/51682 equity=11,822.44
+  bar 9500/51682 equity=12,175.86
+  bar 9750/51682 equity=12,236.96
+  bar 10000/51682 equity=12,420.53
+  bar 10250/51682 equity=11,923.63
+  bar 10500/51682 equity=12,023.90
+  bar 10750/51682 equity=12,252.53
+  bar 11000/51682 equity=12,993.32
+  bar 11250/51682 equity=12,730.38
+  bar 11500/51682 equity=13,013.30
+  bar 11750/51682 equity=12,993.40
+  bar 12000/51682 equity=13,370.05
+  bar 12250/51682 equity=13,370.05
+  bar 12500/51682 equity=13,585.91
+  bar 12750/51682 equity=13,991.78
+  bar 13000/51682 equity=13,850.11
+  bar 13250/51682 equity=13,294.33
+  bar 13500/51682 equity=13,023.57
+  bar 13750/51682 equity=12,999.19
+  bar 14000/51682 equity=12,736.80
+  bar 14250/51682 equity=12,478.93
+  bar 14500/51682 equity=12,664.10
+  bar 14750/51682 equity=12,681.32
+  bar 15000/51682 equity=12,424.59
+  bar 15250/51682 equity=12,290.96
+  bar 15500/51682 equity=12,100.60
+  bar 15750/51682 equity=12,216.57
+  bar 16000/51682 equity=12,153.90
+  bar 16250/51682 equity=12,547.14
+  bar 16500/51682 equity=12,644.06
+  bar 16750/51682 equity=12,492.80
+  bar 17000/51682 equity=12,299.15
+  bar 17250/51682 equity=12,172.11
+  bar 17500/51682 equity=12,472.66
+  bar 17750/51682 equity=12,970.10
+  bar 18000/51682 equity=13,357.61
+  bar 18250/51682 equity=13,299.72
+  bar 18500/51682 equity=13,128.10
+  bar 18750/51682 equity=13,110.22
+  bar 19000/51682 equity=12,844.32
+  bar 19250/51682 equity=13,617.18
+  bar 19500/51682 equity=13,739.34
+  bar 19750/51682 equity=13,781.31
+  bar 20000/51682 equity=14,041.54
+  bar 20250/51682 equity=13,898.78
+  bar 20500/51682 equity=13,178.28
+  bar 20750/51682 equity=13,041.73
+  bar 21000/51682 equity=13,712.78
+  bar 21250/51682 equity=13,676.28
+  bar 21500/51682 equity=14,770.97
+  bar 21750/51682 equity=14,678.57
+  bar 22000/51682 equity=14,528.66
+  bar 22250/51682 equity=15,408.93
+  bar 22500/51682 equity=15,210.17
+  bar 22750/51682 equity=15,489.52
+  bar 23000/51682 equity=15,624.71
+  bar 23250/51682 equity=15,744.45
+  bar 23500/51682 equity=15,583.48
+  bar 23750/51682 equity=15,551.55
+  bar 24000/51682 equity=15,072.79
+  bar 24250/51682 equity=15,977.66
+  bar 24500/51682 equity=15,480.22
+  bar 24750/51682 equity=16,416.25
+  bar 25000/51682 equity=17,410.15
+  bar 25250/51682 equity=17,930.55
+  bar 25500/51682 equity=17,563.74
+  bar 25750/51682 equity=17,894.94
+  bar 26000/51682 equity=17,353.71
+  bar 26250/51682 equity=18,218.52
+  bar 26500/51682 equity=17,667.68
+  bar 26750/51682 equity=16,961.40
+  bar 27000/51682 equity=16,611.50
+  bar 27250/51682 equity=16,357.74
+  bar 27500/51682 equity=16,347.08
+  bar 27750/51682 equity=16,420.68
+  bar 28000/51682 equity=16,337.78
+  bar 28250/51682 equity=16,581.79
+  bar 28500/51682 equity=16,485.92
+  bar 28750/51682 equity=17,078.19
+  bar 29000/51682 equity=17,034.86
+  bar 29250/51682 equity=16,688.85
+  bar 29500/51682 equity=16,431.39
+  bar 29750/51682 equity=16,337.68
+  bar 30000/51682 equity=15,997.87
+  bar 30250/51682 equity=15,975.05
+  bar 30500/51682 equity=16,213.09
+  bar 30750/51682 equity=15,882.48
+  bar 31000/51682 equity=15,872.86
+  bar 31250/51682 equity=16,026.96
+  bar 31500/51682 equity=16,340.90
+  bar 31750/51682 equity=16,087.33
+  bar 32000/51682 equity=16,067.18
+  bar 32250/51682 equity=16,139.62
+  bar 32500/51682 equity=15,890.16
+  bar 32750/51682 equity=15,953.86
+  bar 33000/51682 equity=15,872.20
+  bar 33250/51682 equity=15,765.72
+  bar 33500/51682 equity=16,069.38
+  bar 33750/51682 equity=15,821.55
+  bar 34000/51682 equity=15,975.92
+  bar 34250/51682 equity=16,049.33
+  bar 34500/51682 equity=16,204.51
+  bar 34750/51682 equity=16,122.21
+  bar 35000/51682 equity=16,122.21
+  bar 35250/51682 equity=16,122.21
+  bar 35500/51682 equity=16,122.21
+  bar 35750/51682 equity=16,122.21
+  bar 36000/51682 equity=16,122.21
+  bar 36250/51682 equity=16,122.21
+  bar 36500/51682 equity=16,122.21
+  bar 36750/51682 equity=16,122.21
+  bar 37000/51682 equity=16,122.21
+  bar 37250/51682 equity=16,122.21
+  bar 37500/51682 equity=16,122.21
+  bar 37750/51682 equity=16,122.21
+  bar 38000/51682 equity=16,122.21
+  bar 38250/51682 equity=16,122.21
+  bar 38500/51682 equity=16,122.21
+  bar 38750/51682 equity=16,122.21
+  bar 39000/51682 equity=16,122.21
+  bar 39250/51682 equity=16,122.21
+  bar 39500/51682 equity=16,122.21
+  bar 39750/51682 equity=16,122.21
+  bar 40000/51682 equity=16,122.21
+  bar 40250/51682 equity=16,122.21
+  bar 40500/51682 equity=16,122.21
+  bar 40750/51682 equity=16,122.21
+  bar 41000/51682 equity=16,122.21
+  bar 41250/51682 equity=16,122.21
+  bar 41500/51682 equity=16,122.21
+  bar 41750/51682 equity=16,122.21
+  bar 42000/51682 equity=16,122.21
+  bar 42250/51682 equity=16,122.21
+  bar 42500/51682 equity=16,122.21
+  bar 42750/51682 equity=16,122.21
+  bar 43000/51682 equity=16,122.21
+  bar 43250/51682 equity=16,122.21
+  bar 43500/51682 equity=16,122.21
+  bar 43750/51682 equity=16,122.21
+  bar 44000/51682 equity=16,122.21
+  bar 44250/51682 equity=16,122.21
+  bar 44500/51682 equity=16,122.21
+  bar 44750/51682 equity=16,122.21
+  bar 45000/51682 equity=16,122.21
+  bar 45250/51682 equity=16,122.21
+  bar 45500/51682 equity=16,122.21
+  bar 45750/51682 equity=16,122.21
+  bar 46000/51682 equity=16,122.21
+  bar 46250/51682 equity=16,122.21
+  bar 46500/51682 equity=16,122.21
+  bar 46750/51682 equity=16,122.21
+  bar 47000/51682 equity=16,122.21
+  bar 47250/51682 equity=16,122.21
+  bar 47500/51682 equity=16,122.21
+  bar 47750/51682 equity=16,122.21
+  bar 48000/51682 equity=16,122.21
+  bar 48250/51682 equity=16,122.21
+  bar 48500/51682 equity=16,122.21
+  bar 48750/51682 equity=16,122.21
+  bar 49000/51682 equity=16,122.21
+  bar 49250/51682 equity=16,122.21
+  bar 49500/51682 equity=16,122.21
+  bar 49750/51682 equity=16,122.21
+  bar 50000/51682 equity=16,122.21
+  bar 50250/51682 equity=16,122.21
+  bar 50500/51682 equity=16,122.21
+  bar 50750/51682 equity=16,122.21
+  bar 51000/51682 equity=16,122.21
+  bar 51250/51682 equity=16,122.21
+  bar 51500/51682 equity=16,122.21
+{
+  "run_id": "7d3e6786",
+  "trades": 361,
+  "final_equity": 16122.21,
+  "return_pct": 61.22,
+  "max_drawdown_pct": 15.02,
+  "win_rate": 0.321,
+  "expectancy_r": 0.172,
+  "kill_switch": false,
+  "blocked": {
+    "MM: setup disabled: negative expectancy in journal": 7306,
+    "PSY: TILT": 1272,
+    "PSY: REVENGE": 735,
+    "PSY: FOMO": 572,
+    "PSY: DAILY LOSS LIMIT": 2
+  },
+  "by_setup": {
+    "STRAT:structure_bias+ema_bias+htf_bias": {
+      "trades": 361,
+      "win_rate": 0.321,
+      "avg_r": 0.172,
+      "expectancy_r": 0.172,
+      "profit_factor": 1.26,
+      "total_r": 62.14
+    }
+  }
+}

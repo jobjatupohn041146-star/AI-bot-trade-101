@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ผลทดสอบบอทเทรด AI</title>
-<meta name="description" content="ผล backtest ของบอทเทรดที่เรียน ICT, SMC, Elliott Wave และ Price Action บนข้อมูลจริง">
+<meta name="description" content="สถิติ win rate ของแต่ละเทคนิค ICT, SMC, Elliott Wave, Price Action และกลยุทธ์ RR 1:2–1:3 บนข้อมูลจริงถึงปัจจุบัน">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -87,10 +87,47 @@
   <header>
     <span class="eyebrow">AI Bot Trade 101 · Backtest report</span>
     <h1>ผลทดสอบบอทเทรด AI</h1>
-    <div id="verdict" class="verdict">—</div>
-    <p id="lede"></p>
+    <div id="verdict3" class="verdict">—</div>
+    <p id="lede3"></p>
     <p class="muted">ทุกตัวเลขหักค่าธรรมเนียม 0.05% ต่อขาแล้ว · เงินทุนเริ่มต้น 10,000 · เสี่ยง 1% ต่อเทรด · ข้อมูลรายชั่วโมงจาก Binance และ Yahoo Finance · อัปเดต __UPDATED__</p>
   </header>
+
+  <section id="techniques">
+    <h2>Win rate ของแต่ละเทคนิค ทุกตลาด ถึงปัจจุบัน</h2>
+    <p class="muted">ใช้แต่ละเทคนิคเดี่ยวๆ เป็นสัญญาณเข้า stop ที่จุดโครงสร้าง TP คงที่ 2R หรือ 3R รวม BTC, ETH, SOL, XRP, BNB และทองคำ หักค่าธรรมเนียมแล้ว เส้นขีดในกราฟคือ win rate ขั้นต่ำที่ต้องได้เพื่อไม่ขาดทุน</p>
+    <div class="seg" role="group" aria-label="เลือก Risk:Reward">
+      <button type="button" data-rr="3" aria-pressed="true">RR 1:3</button>
+      <button type="button" data-rr="2" aria-pressed="false">RR 1:2</button>
+    </div>
+    <div class="legend">
+      <span><i class="sw" style="background:var(--ok)"></i>ผลเฉลี่ยเป็นบวก</span>
+      <span><i class="sw" style="background:var(--bad)"></i>ผลเฉลี่ยติดลบ</span>
+      <span><i class="sw" style="background:var(--fg)"></i>win rate ขั้นต่ำเพื่อคุ้มทุน</span>
+    </div>
+    <div class="chart" id="techchart"></div>
+    <div class="tablewrap"><table id="techtable"></table></div>
+    <p class="muted">Killzone เป็นตัวกรองเวลา ไม่ได้บอกทิศ จึงไม่มีสถิติเมื่อใช้เดี่ยวๆ ตลาดที่เป็นบวกนับจาก 6 ตลาด</p>
+  </section>
+
+  <section id="strategies">
+    <h2>กลยุทธ์ที่เกิดจากการผสมเทคนิค</h2>
+    <p class="muted">ลองผสม 1–3 เทคนิค ที่ RR 1:2 และ 1:3 รวม 728 แบบ เลือกบน BTC+ETH 2019–2023 ตรวจบน 2024 – มิ.ย. 2025 แล้วทดสอบครั้งเดียวบน SOL, XRP, BNB และทองคำปี 2026 ที่ไม่เคยใช้ กฎเลือกและเกณฑ์ผ่าน commit ไว้ก่อนเห็นผล</p>
+    <div class="tablewrap"><table id="strattable"></table></div>
+    <p class="muted">เกณฑ์ผ่าน: ผลเฉลี่ยรวมเป็นบวก และเป็นบวกอย่างน้อย 3 ใน 4 ตลาดทดสอบ ลอง 728 แบบย่อมมีบางแบบดูดีเพราะโชค ผลบนตลาดที่ไม่เคยใช้จึงสำคัญที่สุด</p>
+  </section>
+
+  <section id="engine">
+    <h2>กลยุทธ์อันดับ 1 รันผ่านบอทตัวจริง</h2>
+    <p class="muted">โครงสร้างตลาด + EMA + ทิศ TF 4 ชม. ที่ RR 1:3 ผ่านด่านจิตวิทยาและ Money Management ครบ เสี่ยง 1% ต่อไม้ เริ่ม 10,000</p>
+    <div class="tablewrap"><table id="enginetable"></table></div>
+    <p class="muted">แบบตามแผนเดิม บอทปิด setup ถาวรเมื่อ 30 ไม้แรกขาดทุน ทำให้ XRP และทองคำแทบไม่ได้เทรด แบบที่ปรับตัดสินจาก 100 ไม้ล่าสุด ซึ่งปรับหลังเห็นผลแล้ว จึงต้องยืนยันบนข้อมูลใหม่อีกรอบ</p>
+  </section>
+
+  <section id="previous">
+    <h2>รอบก่อนหน้า: กฎแบบให้คะแนนรวม</h2>
+    <div id="verdict" class="verdict">—</div>
+    <p id="lede"></p>
+  </section>
 
   <section>
     <h2>การทดสอบครั้งสุดท้าย บนข้อมูลที่บอทไม่เคยเห็น</h2>
@@ -266,9 +303,9 @@ function drawEquity() {
     })
     .on('pointerleave', () => { tip.style('display', 'none'); guide.style('display', 'none'); });
 }
-document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => {
+document.querySelectorAll('.seg button[data-mk]').forEach((b) => b.addEventListener('click', () => {
   market = b.dataset.mk;
-  document.querySelectorAll('.seg button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+  document.querySelectorAll('.seg button[data-mk]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
   drawEquity();
 }));
 
@@ -338,7 +375,107 @@ table('round1', DATA.round1, [
   { h: 'ผลตอบแทน', f: 'return_pct', fmt: fmt.pct, tone: true }, { h: 'DD สูงสุด %', f: 'max_dd_pct', fmt: one },
 ]);
 
-function drawAll() { drawEquity(); drawTuning(); }
+
+// ---- Round 3 ----
+const strategies = DATA.strategies || [];
+const v3 = document.getElementById('verdict3');
+const passedS = strategies.filter((r) => r.passed);
+v3.textContent = passedS.length
+  ? `ผ่าน ${passedS.length} จาก ${strategies.length} กลยุทธ์บนตลาดที่ไม่เคยใช้ · ยังต้องทดลองบน testnet ก่อนใช้เงินจริง`
+  : 'ยังไม่มีกลยุทธ์ไหนผ่าน';
+v3.classList.toggle('ok', passedS.length > 0);
+const topS = strategies[0];
+if (topS) {
+  document.getElementById('lede3').textContent =
+    `เทคนิคตามเทรนด์ทำกำไรได้ ส่วนจุดเข้าแบบ SMC/ICT เดี่ยวๆ ขาดทุนหลังหักค่าธรรมเนียม กลยุทธ์อันดับ 1 คือ ${topS.label} ที่ RR 1:${topS.rr}: ชนะ ${topS.final_win}% (ต้องได้ ${(100 / (1 + topS.rr)).toFixed(0)}% ขึ้นไป) ผลเฉลี่ย ${fmt.r(topS.final_exp)}R ต่อไม้ บน ${fmt.int(topS.final_n)} ไม้ที่ไม่เคยใช้`;
+}
+
+let rrSel = 3;
+function techRows() {
+  return (DATA.techniques || []).filter((r) => r.rr === rrSel).sort((a, b) => b.exp_r - a.exp_r);
+}
+function drawTech() {
+  const el = document.getElementById('techchart');
+  el.replaceChildren();
+  const rows = techRows();
+  if (!rows.length) return;
+  const W = el.clientWidth, narrow = W < 560, bh = narrow ? 44 : 30, H = rows.length * bh + 30;
+  const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H)
+    .attr('role', 'img').attr('aria-label', `win rate ของแต่ละเทคนิคที่ RR 1:${rrSel} เทียบกับจุดคุ้มทุน`);
+  const labelW = narrow ? 0 : Math.min(280, W * 0.42);
+  const maxWin = d3.max(rows, (r) => r.win_rate);
+  const x = d3.scaleLinear().domain([0, Math.max(45, Math.ceil(maxWin / 5) * 5)]).range([labelW + 8, W - 70]);
+  const y = d3.scaleBand().domain(rows.map((r) => r.technique)).range([4, H - 26]).padding(narrow ? 0.5 : 0.3);
+  const off = narrow ? 8 : 0;
+  svg.append('g').attr('transform', `translate(0,${H - 26})`)
+    .call(d3.axisBottom(x).ticks(5).tickFormat((v) => v + '%').tickSize(-(H - 30)))
+    .call((g) => g.select('.domain').remove()).call((g) => g.selectAll('line').attr('stroke', css('--grid')));
+  const g = svg.selectAll('g.t').data(rows).join('g');
+  g.append('rect').attr('x', x(0)).attr('width', (r) => x(r.win_rate) - x(0))
+    .attr('y', (r) => y(r.technique) + off).attr('height', y.bandwidth()).attr('rx', 2)
+    .attr('fill', (r) => (r.exp_r > 0 ? css('--ok') : css('--bad'))).attr('fill-opacity', 0.75);
+  g.append('line').attr('x1', (r) => x(r.breakeven)).attr('x2', (r) => x(r.breakeven))
+    .attr('y1', (r) => y(r.technique) + off - 3).attr('y2', (r) => y(r.technique) + off + y.bandwidth() + 3)
+    .attr('stroke', css('--fg')).attr('stroke-width', 2);
+  g.append('text').attr('class', 'lbl').attr('x', narrow ? 0 : labelW)
+    .attr('y', (r) => (narrow ? y(r.technique) + off - 4 : y(r.technique) + y.bandwidth() / 2)).attr('dy', narrow ? 0 : '0.35em')
+    .attr('text-anchor', narrow ? 'start' : 'end').text((r) => r.label);
+  g.append('text').attr('class', 'lbl num').attr('x', W - 4).attr('text-anchor', 'end')
+    .attr('y', (r) => y(r.technique) + off + y.bandwidth() / 2).attr('dy', '0.35em')
+    .style('fill', (r) => (r.exp_r > 0 ? css('--ok') : css('--bad'))).text((r) => r.win_rate.toFixed(1) + '%');
+}
+function fillTable(id, rows, cols, hl) {
+  const t = document.getElementById(id);
+  t.replaceChildren();
+  const head = t.createTHead().insertRow();
+  for (const c of cols) { const th = document.createElement('th'); th.textContent = c.h; if (c.l) th.className = 'l'; head.append(th); }
+  const body = t.createTBody();
+  for (const r of rows) {
+    const tr = body.insertRow();
+    if (hl && hl(r)) tr.className = 'hl';
+    for (const c of cols) {
+      const td = tr.insertCell();
+      const val = typeof c.f === 'function' ? c.f(r) : r[c.f];
+      td.textContent = val == null ? '—' : c.fmt ? c.fmt(val) : val;
+      td.className = [c.l ? 'l' : '', c.text ? 't' : '', c.tone && val != null ? tone(c.tone === true ? val : c.tone(r)) : ''].join(' ').trim();
+    }
+  }
+}
+function drawTechTable() {
+  fillTable('techtable', techRows(), [
+    { h: 'เทคนิค', f: 'label', l: true, text: true }, { h: 'เทรด', f: 'trades', fmt: fmt.int },
+    { h: 'Win rate', f: 'win_rate', fmt: (v) => v.toFixed(1) + '%', tone: (r) => r.exp_r },
+    { h: 'ต้องได้', f: 'breakeven', fmt: (v) => v.toFixed(1) + '%' },
+    { h: 'ผลเฉลี่ย (R)', f: 'exp_r', fmt: fmt.r, tone: true },
+    { h: 'Profit factor', f: 'profit_factor', fmt: (v) => v.toFixed(2) },
+    { h: 'ตลาดที่เป็นบวก', f: (r) => `${r.positive_markets}/6`, text: true },
+  ]);
+}
+document.querySelectorAll('.seg button[data-rr]').forEach((b) => b.addEventListener('click', () => {
+  rrSel = Number(b.dataset.rr);
+  document.querySelectorAll('.seg button[data-rr]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+  drawTech(); drawTechTable();
+}));
+drawTechTable();
+fillTable('strattable', strategies, [
+  { h: '#', f: 'rank' }, { h: 'กลยุทธ์', f: 'label', l: true, text: true }, { h: 'RR', f: (r) => `1:${r.rr}`, text: true },
+  { h: 'ฝึก: ชนะ / R', f: (r) => `${r.train_win}% / ${fmt.r(r.train_exp)}` },
+  { h: 'ตรวจ: ชนะ / R', f: (r) => `${r.val_win}% / ${fmt.r(r.val_exp)}` },
+  { h: 'ทดสอบ: ชนะ', f: 'final_win', fmt: (v) => v.toFixed(1) + '%' },
+  { h: 'ทดสอบ: R', f: 'final_exp', fmt: fmt.r, tone: true },
+  { h: 'SOL', f: 'm_SOLUSDT', fmt: fmt.r, tone: true }, { h: 'XRP', f: 'm_XRPUSDT', fmt: fmt.r, tone: true },
+  { h: 'BNB', f: 'm_BNBUSDT', fmt: fmt.r, tone: true }, { h: 'ทองคำ', f: 'm_GOLD', fmt: fmt.r, tone: true },
+  { h: 'แพ้ติดกันสูงสุด', f: 'losing_streak' },
+  { h: 'ผล', f: (r) => (r.passed ? 'ผ่าน' : 'ไม่ผ่าน'), text: true, tone: (r) => (r.passed ? 1 : -1) },
+], (r) => r.rank === 1);
+fillTable('enginetable', DATA.engine_runs || [], [
+  { h: 'แบบ', f: 'variant', l: true, text: true }, { h: 'ตลาด', f: 'market', l: true, text: true },
+  { h: 'เทรด', f: 'trades', fmt: fmt.int }, { h: 'ชนะ %', f: 'win_pct', fmt: (v) => v.toFixed(1) },
+  { h: 'ผลเฉลี่ย (R)', f: 'exp_r', fmt: fmt.r, tone: true },
+  { h: 'ผลตอบแทน', f: 'return_pct', fmt: fmt.pct, tone: true }, { h: 'DD สูงสุด %', f: 'max_dd_pct', fmt: (v) => v.toFixed(1) },
+]);
+
+function drawAll() { drawEquity(); drawTuning(); drawTech(); }
 drawAll();
 let rt;
 window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(drawAll, 150); });

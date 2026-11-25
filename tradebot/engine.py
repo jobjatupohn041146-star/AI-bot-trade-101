@@ -78,8 +78,16 @@ class TradingEngine:
 
     # ---------------------------------------------------------------- helpers
     def _setup_disabled(self, setup: str) -> bool:
+        m = self.cfg.money
+        rs = [t["r_multiple"] for t in self.journal.trades(setup=setup) if t["run_id"] == self.run_id] \
+            if m.disable_window else None
+        if rs is not None:  # rolling window: a setup can recover after a bad streak
+            if len(rs) < m.disable_setup_after:
+                return False
+            recent = rs[-m.disable_window:]
+            return sum(recent) / len(recent) < 0
         st = self.journal.stats().get(setup)
-        return bool(st and st["trades"] >= self.cfg.money.disable_setup_after and st["expectancy_r"] < 0)
+        return bool(st and st["trades"] >= m.disable_setup_after and st["expectancy_r"] < 0)
 
     def _fill(self, df: pd.DataFrame, i: int, atr_now: float, price_hint: float | None = None,
               first_bar: int | None = None) -> None:

@@ -90,3 +90,50 @@ def load_binance_vision(symbol: str = "BTCUSDT", interval: str = "1h", start: st
     unit_us = t > 10**14  # archives switched from ms to µs timestamps in 2025
     df["time"] = pd.to_datetime(t.where(~unit_us, t // 1000), unit="ms", utc=True)
     return normalize(df).loc[lambda d: ~d.index.duplicated()]
+
+
+def load_binance_daily(symbol: str, interval: str, days: list, cache_dir: str | None = None) -> pd.DataFrame:
+    """Daily kline archives (for the current, not yet archived month)."""
+    import io
+    import urllib.error
+    import urllib.request
+    import zipfile
+    from pathlib import Path
+
+    cache = Path(cache_dir) if cache_dir else None
+    frames = []
+    for day in days:
+        name = f"{symbol}-{interval}-{day}"
+        local = cache / f"{name}.csv" if cache else None
+        if local and local.exists():
+            raw = local.read_bytes()
+        else:
+            url = f"https://data.binance.vision/data/spot/daily/klines/{symbol}/{interval}/{name}.zip"
+            try:
+                with urllib.request.urlopen(url, timeout=60) as r:
+                    raw = zipfile.ZipFile(io.BytesIO(r.read())).read(f"{name}.csv")
+            except urllib.error.HTTPError:
+                continue  # not published yet
+            if local:
+                local.parent.mkdir(parents=True, exist_ok=True)
+                local.write_bytes(raw)
+        frames.append(pd.read_csv(io.BytesIO(raw), header=None, usecols=range(6)))
+    if not frames:
+        return pd.DataFrame(columns=COLS)
+    df = pd.concat(frames, ignore_index=True)
+    df.columns = ["time", "open", "high", "low", "close", "volume"]
+    t = df["time"].astype("int64")
+    df["time"] = pd.to_datetime(t.where(t <= 10**14, t // 1000), unit="ms", utc=True)
+    return normalize(df)
+
+
+def load_binance_until_now(symbol: str, interval: str = "1h", start: str = "2019-01",
+                           cache_dir: str | None = None) -> pd.DataFrame:
+    """Monthly archives up to last month + daily archives for this month."""
+    today = pd.Timestamp.now(tz="UTC").normalize()
+    last_month = (today.tz_localize(None).to_period("M") - 1).strftime("%Y-%m")
+    monthly = load_binance_vision(symbol, interval, start, last_month, cache_dir)
+    days = [d.strftime("%Y-%m-%d") for d in pd.date_range(today.replace(day=1), today - pd.Timedelta(days=1))]
+    daily = load_binance_daily(symbol, interval, days, cache_dir)
+    df = pd.concat([monthly, daily])
+    return df[~df.index.duplicated()].sort_index()

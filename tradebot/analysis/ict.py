@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import numpy as np
 import pandas as pd
 
 from ..indicators import Swing
@@ -48,15 +49,19 @@ def ote(df: pd.DataFrame, swings: list[Swing]) -> dict | None:
 
 def asian_range_sweep(df: pd.DataFrame) -> dict | None:
     """Judas swing: today's London/NY took out the Asian high or low."""
-    ts = df.index[-1]
-    day = df[df.index.normalize() == ts.normalize()]
-    asia = day[(day.index.hour >= 0) & (day.index.hour < 6)]
-    after = day[day.index.hour >= 7]
-    if len(asia) < 3 or after.empty:
+    tail = df.iloc[-24:]
+    idx = tail.index
+    today = idx[-1].normalize()
+    same = np.asarray(idx.normalize() == today)
+    hours = np.asarray(idx.hour)
+    hi, lo = tail["high"].to_numpy(), tail["low"].to_numpy()
+    asia = same & (hours < 6)
+    after = same & (hours >= 7)
+    if asia.sum() < 3 or not after.any():
         return None
-    return {"asia_high": float(asia["high"].max()), "asia_low": float(asia["low"].min()),
-            "swept_high": bool(after["high"].max() > asia["high"].max()),
-            "swept_low": bool(after["low"].min() < asia["low"].min())}
+    ah, al = float(hi[asia].max()), float(lo[asia].min())
+    return {"asia_high": ah, "asia_low": al,
+            "swept_high": bool(hi[after].max() > ah), "swept_low": bool(lo[after].min() < al)}
 
 
 def analyze(df: pd.DataFrame, swings: list[Swing], events: list[StructureEvent], ind: dict, intraday: bool) -> dict:

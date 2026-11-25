@@ -76,6 +76,11 @@ def main(argv: list[str] | None = None) -> None:
     lv.add_argument("--state", default=str(DATA_DIR / "live_state.json"), help="resume file")
     lv.add_argument("--db", default=str(DATA_DIR / "live_journal.db"))
     lv.add_argument("--policy", default=str(POLICY))
+    lv.add_argument("--strategy", help="components that must all agree, comma-separated")
+    lv.add_argument("--rr", type=float, help="fixed risk:reward target")
+    lv.add_argument("--risk", type=float, help="risk %% per trade (default 1.0)")
+    lv.add_argument("--disable-after", type=int, default=100)
+    lv.add_argument("--disable-window", type=int, default=100)
     lv.add_argument("--real", action="store_true",
                     help="REAL money. Also requires env TRADEBOT_I_UNDERSTAND_RISK=YES")
     a = ap.parse_args(argv)
@@ -115,6 +120,8 @@ def main(argv: list[str] | None = None) -> None:
         cfg.money.disable_setup_after = a.disable_after
     if getattr(a, "disable_window", None):
         cfg.money.disable_window = a.disable_window
+    if getattr(a, "risk", None):
+        cfg.money.risk_per_trade_pct = a.risk
     if getattr(a, "hold", None):
         cfg.exits.learning_hold_bars = a.hold
     if getattr(a, "min_score", None):

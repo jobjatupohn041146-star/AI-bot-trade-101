@@ -11,9 +11,12 @@ def ema(s: pd.Series, n: int) -> pd.Series:
 
 
 def atr(df: pd.DataFrame, n: int = 14) -> pd.Series:
-    pc = df["close"].shift(1)
-    tr = pd.concat([df["high"] - df["low"], (df["high"] - pc).abs(), (df["low"] - pc).abs()], axis=1).max(axis=1)
-    return tr.ewm(alpha=1 / n, adjust=False).mean()
+    h, l, c = df["high"].to_numpy(), df["low"].to_numpy(), df["close"].to_numpy()
+    tr = h - l
+    if len(c) > 1:
+        pc = c[:-1]
+        tr[1:] = np.maximum.reduce([tr[1:], np.abs(h[1:] - pc), np.abs(l[1:] - pc)])
+    return pd.Series(tr, index=df.index).ewm(alpha=1 / n, adjust=False).mean()
 
 
 @dataclass
@@ -29,11 +32,21 @@ def find_swings(df: pd.DataFrame, left: int = 3, right: int = 3) -> list[Swing]:
     h, l = df["high"].to_numpy(), df["low"].to_numpy()
     n = len(df)
     raw: list[Swing] = []
-    for i in range(left, n - right):
-        if h[i] > h[i - left:i].max() and h[i] >= h[i + 1:i + right + 1].max():
-            raw.append(Swing(i, float(h[i]), "H", i + right))
-        if l[i] < l[i - left:i].min() and l[i] <= l[i + 1:i + right + 1].min():
-            raw.append(Swing(i, float(l[i]), "L", i + right))
+    if n >= left + right + 1:
+        from numpy.lib.stride_tricks import sliding_window_view as win
+        idx = np.arange(left, n - right)
+        lh = win(h, left)[: n - left - right].max(axis=1)        # max(h[i-left:i])
+        rh = win(h[1:], right)[left: n - right].max(axis=1)      # max(h[i+1:i+right+1])
+        ll = win(l, left)[: n - left - right].min(axis=1)
+        rl = win(l[1:], right)[left: n - right].min(axis=1)
+        hc, lc = h[idx], l[idx]
+        is_h = (hc > lh) & (hc >= rh)
+        is_l = (lc < ll) & (lc <= rl)
+        for i, ih, il in zip(idx, is_h, is_l):
+            if ih:
+                raw.append(Swing(int(i), float(h[i]), "H", int(i) + right))
+            if il:
+                raw.append(Swing(int(i), float(l[i]), "L", int(i) + right))
     out: list[Swing] = []
     for s in raw:
         if out and out[-1].kind == s.kind:

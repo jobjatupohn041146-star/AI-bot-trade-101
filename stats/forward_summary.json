@@ -1,0 +1,14 @@
+{
+ "updated": "2026-11-25T06:06Z",
+ "start": "2026-11-25",
+ "strategy": "โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF)",
+ "rr": 3.0,
+ "assets": 31,
+ "open_trades": 5,
+ "closed": {
+  "trades": 0
+ },
+ "days": 0.3,
+ "result_pct_at_1pct_risk_per_trade": 0.0,
+ "errors": {}
+}

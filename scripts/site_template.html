@@ -43,7 +43,7 @@
   .verdict { align-self: flex-start; border: 1.5px solid var(--bad); color: var(--bad); border-radius: 999px; padding: 4px 14px; font-weight: 600; }
   .verdict.ok { border-color: var(--ok); color: var(--ok); }
   section { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
   .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
   .card-top { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; align-items: baseline; }
   .pill { font-size: .8rem; border: 1px solid currentColor; border-radius: 999px; padding: 1px 10px; }
@@ -89,11 +89,37 @@
     <h1>ผลทดสอบบอทเทรด AI</h1>
     <div id="verdict3" class="verdict">—</div>
     <p id="lede3"></p>
-    <p class="muted">ทุกตัวเลขหักค่าธรรมเนียม 0.05% ต่อขาแล้ว · เงินทุนเริ่มต้น 10,000 · เสี่ยง 1% ต่อเทรด · ข้อมูลรายชั่วโมงจาก Binance และ Yahoo Finance · อัปเดต __UPDATED__</p>
+    <p class="muted">ทุกตัวเลขหักต้นทุนแล้ว (คริปโต 0.05%, โลหะ/น้ำมัน 0.02%, ดัชนี 0.01%, Forex 0.007% ต่อขา) · Risk:Reward 1:2 หรือ 1:3 เสมอ · ข้อมูลรายชั่วโมงจาก Binance และ Yahoo Finance · อัปเดต __UPDATED__</p>
   </header>
 
+  <section id="forward">
+    <h2>ทดสอบล่วงหน้า (forward test) กลยุทธ์อันดับ 1</h2>
+    <p class="muted">นับเฉพาะแท่งเทียนที่เกิดขึ้นหลังเลือกกลยุทธ์ (ตั้งแต่ 25 พ.ย. 2026) บน 31 สินทรัพย์ อัปเดตทุกวันอัตโนมัติ ผลส่วนนี้คือหลักฐานที่ยังไม่ผ่านการปรับใดๆ</p>
+    <div class="cards" id="fwdcards"></div>
+    <div class="tablewrap"><table id="fwdassets"></table></div>
+    <div class="tablewrap"><table id="fwdtech"></table></div>
+  </section>
+
+  <section id="assets">
+    <h2>อันดับสินทรัพย์ สำหรับกลยุทธ์อันดับ 1 (RR 1:3)</h2>
+    <p class="muted">โครงสร้างตลาด + EMA 50/200 + ทิศ TF 4 ชม. ย้อนหลังถึง 24 พ.ย. 2026 · คริปโตเริ่ม 2019/2021, ทองคำ/เงิน/น้ำมัน/ดัชนี/Forex ย้อนได้ราว 2 ปี (ข้อจำกัดของ Yahoo)</p>
+    <div class="tablewrap"><table id="s1assets"></table></div>
+  </section>
+
+  <section id="classes">
+    <h2>เทคนิคไหนใช้ได้กับสินทรัพย์ประเภทไหน (RR 1:3)</h2>
+    <p class="muted">ตัวเลขคือสัดส่วนของสินทรัพย์ในกลุ่มที่เทคนิคนั้นได้ผลเฉลี่ยเป็นบวก</p>
+    <div class="tablewrap"><table id="techclass"></table></div>
+  </section>
+
+  <section id="leaderboard">
+    <h2>อันดับกลยุทธ์ผสม ทุกสินทรัพย์ (Top 20)</h2>
+    <p class="muted">728 แบบ (ผสม 1–3 เทคนิค × RR 1:2, 1:3) จัดอันดับตามจำนวนสินทรัพย์ที่ได้ผลเป็นบวก แล้วตามผลเฉลี่ยกลาง นับเฉพาะสินทรัพย์ที่มีอย่างน้อย 30 ไม้</p>
+    <div class="tablewrap"><table id="leadertable"></table></div>
+  </section>
+
   <section id="techniques">
-    <h2>Win rate ของแต่ละเทคนิค ทุกตลาด ถึงปัจจุบัน</h2>
+    <h2>Win rate ของแต่ละเทคนิค (รอบ 3: 6 ตลาด)</h2>
     <p class="muted">ใช้แต่ละเทคนิคเดี่ยวๆ เป็นสัญญาณเข้า stop ที่จุดโครงสร้าง TP คงที่ 2R หรือ 3R รวม BTC, ETH, SOL, XRP, BNB และทองคำ หักค่าธรรมเนียมแล้ว เส้นขีดในกราฟคือ win rate ขั้นต่ำที่ต้องได้เพื่อไม่ขาดทุน</p>
     <div class="seg" role="group" aria-label="เลือก Risk:Reward">
       <button type="button" data-rr="3" aria-pressed="true">RR 1:3</button>
@@ -385,9 +411,16 @@ v3.textContent = passedS.length
   : 'ยังไม่มีกลยุทธ์ไหนผ่าน';
 v3.classList.toggle('ok', passedS.length > 0);
 const topS = strategies[0];
+const s1a = DATA.s1_assets || [];
 if (topS) {
   document.getElementById('lede3').textContent =
     `เทคนิคตามเทรนด์ทำกำไรได้ ส่วนจุดเข้าแบบ SMC/ICT เดี่ยวๆ ขาดทุนหลังหักค่าธรรมเนียม กลยุทธ์อันดับ 1 คือ ${topS.label} ที่ RR 1:${topS.rr}: ชนะ ${topS.final_win}% (ต้องได้ ${(100 / (1 + topS.rr)).toFixed(0)}% ขึ้นไป) ผลเฉลี่ย ${fmt.r(topS.final_exp)}R ต่อไม้ บน ${fmt.int(topS.final_n)} ไม้ที่ไม่เคยใช้`;
+  if (s1a.length) {
+    const byClass = d3.rollups(s1a, (v) => [v.filter((r) => r.exp_r > 0).length, v.length], (r) => r.class);
+    const th = { Crypto: 'คริปโต', Metals: 'โลหะ', Energy: 'น้ำมัน', Index: 'ดัชนี', Forex: 'Forex' };
+    document.getElementById('lede3').textContent +=
+      ` · ขยายไป ${s1a.length} สินทรัพย์: ได้ผลเป็นบวก ` + byClass.map(([c, [p, n]]) => `${th[c] || c} ${p}/${n}`).join(', ');
+  }
 }
 
 let rrSel = 3;
@@ -473,6 +506,79 @@ fillTable('enginetable', DATA.engine_runs || [], [
   { h: 'เทรด', f: 'trades', fmt: fmt.int }, { h: 'ชนะ %', f: 'win_pct', fmt: (v) => v.toFixed(1) },
   { h: 'ผลเฉลี่ย (R)', f: 'exp_r', fmt: fmt.r, tone: true },
   { h: 'ผลตอบแทน', f: 'return_pct', fmt: fmt.pct, tone: true }, { h: 'DD สูงสุด %', f: 'max_dd_pct', fmt: (v) => v.toFixed(1) },
+]);
+
+// ---- Round 4: all assets + forward ----
+const fsum = (DATA.forward_summary || [])[0];
+if (fsum) {
+  const cards = document.getElementById('fwdcards');
+  const items = [
+    ['วันที่ผ่านไป', `${fsum.days} วัน`, `เริ่ม ${fsum.start} · อัปเดต ${fsum.updated.replace('T', ' ')}`],
+    ['ไม้ที่ปิดแล้ว', fmt.int(fsum.trades || 0), `กำลังถืออยู่ ${fsum.open} ไม้ · ${fsum.assets} สินทรัพย์`],
+    ['Win rate', fsum.trades ? fsum.win_rate.toFixed(1) + '%' : '—', 'ต้องเกิน 25% ที่ RR 1:3'],
+    ['ผลรวม', fsum.trades ? (fsum.total_r > 0 ? '+' : '') + fsum.total_r.toFixed(1) + 'R' : '—', 'เท่ากับ % ของทุนถ้าเสี่ยง 1% ต่อไม้'],
+  ];
+  for (const [k, v, sub] of items) {
+    const el = document.createElement('article');
+    el.className = 'card';
+    const a = document.createElement('div'); a.className = 'muted'; a.textContent = k;
+    const b = document.createElement('div'); b.className = 'big'; b.textContent = v;
+    const c = document.createElement('div'); c.className = 'muted'; c.textContent = sub;
+    el.append(a, b, c);
+    cards.append(el);
+  }
+}
+const fwdA = (DATA.forward_assets || []).filter((r) => r.closed > 0 || r.open > 0);
+if (fwdA.length) {
+  fillTable('fwdassets', fwdA, [
+    { h: 'สินทรัพย์', f: 'asset', l: true, text: true }, { h: 'ประเภท', f: 'class', l: true, text: true },
+    { h: 'ปิดแล้ว', f: 'closed' }, { h: 'ถืออยู่', f: 'open' },
+    { h: 'ชนะ %', f: 'win_rate', fmt: (v) => v.toFixed(1) }, { h: 'รวม (R)', f: 'total_r', fmt: (v) => (v > 0 ? '+' : '') + v.toFixed(1), tone: true },
+  ]);
+} else {
+  document.getElementById('fwdassets').closest('.tablewrap').hidden = true;
+}
+const fwdT = DATA.forward_techniques || [];
+if (fwdT.some((r) => r.trades)) {
+  fillTable('fwdtech', fwdT.filter((r) => r.trades), [
+    { h: 'เทคนิค (ทดสอบล่วงหน้า)', f: 'label', l: true, text: true }, { h: 'RR', f: (r) => `1:${r.rr}`, text: true },
+    { h: 'ไม้', f: 'trades' }, { h: 'Win rate', f: 'win_rate', fmt: (v) => v.toFixed(1) + '%', tone: (r) => r.exp_r },
+    { h: 'ต้องได้', f: 'breakeven_win_rate', fmt: (v) => v.toFixed(1) + '%' },
+    { h: 'ผลเฉลี่ย (R)', f: 'exp_r', fmt: fmt.r, tone: true },
+  ]);
+} else {
+  document.getElementById('fwdtech').closest('.tablewrap').hidden = true;
+}
+fillTable('s1assets', DATA.s1_assets || [], [
+  { h: '#', f: 'rank' }, { h: 'สินทรัพย์', f: 'asset', l: true, text: true }, { h: 'ประเภท', f: 'class', l: true, text: true },
+  { h: 'ตั้งแต่', f: 'from', text: true }, { h: 'ไม้', f: 'trades', fmt: fmt.int },
+  { h: 'Win rate', f: 'win_rate', fmt: (v) => v.toFixed(1) + '%', tone: (r) => r.exp_r },
+  { h: 'ผลเฉลี่ย (R)', f: 'exp_r', fmt: fmt.r, tone: true }, { h: 'PF', f: 'profit_factor', fmt: (v) => v.toFixed(2) },
+  { h: 'แพ้ติดกันสูงสุด', f: 'max_losing_streak' },
+], (r) => r.rank <= 3);
+(() => {
+  const rows = DATA.tech_by_class || [];
+  const classes = ['Crypto', 'Metals', 'Energy', 'Index', 'Forex'].filter((c) => rows.some((r) => r.class === c));
+  const techs = [...new Map(rows.map((r) => [r.technique, r.label])).entries()];
+  const table = techs.map(([t, label]) => {
+    const o = { label };
+    for (const c of classes) { const r = rows.find((x) => x.technique === t && x.class === c); o[c] = r ? r.pos : null; }
+    o.avg = d3.mean(classes, (c) => o[c] ?? 0);
+    return o;
+  }).sort((a, b) => b.avg - a.avg);
+  fillTable('techclass', table, [
+    { h: 'เทคนิค', f: 'label', l: true, text: true },
+    ...classes.map((c) => ({ h: { Crypto: 'คริปโต', Metals: 'โลหะ', Energy: 'น้ำมัน', Index: 'ดัชนี', Forex: 'Forex' }[c], f: c,
+      fmt: (v) => Math.round(v) + '%', tone: (r) => (r[c] >= 60 ? 1 : r[c] <= 40 ? -1 : 0) })),
+  ]);
+})();
+fillTable('leadertable', DATA.leaderboard || [], [
+  { h: '#', f: 'rank' }, { h: 'กลยุทธ์', f: 'strategy', l: true, text: true }, { h: 'RR', f: (r) => `1:${r.rr}`, text: true },
+  { h: 'บวก/ทั้งหมด', f: (r) => `${r.positive_assets}/${r.assets}`, text: true },
+  { h: 'ผลเฉลี่ยกลาง (R)', f: 'median_exp_r', fmt: fmt.r, tone: true },
+  { h: 'แย่สุด (R)', f: 'worst_exp_r', fmt: fmt.r, tone: true },
+  { h: 'Win rate', f: 'win_rate', fmt: (v) => v.toFixed(1) + '%' }, { h: 'ต้องได้', f: 'breakeven_win_rate', fmt: (v) => v.toFixed(1) + '%' },
+  { h: 'ไม้', f: 'trades', fmt: fmt.int }, { h: 'ดีสุดที่', f: 'best_asset', text: true },
 ]);
 
 function drawAll() { drawEquity(); drawTuning(); drawTech(); }

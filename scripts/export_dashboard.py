@@ -117,3 +117,8 @@ for tag, folder in (("ตามแผนเดิม (ปิด setup หลั�
 if eng:
     write("engine_runs", eng, ["data/runs/strat/*.db", "data/runs/strat2/*.db"])
 print("round 3 exported")
+
+# ---- Round 4 lives in export_stats.py so the daily job can run it alone ----
+import runpy  # noqa: E402
+
+runpy.run_path(str(Path(__file__).with_name("export_stats.py")))

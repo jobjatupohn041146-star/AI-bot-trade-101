@@ -11,4 +11,4 @@ python3 -m venv .venv
 chown -R tradebot:tradebot /opt/AI-bot-trade-101
 [ -f /etc/tradebot.env ] || { cp deploy/env.example /etc/tradebot.env; chmod 600 /etc/tradebot.env; }
 echo "Now: edit /etc/tradebot.env, then run (as tradebot): .venv/bin/python -m tradebot study --claude"
-echo "Then: cp deploy/tradebot-testnet.service /etc/systemd/system/ && systemctl enable --now tradebot-testnet"
+echo "Then: cp deploy/tradebot-testnet@.service /etc/systemd/system/ && systemctl daemon-reload && systemctl enable --now tradebot-testnet@BTC tradebot-testnet@ETH tradebot-testnet@SOL"

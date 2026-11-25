@@ -18,10 +18,10 @@ COMPONENTS = ["structure_bias", "ema_bias", "htf_bias", "order_block", "fvg", "p
 
 
 def scan(df: pd.DataFrame, lookback: int = 300, htf: str = "4h", htf_lookback: int = 1600,
-         intraday: bool = True, progress: bool = False) -> pd.DataFrame:
+         intraday: bool = True, progress: bool = False, start: int | None = None) -> pd.DataFrame:
     rows = []
     htf_key, htf_ctx = None, None
-    for i in range(lookback, len(df)):
+    for i in range(max(lookback, start or 0), len(df)):
         window = df.iloc[i - lookback + 1: i + 1]
         ctx = analyze(window, intraday=intraday)
         # HTF bias from completed higher-timeframe bars only (same rule as the engine)

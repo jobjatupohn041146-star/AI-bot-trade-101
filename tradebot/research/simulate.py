@@ -39,13 +39,18 @@ def load_market(name: str, csv: str, scan_pkl: str) -> Market:
                   df["close"].to_numpy(), df.index, sc)
 
 
+def _utc(t) -> pd.Timestamp:
+    t = pd.Timestamp(t)
+    return t.tz_localize("UTC") if t.tzinfo is None else t
+
+
 def signals(m: Market, required: tuple, start=None, end=None) -> pd.DataFrame:
     sc = m.scan
     mask = pd.Series(True, index=sc.index)
     if start is not None:
-        mask &= sc["time"] >= pd.Timestamp(start, tz="UTC")
+        mask &= sc["time"] >= _utc(start)
     if end is not None:
-        mask &= sc["time"] < pd.Timestamp(end, tz="UTC")
+        mask &= sc["time"] < _utc(end)
     L = mask.copy()
     S = mask.copy()
     for c in required:
@@ -91,13 +96,20 @@ def simulate(m: Market, required: tuple, rr: float, start=None, end=None, max_ho
         else:
             k = last - e - 1
             r, how = (m.c[e + k] - entry) * sign / risk, "time"
+            if last == n and n < e + max_hold:  # data ended first: the trade is still running
+                how = "open"
         fee_r = 2 * fee_pct / 100 * entry / risk
-        rec.append((ts, sign, r - fee_r, how, fee_r, k + 1))
+        rec.append((ts, sign, r - fee_r, how, fee_r, k + 1, entry, stop, tp))
         busy = e + k
-    return pd.DataFrame(rec, columns=["time", "sign", "r", "exit", "fee_r", "bars"])
+        if how == "open":
+            break
+    return pd.DataFrame(rec, columns=["time", "sign", "r", "exit", "fee_r", "bars", "entry", "stop", "target"])
 
 
 def stats(tr: pd.DataFrame, rr: float | None = None) -> dict:
+    """Closed trades only (an open trade has no result yet)."""
+    if not tr.empty and "exit" in tr:
+        tr = tr[tr["exit"] != "open"]
     if tr.empty:
         return {"trades": 0}
     r = tr["r"]

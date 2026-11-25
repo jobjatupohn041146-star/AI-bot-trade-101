@@ -1,0 +1,729 @@
+rank,strategy,components,rr,assets,positive_assets,positive_share,median_exp_r,mean_exp_r,worst_exp_r,trades,win_rate,breakeven_win_rate,best_asset
+1,โครงสร้างตลาดตามเทรนด์ (PA/SMC),structure_bias,3.0,31,22,71.0,0.037,0.029,-0.263,17682,30.7,25.0,GOLD
+2,EMA 50/200 ตามเทรนด์ (PA) + CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT),"ema_bias,choch_mss,killzone",3.0,31,21,67.7,0.036,0.012,-0.32,8653,28.8,25.0,GOLD
+3,EMA 50/200 ตามเทรนด์ (PA) + CHoCH / MSS (SMC/ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,choch_mss,elliott_with",3.0,31,19,61.3,0.019,-0.0,-0.48,8105,27.5,25.0,GOLD
+4,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF),"structure_bias,ema_bias,htf_bias",3.0,31,18,58.1,0.049,0.01,-0.217,14992,29.9,25.0,GOLD
+5,EMA 50/200 ตามเทรนด์ (PA) + CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA),"ema_bias,choch_mss,candle",3.0,31,18,58.1,0.044,0.012,-0.376,8926,28.8,25.0,GOLD
+6,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + Pin bar / Engulfing (PA),"structure_bias,ema_bias,candle",3.0,31,18,58.1,0.023,0.014,-0.233,15414,29.2,25.0,GOLD
+7,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + CHoCH / MSS (SMC/ICT),"ema_bias,htf_bias,choch_mss",3.0,31,18,58.1,0.022,-0.008,-0.282,9464,28.6,25.0,GOLD
+8,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA),"structure_bias,ema_bias",3.0,31,18,58.1,0.018,0.015,-0.186,16437,29.9,25.0,GOLD
+9,CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"choch_mss,killzone,elliott_with",3.0,31,18,58.1,0.017,0.008,-0.238,8548,27.9,25.0,SP500
+10,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA),"structure_bias,ema_bias",2.0,31,18,58.1,0.012,-0.009,-0.168,20751,35.8,33.3,GOLD
+11,EMA 50/200 ตามเทรนด์ (PA) + Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"ema_bias,candle,killzone",3.0,31,18,58.1,0.012,-0.002,-0.194,14835,28.3,25.0,AVAXUSDT
+12,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF),"ema_bias,htf_bias",2.0,31,18,58.1,0.002,-0.015,-0.212,20580,35.8,33.3,SOLUSDT
+13,EMA 50/200 ตามเทรนด์ (PA),ema_bias,3.0,31,17,54.8,0.037,0.008,-0.21,18144,29.5,25.0,GOLD
+14,EMA 50/200 ตามเทรนด์ (PA) + CHoCH / MSS (SMC/ICT),"ema_bias,choch_mss",3.0,31,17,54.8,0.035,0.001,-0.2,11396,28.8,25.0,GOLD
+15,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + CHoCH / MSS (SMC/ICT),"structure_bias,ema_bias,choch_mss",3.0,31,17,54.8,0.034,0.001,-0.2,11388,28.8,25.0,GOLD
+16,EMA 50/200 ตามเทรนด์ (PA),ema_bias,2.0,31,17,54.8,0.015,-0.016,-0.196,22943,35.7,33.3,ETHUSDT
+17,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF),"structure_bias,ema_bias,htf_bias",2.0,31,17,54.8,0.012,-0.009,-0.208,18613,35.9,33.3,GOLD
+18,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF),"ema_bias,htf_bias",3.0,31,17,54.8,0.009,0.002,-0.251,16585,29.6,25.0,GOLD
+19,ทิศทาง TF 4 ชม. (MTF) + CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT),"htf_bias,choch_mss,killzone",3.0,31,17,54.8,0.005,-0.001,-0.393,8358,28.3,25.0,GOLD
+20,EMA 50/200 ตามเทรนด์ (PA) + Pin bar / Engulfing (PA),"ema_bias,candle",3.0,31,16,51.6,0.013,0.007,-0.168,17064,29.0,25.0,GOLD
+21,EMA 50/200 ตามเทรนด์ (PA) + Killzone London/NY (ICT),"ema_bias,killzone",3.0,31,16,51.6,0.012,0.006,-0.15,18602,28.9,25.0,GOLD
+22,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Killzone London/NY (ICT),"structure_bias,killzone",3.0,31,16,51.6,0.01,0.001,-0.166,19876,28.9,25.0,GOLD
+23,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + Killzone London/NY (ICT),"structure_bias,ema_bias,killzone",3.0,31,16,51.6,0.01,0.003,-0.155,16832,28.8,25.0,GOLD
+24,CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"choch_mss,killzone,elliott_with",2.0,31,16,51.6,0.007,-0.016,-0.186,9185,35.1,33.3,SILVER
+25,EMA 50/200 ตามเทรนด์ (PA) + CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT),"ema_bias,choch_mss,killzone",2.0,31,16,51.6,0.006,-0.007,-0.288,9493,35.4,33.3,GOLD
+26,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Pin bar / Engulfing (PA),"structure_bias,candle",2.0,31,16,51.6,0.005,-0.005,-0.148,22200,35.6,33.3,GOLD
+27,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + แนวรับ/แนวต้าน (PA),"structure_bias,ema_bias,sr_zone",3.0,31,16,51.6,0.004,-0.012,-0.192,16577,28.4,25.0,GOLD
+28,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF),"structure_bias,htf_bias",3.0,31,16,51.6,0.002,0.014,-0.206,16142,29.8,25.0,GOLD
+29,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + Pin bar / Engulfing (PA),"structure_bias,htf_bias,candle",3.0,31,16,51.6,0.002,-0.002,-0.218,15597,28.9,25.0,GOLD
+30,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + CHoCH / MSS (SMC/ICT),"ema_bias,htf_bias,choch_mss",2.0,31,16,51.6,0.001,-0.013,-0.214,10758,35.2,33.3,GOLD
+31,EMA 50/200 ตามเทรนด์ (PA) + แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT),"ema_bias,sr_zone,choch_mss",3.0,31,16,51.6,0.001,-0.019,-0.225,10427,28.2,25.0,GOLD
+32,ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC) + CHoCH / MSS (SMC/ICT),"htf_bias,fvg,choch_mss",3.0,31,16,51.6,0.001,-0.024,-0.659,6919,28.2,25.0,GOLD
+33,Fair Value Gap (SMC) + CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA),"fvg,choch_mss,candle",3.0,30,15,50.0,-0.004,0.036,-0.342,3559,27.4,25.0,NASDAQ
+34,EMA 50/200 ตามเทรนด์ (PA) + CHoCH / MSS (SMC/ICT) + OTE 62–79% (ICT),"ema_bias,choch_mss,ote",2.0,20,10,50.0,-0.01,-0.041,-0.504,1438,34.8,33.3,AVAXUSDT
+35,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + Pin bar / Engulfing (PA),"structure_bias,ema_bias,candle",2.0,31,15,48.4,0.0,-0.009,-0.18,18862,35.5,33.3,GOLD
+36,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Pin bar / Engulfing (PA),"structure_bias,candle",3.0,31,15,48.4,0.0,-0.01,-0.26,17700,29.4,25.0,NEARUSDT
+37,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + Killzone London/NY (ICT),"ema_bias,htf_bias,killzone",3.0,31,15,48.4,0.0,-0.015,-0.195,16868,28.5,25.0,GOLD
+38,EMA 50/200 ตามเทรนด์ (PA) + CHoCH / MSS (SMC/ICT),"ema_bias,choch_mss",2.0,31,15,48.4,0.0,-0.01,-0.184,13201,35.2,33.3,GOLD
+39,ทิศทาง TF 4 ชม. (MTF) + CHoCH / MSS (SMC/ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"htf_bias,choch_mss,elliott_with",3.0,31,15,48.4,-0.001,-0.009,-0.245,8136,27.0,25.0,GOLD
+40,EMA 50/200 ตามเทรนด์ (PA) + แนวรับ/แนวต้าน (PA),"ema_bias,sr_zone",3.0,31,15,48.4,-0.003,-0.019,-0.277,19309,28.4,25.0,AVAXUSDT
+41,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + CHoCH / MSS (SMC/ICT),"structure_bias,ema_bias,choch_mss",2.0,31,15,48.4,-0.003,-0.01,-0.18,13192,35.2,33.3,GOLD
+42,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT),"structure_bias,choch_mss,killzone",3.0,31,15,48.4,-0.005,-0.008,-0.284,13438,28.4,25.0,OIL
+43,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + แนวรับ/แนวต้าน (PA),"ema_bias,htf_bias,sr_zone",3.0,31,15,48.4,-0.006,-0.032,-0.333,17420,28.1,25.0,XLMUSDT
+44,CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA),"choch_mss,candle",3.0,31,15,48.4,-0.006,-0.013,-0.239,13252,28.5,25.0,GOLD
+45,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA),"structure_bias,choch_mss,candle",3.0,31,15,48.4,-0.008,-0.014,-0.249,13254,28.5,25.0,GOLD
+46,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF),"structure_bias,htf_bias",2.0,31,15,48.4,-0.009,-0.009,-0.19,20292,35.7,33.3,GOLD
+47,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + Pin bar / Engulfing (PA),"ema_bias,htf_bias,candle",3.0,31,15,48.4,-0.009,-0.007,-0.227,15588,28.8,25.0,GOLD
+48,CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT),"choch_mss,killzone",3.0,31,15,48.4,-0.012,-0.009,-0.284,13432,28.4,25.0,OIL
+49,Fair Value Gap (SMC) + CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT),"fvg,choch_mss,killzone",3.0,31,15,48.4,-0.014,-0.031,-0.469,6058,28.0,25.0,OIL
+50,ทิศทาง TF 4 ชม. (MTF) + CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA),"htf_bias,choch_mss,candle",3.0,31,15,48.4,-0.019,-0.026,-0.395,9074,28.4,25.0,GOLD
+51,EMA 50/200 ตามเทรนด์ (PA) + CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA),"ema_bias,choch_mss,candle",2.0,31,15,48.4,-0.021,-0.011,-0.262,9911,35.3,33.3,GOLD
+52,Fair Value Gap (SMC) + CHoCH / MSS (SMC/ICT) + OTE 62–79% (ICT),"fvg,choch_mss,ote",3.0,24,11,45.8,-0.07,-0.063,-0.674,2361,26.2,25.0,LTCUSDT
+53,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Killzone London/NY (ICT),"structure_bias,killzone",2.0,31,14,45.2,-0.003,-0.023,-0.19,25155,35.1,33.3,GOLD
+54,โครงสร้างตลาดตามเทรนด์ (PA/SMC),structure_bias,2.0,31,14,45.2,-0.004,-0.002,-0.126,22370,36.0,33.3,NEARUSDT
+55,EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC) + CHoCH / MSS (SMC/ICT),"ema_bias,fvg,choch_mss",3.0,31,14,45.2,-0.004,-0.02,-0.507,5992,28.2,25.0,GOLD
+56,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC),"structure_bias,htf_bias,fvg",3.0,31,14,45.2,-0.007,-0.005,-0.187,14489,28.9,25.0,BNBUSDT
+57,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + Killzone London/NY (ICT),"structure_bias,ema_bias,killzone",2.0,31,14,45.2,-0.008,-0.022,-0.201,20529,35.2,33.3,GOLD
+58,ทิศทาง TF 4 ชม. (MTF) + Killzone London/NY (ICT),"htf_bias,killzone",3.0,31,14,45.2,-0.01,-0.021,-0.23,21019,28.1,25.0,GOLD
+59,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + Killzone London/NY (ICT),"structure_bias,htf_bias,killzone",3.0,31,14,45.2,-0.01,-0.013,-0.281,17000,28.5,25.0,GOLD
+60,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + CHoCH / MSS (SMC/ICT),"structure_bias,htf_bias,choch_mss",2.0,31,14,45.2,-0.012,-0.017,-0.205,13058,35.1,33.3,GOLD
+61,EMA 50/200 ตามเทรนด์ (PA) + แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT),"ema_bias,sr_zone,choch_mss",2.0,31,14,45.2,-0.012,-0.021,-0.231,11795,34.9,33.3,GOLD
+62,แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT),"sr_zone,choch_mss,killzone",3.0,31,14,45.2,-0.013,-0.032,-0.251,11790,27.6,25.0,DOTUSDT
+63,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Fair Value Gap (SMC),"structure_bias,fvg",3.0,31,14,45.2,-0.014,-0.005,-0.178,17330,28.9,25.0,NEARUSDT
+64,แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"sr_zone,choch_mss,elliott_with",2.0,31,14,45.2,-0.014,-0.024,-0.251,14145,34.6,33.3,GOLD
+65,ทิศทาง TF 4 ชม. (MTF) + CHoCH / MSS (SMC/ICT),"htf_bias,choch_mss",2.0,31,14,45.2,-0.014,-0.016,-0.21,13074,35.1,33.3,GOLD
+66,CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"choch_mss,candle,killzone",3.0,31,14,45.2,-0.016,-0.01,-0.286,8497,27.7,25.0,GOLD
+67,Fair Value Gap (SMC) + CHoCH / MSS (SMC/ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"fvg,choch_mss,elliott_with",3.0,31,14,45.2,-0.017,-0.008,-0.336,5966,27.0,25.0,OIL
+68,EMA 50/200 ตามเทรนด์ (PA) + Pin bar / Engulfing (PA),"ema_bias,candle",2.0,31,14,45.2,-0.022,-0.02,-0.133,21201,35.3,33.3,GOLD
+69,EMA 50/200 ตามเทรนด์ (PA) + Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT),"ema_bias,premium_discount,choch_mss",3.0,31,14,45.2,-0.026,-0.042,-0.433,5429,27.0,25.0,NASDAQ
+70,ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC) + CHoCH / MSS (SMC/ICT),"htf_bias,fvg,choch_mss",2.0,31,14,45.2,-0.051,-0.044,-0.486,7410,34.5,33.3,SILVER
+71,EMA 50/200 ตามเทรนด์ (PA) + CHoCH / MSS (SMC/ICT) + OTE 62–79% (ICT),"ema_bias,choch_mss,ote",3.0,20,9,45.0,-0.025,-0.027,-0.518,1426,26.2,25.0,AVAXUSDT
+72,Fair Value Gap (SMC) + Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"fvg,candle,ote",3.0,25,11,44.0,-0.054,-0.014,-0.469,2620,26.9,25.0,EURUSD
+73,ทิศทาง TF 4 ชม. (MTF) + CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA),"htf_bias,choch_mss,candle",2.0,31,13,41.9,-0.002,-0.024,-0.232,10061,35.0,33.3,GOLD
+74,แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"sr_zone,choch_mss,elliott_with",3.0,31,13,41.9,-0.003,-0.005,-0.191,12687,27.2,25.0,GOLD
+75,Order Block (SMC) + CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA),"order_block,choch_mss,candle",3.0,31,13,41.9,-0.009,-0.016,-0.537,4548,26.8,25.0,GOLD
+76,EMA 50/200 ตามเทรนด์ (PA) + Killzone London/NY (ICT),"ema_bias,killzone",2.0,31,13,41.9,-0.01,-0.022,-0.209,23110,35.3,33.3,GOLD
+77,ทิศทาง TF 4 ชม. (MTF) + CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT),"htf_bias,choch_mss,killzone",2.0,31,13,41.9,-0.01,-0.013,-0.295,9107,35.2,33.3,GOLD
+78,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,ema_bias,elliott_with",3.0,31,13,41.9,-0.013,-0.012,-0.165,20916,27.7,25.0,GOLD
+79,EMA 50/200 ตามเทรนด์ (PA) + แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA),"ema_bias,sr_zone,candle",3.0,31,13,41.9,-0.013,-0.026,-0.251,15443,27.6,25.0,GOLD
+80,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + แนวรับ/แนวต้าน (PA),"structure_bias,htf_bias,sr_zone",3.0,31,13,41.9,-0.014,-0.024,-0.291,16545,28.2,25.0,GOLD
+81,EMA 50/200 ตามเทรนด์ (PA) + CHoCH / MSS (SMC/ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,choch_mss,elliott_with",2.0,31,13,41.9,-0.016,-0.02,-0.274,8676,35.1,33.3,GOLD
+82,EMA 50/200 ตามเทรนด์ (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,elliott_with",3.0,31,13,41.9,-0.018,-0.016,-0.17,22803,27.7,25.0,GOLD
+83,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA),"structure_bias,choch_mss,candle",2.0,31,13,41.9,-0.018,-0.01,-0.234,15607,34.8,33.3,GOLD
+84,CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA),"choch_mss,candle",2.0,31,13,41.9,-0.018,-0.009,-0.232,15605,34.8,33.3,GOLD
+85,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + Pin bar / Engulfing (PA),"ema_bias,htf_bias,candle",2.0,31,13,41.9,-0.021,-0.03,-0.167,19150,35.2,33.3,SOLUSDT
+86,ทิศทาง TF 4 ชม. (MTF) + Pin bar / Engulfing (PA),"htf_bias,candle",3.0,31,13,41.9,-0.026,-0.03,-0.277,19326,28.2,25.0,GOLD
+87,Order Block (SMC) + CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT),"order_block,choch_mss,killzone",3.0,31,13,41.9,-0.033,-0.029,-0.514,6647,27.0,25.0,USDJPY
+88,CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"choch_mss,candle,elliott_with",3.0,31,13,41.9,-0.043,-0.023,-0.201,8187,26.9,25.0,SILVER
+89,CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"choch_mss,killzone,ote",3.0,24,10,41.7,-0.084,-0.118,-0.881,2362,25.0,25.0,XLMUSDT
+90,Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT) + OTE 62–79% (ICT),"liquidity_sweep,choch_mss,ote",3.0,20,8,40.0,-0.07,-0.065,-0.44,1131,25.3,25.0,DOTUSDT
+91,ทิศทาง TF 4 ชม. (MTF) + แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT),"htf_bias,sr_zone,choch_mss",3.0,31,12,38.7,-0.005,-0.03,-0.286,10454,27.9,25.0,GOLD
+92,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + Killzone London/NY (ICT),"structure_bias,htf_bias,killzone",2.0,31,12,38.7,-0.014,-0.027,-0.248,20934,35.0,33.3,GOLD
+93,ทิศทาง TF 4 ชม. (MTF) + CHoCH / MSS (SMC/ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"htf_bias,choch_mss,elliott_with",2.0,31,12,38.7,-0.015,-0.023,-0.27,8739,34.7,33.3,SOLUSDT
+94,ทิศทาง TF 4 ชม. (MTF),htf_bias,3.0,31,12,38.7,-0.017,-0.021,-0.274,20769,28.6,25.0,GOLD
+95,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Fair Value Gap (SMC),"structure_bias,fvg",2.0,31,12,38.7,-0.022,-0.03,-0.2,21247,34.7,33.3,GBPUSD
+96,EMA 50/200 ตามเทรนด์ (PA) + Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT),"ema_bias,premium_discount,choch_mss",2.0,31,12,38.7,-0.023,-0.062,-0.468,5586,34.8,33.3,NASDAQ
+97,EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC),"ema_bias,fvg",3.0,31,12,38.7,-0.024,-0.013,-0.233,14769,28.6,25.0,AVAXUSDT
+98,ทิศทาง TF 4 ชม. (MTF) + CHoCH / MSS (SMC/ICT),"htf_bias,choch_mss",3.0,31,12,38.7,-0.025,-0.015,-0.246,11299,28.6,25.0,GOLD
+99,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + CHoCH / MSS (SMC/ICT),"structure_bias,htf_bias,choch_mss",3.0,31,12,38.7,-0.025,-0.014,-0.24,11286,28.6,25.0,GOLD
+100,แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT) + OTE 62–79% (ICT),"sr_zone,choch_mss,ote",3.0,31,12,38.7,-0.026,-0.027,-0.346,4813,26.4,25.0,NASDAQ
+101,EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC) + CHoCH / MSS (SMC/ICT),"ema_bias,fvg,choch_mss",2.0,31,12,38.7,-0.03,-0.037,-0.35,6363,34.5,33.3,AVAXUSDT
+102,EMA 50/200 ตามเทรนด์ (PA) + แนวรับ/แนวต้าน (PA) + Killzone London/NY (ICT),"ema_bias,sr_zone,killzone",3.0,31,12,38.7,-0.031,-0.033,-0.19,17310,27.4,25.0,AVAXUSDT
+103,ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC) + Pin bar / Engulfing (PA),"htf_bias,fvg,candle",3.0,31,12,38.7,-0.031,-0.051,-0.306,9761,27.2,25.0,NASDAQ
+104,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + Pin bar / Engulfing (PA),"structure_bias,htf_bias,candle",2.0,31,12,38.7,-0.032,-0.024,-0.167,19138,35.0,33.3,GOLD
+105,EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC) + Pin bar / Engulfing (PA),"ema_bias,fvg,candle",3.0,31,12,38.7,-0.032,-0.026,-0.307,7565,27.7,25.0,EURUSD
+106,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Fair Value Gap (SMC) + CHoCH / MSS (SMC/ICT),"structure_bias,fvg,choch_mss",3.0,31,12,38.7,-0.035,-0.035,-0.302,11490,27.9,25.0,FILUSDT
+107,CHoCH / MSS (SMC/ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"choch_mss,elliott_with",3.0,31,12,38.7,-0.037,-0.015,-0.174,15036,27.0,25.0,GOLD
+108,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + CHoCH / MSS (SMC/ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,choch_mss,elliott_with",3.0,31,12,38.7,-0.037,-0.014,-0.174,15024,27.0,25.0,GOLD
+109,Fair Value Gap (SMC) + CHoCH / MSS (SMC/ICT),"fvg,choch_mss",3.0,31,12,38.7,-0.037,-0.035,-0.302,11491,27.9,25.0,FILUSDT
+110,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Fair Value Gap (SMC) + Killzone London/NY (ICT),"structure_bias,fvg,killzone",3.0,31,12,38.7,-0.039,-0.045,-0.229,15019,27.3,25.0,USDJPY
+111,แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA),"sr_zone,choch_mss,candle",3.0,31,12,38.7,-0.039,-0.029,-0.275,10827,27.4,25.0,GOLD
+112,EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC) + OTE 62–79% (ICT),"ema_bias,fvg,ote",3.0,31,12,38.7,-0.044,-0.068,-0.335,5447,26.2,25.0,AVAXUSDT
+113,Order Block (SMC) + CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA),"order_block,choch_mss,candle",2.0,31,12,38.7,-0.045,-0.061,-0.794,4724,34.4,33.3,XLMUSDT
+114,EMA 50/200 ตามเทรนด์ (PA) + แนวรับ/แนวต้าน (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,sr_zone,elliott_with",3.0,31,12,38.7,-0.054,-0.046,-0.251,19949,26.6,25.0,GOLD
+115,Order Block (SMC) + CHoCH / MSS (SMC/ICT) + OTE 62–79% (ICT),"order_block,choch_mss,ote",3.0,31,12,38.7,-0.061,-0.068,-0.403,4768,26.0,25.0,GBPUSD
+116,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC) + CHoCH / MSS (SMC/ICT),"ema_bias,order_block,choch_mss",3.0,31,12,38.7,-0.064,-0.072,-0.528,4156,26.0,25.0,USDJPY
+117,Order Block (SMC) + Liquidity Sweep (SMC) + OTE 62–79% (ICT),"order_block,liquidity_sweep,ote",2.0,29,11,37.9,-0.062,-0.073,-0.297,3401,33.5,33.3,USDCHF
+118,EMA 50/200 ตามเทรนด์ (PA) + Liquidity Sweep (SMC) + OTE 62–79% (ICT),"ema_bias,liquidity_sweep,ote",3.0,30,11,36.7,-0.088,-0.072,-0.501,3965,25.9,25.0,SILVER
+119,Fair Value Gap (SMC) + Liquidity Sweep (SMC) + OTE 62–79% (ICT),"fvg,liquidity_sweep,ote",3.0,22,8,36.4,-0.08,-0.034,-0.349,1825,26.6,25.0,ADAUSDT
+120,EMA 50/200 ตามเทรนด์ (PA) + Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT),"ema_bias,liquidity_sweep,choch_mss",2.0,22,8,36.4,-0.081,-0.096,-0.564,1335,33.3,33.3,ETCUSDT
+121,Order Block (SMC) + Fair Value Gap (SMC) + OTE 62–79% (ICT),"order_block,fvg,ote",3.0,28,10,35.7,-0.059,-0.084,-0.458,3426,25.8,25.0,DOGEUSDT
+122,Fair Value Gap (SMC) + Pin bar / Engulfing (PA),"fvg,candle",3.0,31,11,35.5,-0.015,-0.022,-0.254,13811,27.5,25.0,NASDAQ
+123,CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"choch_mss,candle,elliott_with",2.0,31,11,35.5,-0.016,-0.043,-0.32,8819,34.3,33.3,USDJPY
+124,Fair Value Gap (SMC),fvg,3.0,31,11,35.5,-0.017,-0.012,-0.169,19040,28.7,25.0,GBPUSD
+125,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC),"ema_bias,htf_bias,fvg",3.0,31,11,35.5,-0.022,-0.024,-0.239,13491,28.5,25.0,SOLUSDT
+126,ทิศทาง TF 4 ชม. (MTF) + แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT),"htf_bias,sr_zone,choch_mss",2.0,31,11,35.5,-0.023,-0.033,-0.193,11809,34.6,33.3,GOLD
+127,ทิศทาง TF 4 ชม. (MTF),htf_bias,2.0,31,11,35.5,-0.027,-0.028,-0.167,26399,35.1,33.3,GOLD
+128,EMA 50/200 ตามเทรนด์ (PA) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,killzone,elliott_with",3.0,31,11,35.5,-0.03,-0.04,-0.225,17802,26.9,25.0,GOLD
+129,Fair Value Gap (SMC) + OTE 62–79% (ICT),"fvg,ote",3.0,31,11,35.5,-0.031,-0.071,-0.374,13213,26.0,25.0,GOLD
+130,Fair Value Gap (SMC) + Premium/Discount (SMC) + OTE 62–79% (ICT),"fvg,premium_discount,ote",3.0,31,11,35.5,-0.031,-0.071,-0.374,13212,26.0,25.0,GOLD
+131,แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA),"sr_zone,choch_mss,candle",2.0,31,11,35.5,-0.033,-0.031,-0.258,12332,34.0,33.3,GOLD
+132,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + แนวรับ/แนวต้าน (PA),"structure_bias,sr_zone",3.0,31,11,35.5,-0.034,-0.032,-0.233,19538,28.0,25.0,GOLD
+133,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,candle,elliott_with",3.0,31,11,35.5,-0.041,-0.041,-0.259,20690,26.9,25.0,LINKUSDT
+134,ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC) + Killzone London/NY (ICT),"htf_bias,fvg,killzone",3.0,31,11,35.5,-0.047,-0.06,-0.427,14208,27.1,25.0,XLMUSDT
+135,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT),"structure_bias,choch_mss,killzone",2.0,31,11,35.5,-0.052,-0.035,-0.226,15831,34.4,33.3,GOLD
+136,CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"choch_mss,candle,killzone",2.0,31,11,35.5,-0.063,-0.045,-0.27,9288,33.8,33.3,USDJPY
+137,EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA),"ema_bias,fvg,sr_zone",3.0,31,11,35.5,-0.071,-0.047,-0.26,12689,26.9,25.0,SILVER
+138,Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT) + OTE 62–79% (ICT),"liquidity_sweep,choch_mss,ote",2.0,20,7,35.0,-0.073,-0.072,-0.434,1138,33.7,33.3,DOGEUSDT
+139,Order Block (SMC) + Fair Value Gap (SMC) + CHoCH / MSS (SMC/ICT),"order_block,fvg,choch_mss",3.0,30,10,33.3,-0.057,-0.033,-0.447,4361,26.1,25.0,OIL
+140,Fair Value Gap (SMC) + CHoCH / MSS (SMC/ICT) + OTE 62–79% (ICT),"fvg,choch_mss,ote",2.0,24,8,33.3,-0.077,-0.094,-0.674,2388,33.4,33.3,AUDUSD
+141,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + Killzone London/NY (ICT),"ema_bias,htf_bias,killzone",2.0,31,10,32.3,-0.014,-0.035,-0.222,20692,34.9,33.3,GOLD
+142,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,htf_bias,elliott_with",3.0,31,10,32.3,-0.024,-0.023,-0.241,20139,27.6,25.0,GOLD
+143,EMA 50/200 ตามเทรนด์ (PA) + Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,candle,elliott_with",3.0,31,10,32.3,-0.025,-0.022,-0.184,16370,27.1,25.0,GOLD
+144,ทิศทาง TF 4 ชม. (MTF) + Killzone London/NY (ICT),"htf_bias,killzone",2.0,31,10,32.3,-0.026,-0.039,-0.193,26558,34.7,33.3,GOLD
+145,EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC) + Killzone London/NY (ICT),"ema_bias,fvg,killzone",3.0,31,10,32.3,-0.026,-0.039,-0.387,11252,27.3,25.0,XLMUSDT
+146,EMA 50/200 ตามเทรนด์ (PA) + แนวรับ/แนวต้าน (PA),"ema_bias,sr_zone",2.0,31,10,32.3,-0.03,-0.042,-0.245,24065,34.9,33.3,SILVER
+147,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC),"structure_bias,ema_bias,fvg",3.0,31,10,32.3,-0.03,-0.025,-0.213,13591,28.4,25.0,AVAXUSDT
+148,ทิศทาง TF 4 ชม. (MTF) + Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"htf_bias,candle,elliott_with",3.0,31,10,32.3,-0.035,-0.04,-0.219,17502,27.0,25.0,GOLD
+149,EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC) + Pin bar / Engulfing (PA),"ema_bias,fvg,candle",2.0,31,10,32.3,-0.045,-0.057,-0.272,8142,34.1,33.3,SOLUSDT
+150,แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT),"sr_zone,choch_mss",3.0,31,10,32.3,-0.046,-0.068,-0.277,14315,27.1,25.0,OIL
+151,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Fair Value Gap (SMC) + OTE 62–79% (ICT),"structure_bias,fvg,ote",3.0,31,10,32.3,-0.047,-0.073,-0.384,10109,25.7,25.0,NASDAQ
+152,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + CHoCH / MSS (SMC/ICT) + OTE 62–79% (ICT),"structure_bias,choch_mss,ote",3.0,31,10,32.3,-0.048,-0.054,-0.39,8266,26.1,25.0,NASDAQ
+153,Liquidity Sweep (SMC) + OTE 62–79% (ICT),"liquidity_sweep,ote",3.0,31,10,32.3,-0.049,-0.043,-0.315,13390,26.1,25.0,USDJPY
+154,Premium/Discount (SMC) + Liquidity Sweep (SMC) + OTE 62–79% (ICT),"premium_discount,liquidity_sweep,ote",3.0,31,10,32.3,-0.049,-0.043,-0.315,13390,26.1,25.0,USDJPY
+155,CHoCH / MSS (SMC/ICT) + OTE 62–79% (ICT),"choch_mss,ote",3.0,31,10,32.3,-0.049,-0.055,-0.39,8277,26.1,25.0,NASDAQ
+156,Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT) + OTE 62–79% (ICT),"premium_discount,choch_mss,ote",3.0,31,10,32.3,-0.049,-0.055,-0.39,8277,26.1,25.0,NASDAQ
+157,CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT),"choch_mss,killzone",2.0,31,10,32.3,-0.052,-0.036,-0.226,15822,34.4,33.3,GOLD
+158,Fair Value Gap (SMC) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"fvg,killzone,ote",3.0,31,10,32.3,-0.053,-0.093,-0.595,4868,26.4,25.0,DOTUSDT
+159,Fair Value Gap (SMC) + CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT),"fvg,choch_mss,killzone",2.0,31,10,32.3,-0.057,-0.068,-0.415,6395,34.1,33.3,OIL
+160,Fair Value Gap (SMC) + CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA),"fvg,choch_mss,candle",2.0,31,10,32.3,-0.066,-0.029,-0.305,3683,33.6,33.3,SILVER
+161,EMA 50/200 ตามเทรนด์ (PA) + Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"ema_bias,candle,ote",3.0,31,10,32.3,-0.076,-0.067,-0.579,4722,25.9,25.0,DOW
+162,Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA) + OTE 62–79% (ICT),"fvg,sr_zone,ote",3.0,31,10,32.3,-0.087,-0.097,-0.425,8127,25.3,25.0,GOLD
+163,Order Block (SMC) + CHoCH / MSS (SMC/ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"order_block,choch_mss,elliott_with",3.0,31,10,32.3,-0.09,-0.06,-0.27,5478,25.9,25.0,GOLD
+164,Order Block (SMC) + Fair Value Gap (SMC) + CHoCH / MSS (SMC/ICT),"order_block,fvg,choch_mss",2.0,31,10,32.3,-0.093,-0.07,-0.385,4516,32.8,33.3,OIL
+165,ทิศทาง TF 4 ชม. (MTF) + CHoCH / MSS (SMC/ICT) + OTE 62–79% (ICT),"htf_bias,choch_mss,ote",3.0,26,8,30.8,-0.073,-0.081,-0.555,3065,26.1,25.0,ATOMUSDT
+166,Fair Value Gap (SMC) + Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"fvg,candle,ote",2.0,26,8,30.8,-0.098,-0.067,-0.459,2682,34.0,33.3,AUDUSD
+167,ทิศทาง TF 4 ชม. (MTF) + CHoCH / MSS (SMC/ICT) + OTE 62–79% (ICT),"htf_bias,choch_mss,ote",2.0,26,8,30.8,-0.099,-0.078,-0.395,3110,34.1,33.3,AUDUSD
+168,EMA 50/200 ตามเทรนด์ (PA) + แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA),"ema_bias,sr_zone,candle",2.0,31,9,29.0,-0.019,-0.041,-0.194,17972,34.7,33.3,SILVER
+169,Order Block (SMC) + แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT),"order_block,sr_zone,choch_mss",3.0,31,9,29.0,-0.021,-0.034,-0.223,9406,27.1,25.0,DOGEUSDT
+170,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,elliott_with",3.0,31,9,29.0,-0.026,-0.029,-0.153,26335,27.5,25.0,ETCUSDT
+171,EMA 50/200 ตามเทรนด์ (PA) + Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"ema_bias,candle,killzone",2.0,31,9,29.0,-0.029,-0.035,-0.21,17242,34.8,33.3,AVAXUSDT
+172,ทิศทาง TF 4 ชม. (MTF) + ปลายคลื่น 2 หรือ 4 (Elliott),"htf_bias,elliott_with",3.0,31,9,29.0,-0.03,-0.039,-0.32,23269,27.6,25.0,GOLD
+173,ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC),"htf_bias,fvg",3.0,31,9,29.0,-0.032,-0.024,-0.228,16944,28.3,25.0,SOLUSDT
+174,Order Block (SMC) + แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT),"order_block,sr_zone,choch_mss",2.0,31,9,29.0,-0.037,-0.049,-0.24,10117,34.4,33.3,GOLD
+175,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,htf_bias,elliott_with",3.0,31,9,29.0,-0.044,-0.036,-0.232,20626,27.5,25.0,SOLUSDT
+176,EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC),"ema_bias,fvg",2.0,31,9,29.0,-0.045,-0.037,-0.257,17585,34.8,33.3,AVAXUSDT
+177,แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT) + OTE 62–79% (ICT),"sr_zone,choch_mss,ote",2.0,31,9,29.0,-0.046,-0.051,-0.312,4907,34.1,33.3,GOLD
+178,แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"sr_zone,candle,elliott_with",3.0,31,9,29.0,-0.051,-0.059,-0.349,17167,26.3,25.0,GOLD
+179,Pin bar / Engulfing (PA) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"candle,killzone,elliott_with",3.0,31,9,29.0,-0.055,-0.062,-0.233,14365,26.3,25.0,XRPUSDT
+180,CHoCH / MSS (SMC/ICT) + OTE 62–79% (ICT),"choch_mss,ote",2.0,31,9,29.0,-0.055,-0.068,-0.37,8541,33.9,33.3,GOLD
+181,Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT) + OTE 62–79% (ICT),"premium_discount,choch_mss,ote",2.0,31,9,29.0,-0.055,-0.068,-0.37,8541,33.9,33.3,GOLD
+182,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + CHoCH / MSS (SMC/ICT) + OTE 62–79% (ICT),"structure_bias,choch_mss,ote",2.0,31,9,29.0,-0.055,-0.067,-0.37,8530,33.9,33.3,GOLD
+183,Order Block (SMC) + Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT),"order_block,premium_discount,choch_mss",3.0,31,9,29.0,-0.058,-0.061,-0.296,9903,25.8,25.0,XRPUSDT
+184,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Fair Value Gap (SMC) + Pin bar / Engulfing (PA),"structure_bias,fvg,candle",3.0,31,9,29.0,-0.06,-0.045,-0.362,9997,26.8,25.0,USDJPY
+185,Fair Value Gap (SMC) + Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT),"fvg,premium_discount,choch_mss",3.0,31,9,29.0,-0.066,-0.058,-0.294,7262,25.8,25.0,GOLD
+186,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT),"structure_bias,sr_zone,choch_mss",3.0,31,9,29.0,-0.067,-0.069,-0.277,14312,27.1,25.0,OIL
+187,Fair Value Gap (SMC) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"fvg,killzone,elliott_with",3.0,31,9,29.0,-0.067,-0.068,-0.275,11125,26.2,25.0,AUDUSD
+188,EMA 50/200 ตามเทรนด์ (PA) + Liquidity Sweep (SMC) + Pin bar / Engulfing (PA),"ema_bias,liquidity_sweep,candle",3.0,31,9,29.0,-0.067,-0.081,-0.502,7719,26.0,25.0,AUDUSD
+189,ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC) + OTE 62–79% (ICT),"htf_bias,fvg,ote",3.0,31,9,29.0,-0.068,-0.101,-0.436,7890,25.9,25.0,GBPUSD
+190,Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT),"fvg,sr_zone,choch_mss",3.0,31,9,29.0,-0.071,-0.057,-0.33,8867,27.4,25.0,XRPUSDT
+191,Pin bar / Engulfing (PA) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"candle,killzone,ote",3.0,31,9,29.0,-0.074,-0.083,-0.394,4596,25.6,25.0,DOW
+192,Order Block (SMC) + CHoCH / MSS (SMC/ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"order_block,choch_mss,elliott_with",2.0,31,9,29.0,-0.079,-0.059,-0.291,5641,33.9,33.3,SP500
+193,Order Block (SMC) + CHoCH / MSS (SMC/ICT) + OTE 62–79% (ICT),"order_block,choch_mss,ote",2.0,31,9,29.0,-0.081,-0.081,-0.379,4856,34.0,33.3,ETCUSDT
+194,Liquidity Sweep (SMC) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"liquidity_sweep,killzone,ote",3.0,31,9,29.0,-0.087,-0.108,-0.455,4684,24.8,25.0,GOLD
+195,Order Block (SMC) + Liquidity Sweep (SMC) + OTE 62–79% (ICT),"order_block,liquidity_sweep,ote",3.0,29,8,27.6,-0.082,-0.053,-0.312,3345,25.6,25.0,GOLD
+196,Order Block (SMC) + Fair Value Gap (SMC) + OTE 62–79% (ICT),"order_block,fvg,ote",2.0,29,8,27.6,-0.107,-0.115,-0.432,3525,33.1,33.3,LTCUSDT
+197,Fair Value Gap (SMC) + Liquidity Sweep (SMC) + OTE 62–79% (ICT),"fvg,liquidity_sweep,ote",2.0,22,6,27.3,-0.072,-0.086,-0.345,1846,33.7,33.3,AUDUSD
+198,EMA 50/200 ตามเทรนด์ (PA) + Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT),"ema_bias,liquidity_sweep,choch_mss",3.0,22,6,27.3,-0.122,-0.104,-0.729,1323,25.8,25.0,ATOMUSDT
+199,Fair Value Gap (SMC),fvg,2.0,31,8,25.8,-0.029,-0.031,-0.106,23967,34.7,33.3,AUDUSD
+200,ทิศทาง TF 4 ชม. (MTF) + ปลายคลื่น 2 หรือ 4 (Elliott),"htf_bias,elliott_with",2.0,31,8,25.8,-0.032,-0.041,-0.212,28917,34.9,33.3,GOLD
+201,แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT),"sr_zone,choch_mss,killzone",2.0,31,8,25.8,-0.033,-0.042,-0.217,13482,34.1,33.3,USDJPY
+202,ทิศทาง TF 4 ชม. (MTF) + Pin bar / Engulfing (PA),"htf_bias,candle",2.0,31,8,25.8,-0.034,-0.045,-0.185,24089,34.8,33.3,GOLD
+203,Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"candle,elliott_with",3.0,31,8,25.8,-0.035,-0.05,-0.229,23262,26.7,25.0,DOTUSDT
+204,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"structure_bias,candle,killzone",3.0,31,8,25.8,-0.035,-0.038,-0.323,17350,27.5,25.0,GOLD
+205,EMA 50/200 ตามเทรนด์ (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,elliott_with",2.0,31,8,25.8,-0.036,-0.038,-0.179,27720,34.7,33.3,GOLD
+206,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,htf_bias,elliott_with",2.0,31,8,25.8,-0.036,-0.038,-0.168,25323,34.8,33.3,GOLD
+207,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + แนวรับ/แนวต้าน (PA),"structure_bias,htf_bias,sr_zone",2.0,31,8,25.8,-0.038,-0.034,-0.191,20468,34.9,33.3,GOLD
+208,ปลายคลื่น 2 หรือ 4 (Elliott),elliott_with,3.0,31,8,25.8,-0.04,-0.04,-0.182,26949,27.5,25.0,SOLUSDT
+209,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC) + CHoCH / MSS (SMC/ICT),"ema_bias,order_block,choch_mss",2.0,31,8,25.8,-0.04,-0.057,-0.489,4284,34.3,33.3,GOLD
+210,Order Block (SMC) + CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT),"order_block,choch_mss,killzone",2.0,31,8,25.8,-0.042,-0.056,-0.487,6962,34.3,33.3,USDJPY
+211,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + CHoCH / MSS (SMC/ICT),"structure_bias,choch_mss",2.0,31,8,25.8,-0.044,-0.041,-0.254,17705,34.3,33.3,GOLD
+212,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC),"ema_bias,htf_bias,fvg",2.0,31,8,25.8,-0.045,-0.043,-0.254,15995,34.6,33.3,SOLUSDT
+213,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + CHoCH / MSS (SMC/ICT),"structure_bias,choch_mss",3.0,31,8,25.8,-0.047,-0.045,-0.325,14577,28.3,25.0,DOGEUSDT
+214,CHoCH / MSS (SMC/ICT),choch_mss,2.0,31,8,25.8,-0.05,-0.041,-0.255,17704,34.2,33.3,GOLD
+215,Fair Value Gap (SMC) + Killzone London/NY (ICT),"fvg,killzone",3.0,31,8,25.8,-0.051,-0.064,-0.264,18466,26.8,25.0,USDJPY
+216,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA),"structure_bias,fvg,sr_zone",3.0,31,8,25.8,-0.053,-0.053,-0.233,16427,27.0,25.0,USDJPY
+217,ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA),"htf_bias,fvg,sr_zone",3.0,31,8,25.8,-0.054,-0.073,-0.284,16098,26.6,25.0,DOW
+218,CHoCH / MSS (SMC/ICT),choch_mss,3.0,31,8,25.8,-0.056,-0.047,-0.325,14570,28.2,25.0,DOGEUSDT
+219,EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA),"ema_bias,fvg,sr_zone",2.0,31,8,25.8,-0.056,-0.052,-0.256,14409,33.9,33.3,SILVER
+220,Liquidity Sweep (SMC) + Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"liquidity_sweep,candle,ote",3.0,31,8,25.8,-0.057,-0.045,-0.188,5855,26.0,25.0,GOLD
+221,EMA 50/200 ตามเทรนด์ (PA) + แนวรับ/แนวต้าน (PA) + Killzone London/NY (ICT),"ema_bias,sr_zone,killzone",2.0,31,8,25.8,-0.058,-0.047,-0.144,20570,34.4,33.3,SILVER
+222,แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC) + OTE 62–79% (ICT),"sr_zone,liquidity_sweep,ote",3.0,31,8,25.8,-0.061,-0.062,-0.466,8781,25.8,25.0,GOLD
+223,Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT),"premium_discount,choch_mss",3.0,31,8,25.8,-0.069,-0.064,-0.302,17351,25.8,25.0,AUDUSD
+224,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT),"structure_bias,premium_discount,choch_mss",3.0,31,8,25.8,-0.069,-0.063,-0.3,17314,25.8,25.0,AUDUSD
+225,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC) + แนวรับ/แนวต้าน (PA),"ema_bias,order_block,sr_zone",3.0,31,8,25.8,-0.07,-0.075,-0.376,9197,25.9,25.0,NASDAQ
+226,Fair Value Gap (SMC) + Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"fvg,candle,killzone",3.0,31,8,25.8,-0.071,-0.097,-0.437,6905,25.6,25.0,NASDAQ
+227,EMA 50/200 ตามเทรนด์ (PA) + Liquidity Sweep (SMC),"ema_bias,liquidity_sweep",3.0,31,8,25.8,-0.075,-0.083,-0.464,15368,26.3,25.0,AUDUSD
+228,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Liquidity Sweep (SMC) + OTE 62–79% (ICT),"structure_bias,liquidity_sweep,ote",3.0,31,8,25.8,-0.082,-0.067,-0.498,7364,25.6,25.0,AUDUSD
+229,ทิศทาง TF 4 ชม. (MTF) + Liquidity Sweep (SMC) + OTE 62–79% (ICT),"htf_bias,liquidity_sweep,ote",3.0,31,8,25.8,-0.088,-0.078,-0.386,6338,25.6,25.0,AUDUSD
+230,Fair Value Gap (SMC) + CHoCH / MSS (SMC/ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"fvg,choch_mss,elliott_with",2.0,31,8,25.8,-0.088,-0.05,-0.289,6193,33.9,33.3,OIL
+231,Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT),"premium_discount,sr_zone,choch_mss",3.0,31,8,25.8,-0.091,-0.071,-0.287,13549,25.7,25.0,AUDUSD
+232,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC) + Fair Value Gap (SMC),"structure_bias,order_block,fvg",3.0,31,8,25.8,-0.099,-0.081,-0.305,10176,25.4,25.0,DOW
+233,ทิศทาง TF 4 ชม. (MTF) + Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"htf_bias,candle,ote",3.0,31,8,25.8,-0.102,-0.093,-0.471,7060,25.5,25.0,AUDUSD
+234,Fair Value Gap (SMC) + Liquidity Sweep (SMC) + Pin bar / Engulfing (PA),"fvg,liquidity_sweep,candle",3.0,31,8,25.8,-0.119,-0.123,-0.886,5123,24.6,25.0,OIL
+235,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC) + Fair Value Gap (SMC),"ema_bias,order_block,fvg",3.0,31,8,25.8,-0.131,-0.105,-0.409,4701,25.0,25.0,USDJPY
+236,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Fair Value Gap (SMC) + Liquidity Sweep (SMC),"structure_bias,fvg,liquidity_sweep",3.0,31,8,25.8,-0.158,-0.13,-0.423,7841,24.2,25.0,OIL
+237,Fair Value Gap (SMC) + Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT),"fvg,liquidity_sweep,choch_mss",3.0,20,5,25.0,-0.234,-0.225,-0.671,934,22.8,25.0,NEARUSDT
+238,Order Block (SMC) + Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT),"order_block,liquidity_sweep,choch_mss",3.0,29,7,24.1,-0.135,-0.161,-0.758,2485,25.7,25.0,GOLD
+239,CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"choch_mss,killzone,ote",2.0,25,6,24.0,-0.107,-0.146,-0.851,2405,32.1,33.3,XLMUSDT
+240,Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA),"liquidity_sweep,choch_mss,candle",2.0,25,6,24.0,-0.116,-0.145,-0.433,2243,31.7,33.3,DOW
+241,Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA),"liquidity_sweep,choch_mss,candle",3.0,25,6,24.0,-0.13,-0.142,-0.559,2214,24.3,25.0,DOW
+242,Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"liquidity_sweep,choch_mss,elliott_with",3.0,21,5,23.8,-0.13,-0.117,-0.348,1505,25.3,25.0,XRPUSDT
+243,Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"liquidity_sweep,choch_mss,elliott_with",2.0,21,5,23.8,-0.141,-0.131,-0.392,1523,32.8,33.3,ETCUSDT
+244,Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT),"liquidity_sweep,choch_mss,killzone",2.0,30,7,23.3,-0.133,-0.144,-0.545,2360,32.4,33.3,GOLD
+245,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + แนวรับ/แนวต้าน (PA),"structure_bias,ema_bias,sr_zone",2.0,31,7,22.6,-0.026,-0.037,-0.167,20332,34.8,33.3,SILVER
+246,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + แนวรับ/แนวต้าน (PA),"ema_bias,htf_bias,sr_zone",2.0,31,7,22.6,-0.034,-0.049,-0.287,21412,34.9,33.3,XLMUSDT
+247,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC),"structure_bias,htf_bias,fvg",2.0,31,7,22.6,-0.04,-0.043,-0.21,17275,34.6,33.3,XLMUSDT
+248,ทิศทาง TF 4 ชม. (MTF) + Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"htf_bias,candle,killzone",3.0,31,7,22.6,-0.04,-0.042,-0.245,17011,27.1,25.0,GOLD
+249,CHoCH / MSS (SMC/ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"choch_mss,elliott_with",2.0,31,7,22.6,-0.041,-0.032,-0.156,17077,34.3,33.3,XRPUSDT
+250,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + CHoCH / MSS (SMC/ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,choch_mss,elliott_with",2.0,31,7,22.6,-0.041,-0.032,-0.155,17067,34.3,33.3,XRPUSDT
+251,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + แนวรับ/แนวต้าน (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,sr_zone,elliott_with",3.0,31,7,22.6,-0.043,-0.058,-0.222,24858,26.5,25.0,SILVER
+252,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,htf_bias,elliott_with",2.0,31,7,22.6,-0.044,-0.045,-0.195,24371,34.6,33.3,GOLD
+253,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"structure_bias,candle,killzone",2.0,31,7,22.6,-0.044,-0.045,-0.221,20612,34.1,33.3,GOLD
+254,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + แนวรับ/แนวต้าน (PA) + Killzone London/NY (ICT),"structure_bias,sr_zone,killzone",3.0,31,7,22.6,-0.048,-0.044,-0.167,19720,27.1,25.0,GOLD
+255,Pin bar / Engulfing (PA),candle,3.0,31,7,22.6,-0.049,-0.053,-0.183,24384,27.0,25.0,GOLD
+256,ทิศทาง TF 4 ชม. (MTF) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"htf_bias,killzone,elliott_with",3.0,31,7,22.6,-0.049,-0.063,-0.269,19324,26.4,25.0,GOLD
+257,Fair Value Gap (SMC) + Pin bar / Engulfing (PA),"fvg,candle",2.0,31,7,22.6,-0.049,-0.051,-0.209,15701,34.0,33.3,EURUSD
+258,Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"killzone,elliott_with",3.0,31,7,22.6,-0.057,-0.046,-0.156,25862,26.8,25.0,GOLD
+259,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Fair Value Gap (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,fvg,elliott_with",3.0,31,7,22.6,-0.058,-0.071,-0.286,18200,25.9,25.0,GBPUSD
+260,Fair Value Gap (SMC) + CHoCH / MSS (SMC/ICT),"fvg,choch_mss",2.0,31,7,22.6,-0.062,-0.061,-0.356,13134,33.8,33.3,FILUSDT
+261,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Fair Value Gap (SMC) + CHoCH / MSS (SMC/ICT),"structure_bias,fvg,choch_mss",2.0,31,7,22.6,-0.062,-0.061,-0.356,13130,33.8,33.3,FILUSDT
+262,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA),"structure_bias,sr_zone,candle",3.0,31,7,22.6,-0.063,-0.058,-0.278,17006,27.2,25.0,GOLD
+263,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC),"structure_bias,ema_bias,fvg",2.0,31,7,22.6,-0.065,-0.051,-0.203,15969,34.4,33.3,AVAXUSDT
+264,ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"htf_bias,fvg,elliott_with",3.0,31,7,22.6,-0.066,-0.075,-0.25,14721,26.2,25.0,GOLD
+265,ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT),"htf_bias,premium_discount,choch_mss",3.0,31,7,22.6,-0.068,-0.083,-0.317,7722,25.9,25.0,GOLD
+266,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC) + Killzone London/NY (ICT),"ema_bias,order_block,killzone",3.0,31,7,22.6,-0.068,-0.085,-0.521,7421,25.6,25.0,GOLD
+267,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC) + CHoCH / MSS (SMC/ICT),"structure_bias,order_block,choch_mss",3.0,31,7,22.6,-0.07,-0.054,-0.338,12849,26.2,25.0,GOLD
+268,EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC) + Killzone London/NY (ICT),"ema_bias,fvg,killzone",2.0,31,7,22.6,-0.07,-0.067,-0.36,12497,33.8,33.3,XLMUSDT
+269,Order Block (SMC) + CHoCH / MSS (SMC/ICT),"order_block,choch_mss",3.0,31,7,22.6,-0.071,-0.054,-0.343,12854,26.1,25.0,GOLD
+270,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC) + Pin bar / Engulfing (PA),"ema_bias,order_block,candle",3.0,31,7,22.6,-0.073,-0.087,-0.285,5336,25.0,25.0,NASDAQ
+271,EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,fvg,elliott_with",3.0,31,7,22.6,-0.077,-0.072,-0.339,12687,26.2,25.0,SOLUSDT
+272,Liquidity Sweep (SMC) + Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"liquidity_sweep,candle,ote",2.0,31,7,22.6,-0.092,-0.077,-0.392,5989,34.0,33.3,DOW
+273,EMA 50/200 ตามเทรนด์ (PA) + Premium/Discount (SMC) + Pin bar / Engulfing (PA),"ema_bias,premium_discount,candle",3.0,31,7,22.6,-0.095,-0.09,-0.342,19009,25.9,25.0,ADAUSDT
+274,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC) + Fair Value Gap (SMC),"structure_bias,order_block,fvg",2.0,31,7,22.6,-0.096,-0.09,-0.326,10956,32.7,33.3,USDJPY
+275,Order Block (SMC) + Fair Value Gap (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"order_block,fvg,elliott_with",2.0,31,7,22.6,-0.097,-0.103,-0.346,5106,32.1,33.3,SILVER
+276,Fair Value Gap (SMC) + Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"fvg,candle,elliott_with",3.0,31,7,22.6,-0.101,-0.079,-0.453,5449,25.4,25.0,OIL
+277,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Liquidity Sweep (SMC) + OTE 62–79% (ICT),"structure_bias,liquidity_sweep,ote",2.0,31,7,22.6,-0.104,-0.09,-0.215,7548,33.1,33.3,DOGEUSDT
+278,แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"sr_zone,candle,ote",3.0,31,7,22.6,-0.108,-0.084,-0.25,8557,25.9,25.0,DOW
+279,Order Block (SMC) + Fair Value Gap (SMC) + Killzone London/NY (ICT),"order_block,fvg,killzone",3.0,31,7,22.6,-0.113,-0.113,-0.477,6271,25.4,25.0,USDJPY
+280,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC) + Fair Value Gap (SMC),"ema_bias,order_block,fvg",2.0,31,7,22.6,-0.125,-0.109,-0.398,4920,32.4,33.3,XLMUSDT
+281,แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT),"sr_zone,liquidity_sweep,choch_mss",2.0,31,7,22.6,-0.126,-0.134,-0.504,4715,33.0,33.3,GOLD
+282,แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT),"sr_zone,liquidity_sweep,choch_mss",3.0,31,7,22.6,-0.149,-0.129,-0.425,4551,25.6,25.0,GOLD
+283,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC) + Liquidity Sweep (SMC),"ema_bias,order_block,liquidity_sweep",2.0,31,7,22.6,-0.174,-0.138,-0.374,3750,32.1,33.3,GOLD
+284,EMA 50/200 ตามเทรนด์ (PA) + Liquidity Sweep (SMC) + OTE 62–79% (ICT),"ema_bias,liquidity_sweep,ote",2.0,30,6,20.0,-0.086,-0.092,-0.426,4037,33.5,33.3,AUDUSD
+285,Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT),"liquidity_sweep,choch_mss,killzone",3.0,30,6,20.0,-0.144,-0.126,-0.817,2318,25.3,25.0,GOLD
+286,Fair Value Gap (SMC) + Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT),"fvg,liquidity_sweep,choch_mss",2.0,20,4,20.0,-0.211,-0.219,-0.675,938,30.1,33.3,UNIUSDT
+287,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,killzone,elliott_with",3.0,31,6,19.4,-0.036,-0.033,-0.13,23405,26.8,25.0,GOLD
+288,ทิศทาง TF 4 ชม. (MTF) + แนวรับ/แนวต้าน (PA),"htf_bias,sr_zone",3.0,31,6,19.4,-0.037,-0.048,-0.267,23196,27.4,25.0,GOLD
+289,ทิศทาง TF 4 ชม. (MTF) + แนวรับ/แนวต้าน (PA),"htf_bias,sr_zone",2.0,31,6,19.4,-0.041,-0.051,-0.239,29213,34.6,33.3,XLMUSDT
+290,ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC),"htf_bias,fvg",2.0,31,6,19.4,-0.047,-0.05,-0.22,20702,34.4,33.3,SOLUSDT
+291,Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA),"fvg,sr_zone",3.0,31,6,19.4,-0.047,-0.063,-0.199,19634,27.0,25.0,XRPUSDT
+292,แนวรับ/แนวต้าน (PA),sr_zone,3.0,31,6,19.4,-0.048,-0.064,-0.22,24958,27.1,25.0,SILVER
+293,EMA 50/200 ตามเทรนด์ (PA) + Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,candle,elliott_with",2.0,31,6,19.4,-0.051,-0.048,-0.239,18799,34.3,33.3,SOLUSDT
+294,ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC) + Pin bar / Engulfing (PA),"htf_bias,fvg,candle",2.0,31,6,19.4,-0.054,-0.086,-0.301,10681,33.5,33.3,EURUSD
+295,แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT),"sr_zone,choch_mss",2.0,31,6,19.4,-0.057,-0.054,-0.258,16919,33.6,33.3,GOLD
+296,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT),"structure_bias,sr_zone,choch_mss",2.0,31,6,19.4,-0.057,-0.053,-0.255,16913,33.6,33.3,GOLD
+297,EMA 50/200 ตามเทรนด์ (PA) + แนวรับ/แนวต้าน (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,sr_zone,elliott_with",2.0,31,6,19.4,-0.058,-0.065,-0.205,23222,33.9,33.3,NASDAQ
+298,Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT),"premium_discount,choch_mss,killzone",3.0,31,6,19.4,-0.058,-0.108,-0.629,7303,25.5,25.0,XLMUSDT
+299,Fair Value Gap (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"fvg,elliott_with",3.0,31,6,19.4,-0.059,-0.062,-0.203,20375,26.3,25.0,SOLUSDT
+300,EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC) + Premium/Discount (SMC),"ema_bias,fvg,premium_discount",2.0,31,6,19.4,-0.059,-0.079,-0.274,17460,33.8,33.3,SOLUSDT
+301,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + แนวรับ/แนวต้าน (PA) + Killzone London/NY (ICT),"structure_bias,sr_zone,killzone",2.0,31,6,19.4,-0.06,-0.055,-0.14,24009,33.9,33.3,SILVER
+302,ทิศทาง TF 4 ชม. (MTF) + Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"htf_bias,candle,elliott_with",2.0,31,6,19.4,-0.061,-0.061,-0.193,20157,34.1,33.3,AVAXUSDT
+303,Fair Value Gap (SMC) + Premium/Discount (SMC),"fvg,premium_discount",3.0,31,6,19.4,-0.062,-0.061,-0.203,25409,26.5,25.0,SP500
+304,EMA 50/200 ตามเทรนด์ (PA) + Liquidity Sweep (SMC) + Pin bar / Engulfing (PA),"ema_bias,liquidity_sweep,candle",2.0,31,6,19.4,-0.062,-0.075,-0.3,7986,34.0,33.3,AUDUSD
+305,Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA) + Killzone London/NY (ICT),"fvg,sr_zone,killzone",3.0,31,6,19.4,-0.068,-0.084,-0.315,15113,26.2,25.0,DOW
+306,Liquidity Sweep (SMC) + OTE 62–79% (ICT),"liquidity_sweep,ote",2.0,31,6,19.4,-0.068,-0.064,-0.196,14241,33.9,33.3,OIL
+307,Premium/Discount (SMC) + Liquidity Sweep (SMC) + OTE 62–79% (ICT),"premium_discount,liquidity_sweep,ote",2.0,31,6,19.4,-0.068,-0.064,-0.196,14241,33.9,33.3,OIL
+308,ทิศทาง TF 4 ชม. (MTF) + แนวรับ/แนวต้าน (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"htf_bias,sr_zone,elliott_with",3.0,31,6,19.4,-0.07,-0.083,-0.323,21520,26.3,25.0,XLMUSDT
+309,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Fair Value Gap (SMC) + Pin bar / Engulfing (PA),"structure_bias,fvg,candle",2.0,31,6,19.4,-0.07,-0.071,-0.3,10921,33.3,33.3,USDJPY
+310,Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"candle,ote",3.0,31,6,19.4,-0.071,-0.066,-0.243,14503,25.5,25.0,DOW
+311,Premium/Discount (SMC) + Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"premium_discount,candle,ote",3.0,31,6,19.4,-0.071,-0.066,-0.243,14503,25.5,25.0,DOW
+312,Liquidity Sweep (SMC) + Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"liquidity_sweep,candle,elliott_with",3.0,31,6,19.4,-0.071,-0.077,-0.341,7124,25.6,25.0,SP500
+313,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC),"ema_bias,htf_bias,order_block",2.0,31,6,19.4,-0.075,-0.091,-0.343,12744,33.3,33.3,XLMUSDT
+314,Order Block (SMC) + CHoCH / MSS (SMC/ICT),"order_block,choch_mss",2.0,31,6,19.4,-0.076,-0.068,-0.31,14271,33.5,33.3,GOLD
+315,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC) + CHoCH / MSS (SMC/ICT),"structure_bias,order_block,choch_mss",2.0,31,6,19.4,-0.076,-0.067,-0.305,14266,33.5,33.3,GOLD
+316,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC),"ema_bias,order_block",2.0,31,6,19.4,-0.076,-0.08,-0.302,14253,33.7,33.3,XLMUSDT
+317,EMA 50/200 ตามเทรนด์ (PA) + Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA),"ema_bias,premium_discount,sr_zone",3.0,31,6,19.4,-0.077,-0.087,-0.435,26012,25.9,25.0,ADAUSDT
+318,แนวรับ/แนวต้าน (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"sr_zone,elliott_with",3.0,31,6,19.4,-0.083,-0.075,-0.275,27552,26.3,25.0,LINKUSDT
+319,ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC) + Premium/Discount (SMC),"htf_bias,fvg,premium_discount",3.0,31,6,19.4,-0.085,-0.084,-0.27,20441,26.2,25.0,AVAXUSDT
+320,ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT),"htf_bias,premium_discount,choch_mss",2.0,31,6,19.4,-0.086,-0.112,-0.404,8024,33.6,33.3,XLMUSDT
+321,Fair Value Gap (SMC) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"fvg,killzone,ote",2.0,31,6,19.4,-0.093,-0.121,-0.559,4970,33.6,33.3,USDJPY
+322,EMA 50/200 ตามเทรนด์ (PA) + แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC),"ema_bias,sr_zone,liquidity_sweep",3.0,31,6,19.4,-0.096,-0.095,-0.463,11358,26.0,25.0,GOLD
+323,Order Block (SMC) + Fair Value Gap (SMC) + Liquidity Sweep (SMC),"order_block,fvg,liquidity_sweep",3.0,31,6,19.4,-0.098,-0.12,-0.621,4020,24.8,25.0,AUDUSD
+324,EMA 50/200 ตามเทรนด์ (PA) + Liquidity Sweep (SMC) + Killzone London/NY (ICT),"ema_bias,liquidity_sweep,killzone",3.0,31,6,19.4,-0.101,-0.099,-0.578,7314,25.7,25.0,AUDUSD
+325,EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC) + Liquidity Sweep (SMC),"ema_bias,fvg,liquidity_sweep",3.0,31,6,19.4,-0.104,-0.09,-0.404,5047,25.4,25.0,SP500
+326,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + OTE 62–79% (ICT),"structure_bias,ema_bias,ote",3.0,31,6,19.4,-0.105,-0.108,-0.292,12859,25.1,25.0,NASDAQ
+327,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC) + Pin bar / Engulfing (PA),"ema_bias,order_block,candle",2.0,31,6,19.4,-0.105,-0.092,-0.233,5583,32.4,33.3,SP500
+328,Order Block (SMC) + Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"order_block,candle,killzone",3.0,31,6,19.4,-0.108,-0.107,-0.336,7039,24.3,25.0,AUDUSD
+329,EMA 50/200 ตามเทรนด์ (PA) + Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"ema_bias,candle,ote",2.0,31,6,19.4,-0.116,-0.097,-0.609,4822,33.5,33.3,AUDUSD
+330,Fair Value Gap (SMC) + Premium/Discount (SMC) + Killzone London/NY (ICT),"fvg,premium_discount,killzone",3.0,31,6,19.4,-0.118,-0.106,-0.264,18881,25.4,25.0,AUDUSD
+331,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC) + Liquidity Sweep (SMC),"ema_bias,order_block,liquidity_sweep",3.0,31,6,19.4,-0.118,-0.113,-0.539,3667,25.2,25.0,AUDUSD
+332,Liquidity Sweep (SMC) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"liquidity_sweep,killzone,elliott_with",3.0,31,6,19.4,-0.12,-0.121,-0.47,7745,25.5,25.0,AUDUSD
+333,EMA 50/200 ตามเทรนด์ (PA) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"ema_bias,killzone,ote",3.0,31,6,19.4,-0.121,-0.107,-0.333,6364,25.2,25.0,AVAXUSDT
+334,Fair Value Gap (SMC) + Liquidity Sweep (SMC) + Pin bar / Engulfing (PA),"fvg,liquidity_sweep,candle",2.0,31,6,19.4,-0.123,-0.138,-0.886,5240,31.9,33.3,OIL
+335,ทิศทาง TF 4 ชม. (MTF) + Liquidity Sweep (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"htf_bias,liquidity_sweep,elliott_with",3.0,31,6,19.4,-0.126,-0.129,-0.389,9310,25.2,25.0,AVAXUSDT
+336,EMA 50/200 ตามเทรนด์ (PA) + Liquidity Sweep (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,liquidity_sweep,elliott_with",3.0,31,6,19.4,-0.141,-0.143,-0.46,6591,25.3,25.0,AVAXUSDT
+337,Order Block (SMC) + Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"order_block,candle,killzone",2.0,31,6,19.4,-0.163,-0.145,-0.342,7392,31.0,33.3,SP500
+338,Order Block (SMC) + Fair Value Gap (SMC) + Pin bar / Engulfing (PA),"order_block,fvg,candle",3.0,26,5,19.2,-0.148,-0.138,-0.614,2531,23.6,25.0,USDJPY
+339,Order Block (SMC) + Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT),"order_block,liquidity_sweep,choch_mss",2.0,29,5,17.2,-0.197,-0.203,-0.925,2513,32.7,33.3,XRPUSDT
+340,ปลายคลื่น 2 หรือ 4 (Elliott),elliott_with,2.0,31,5,16.1,-0.03,-0.049,-0.177,34556,34.6,33.3,SOLUSDT
+341,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC),"ema_bias,order_block",3.0,31,5,16.1,-0.043,-0.07,-0.383,12742,26.4,25.0,ADAUSDT
+342,Fair Value Gap (SMC) + Premium/Discount (SMC) + Pin bar / Engulfing (PA),"fvg,premium_discount,candle",3.0,31,5,16.1,-0.047,-0.061,-0.324,12503,26.2,25.0,NASDAQ
+343,EMA 50/200 ตามเทรนด์ (PA) + Premium/Discount (SMC),"ema_bias,premium_discount",3.0,31,5,16.1,-0.058,-0.076,-0.331,28418,26.5,25.0,ADAUSDT
+344,ทิศทาง TF 4 ชม. (MTF) + Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"htf_bias,candle,killzone",2.0,31,5,16.1,-0.058,-0.064,-0.195,20090,33.9,33.3,GOLD
+345,แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC) + OTE 62–79% (ICT),"sr_zone,liquidity_sweep,ote",2.0,31,5,16.1,-0.058,-0.076,-0.288,9161,33.8,33.3,OIL
+346,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC),"ema_bias,htf_bias,order_block",3.0,31,5,16.1,-0.061,-0.086,-0.376,11409,26.0,25.0,ADAUSDT
+347,Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA),"fvg,sr_zone,candle",3.0,31,5,16.1,-0.062,-0.075,-0.298,9961,25.8,25.0,NASDAQ
+348,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Fair Value Gap (SMC) + Premium/Discount (SMC),"structure_bias,fvg,premium_discount",3.0,31,5,16.1,-0.066,-0.087,-0.308,23047,25.3,25.0,USDJPY
+349,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC),"structure_bias,ema_bias,order_block",3.0,31,5,16.1,-0.067,-0.082,-0.386,12009,26.0,25.0,AVAXUSDT
+350,EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC) + Premium/Discount (SMC),"ema_bias,fvg,premium_discount",3.0,31,5,16.1,-0.07,-0.069,-0.261,15518,26.4,25.0,ADAUSDT
+351,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,candle,elliott_with",2.0,31,5,16.1,-0.072,-0.062,-0.235,24481,33.8,33.3,GOLD
+352,Fair Value Gap (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"fvg,elliott_with",2.0,31,5,16.1,-0.072,-0.076,-0.208,23747,33.7,33.3,AUDUSD
+353,ทิศทาง TF 4 ชม. (MTF) + Liquidity Sweep (SMC) + OTE 62–79% (ICT),"htf_bias,liquidity_sweep,ote",2.0,31,5,16.1,-0.072,-0.091,-0.369,6492,33.2,33.3,EURUSD
+354,ทิศทาง TF 4 ชม. (MTF) + แนวรับ/แนวต้าน (PA) + Killzone London/NY (ICT),"htf_bias,sr_zone,killzone",3.0,31,5,16.1,-0.073,-0.073,-0.363,21002,26.4,25.0,GOLD
+355,แนวรับ/แนวต้าน (PA) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"sr_zone,killzone,elliott_with",3.0,31,5,16.1,-0.075,-0.062,-0.189,21107,26.3,25.0,NASDAQ
+356,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC) + แนวรับ/แนวต้าน (PA),"ema_bias,order_block,sr_zone",2.0,31,5,16.1,-0.075,-0.074,-0.251,9976,33.6,33.3,NASDAQ
+357,ทิศทาง TF 4 ชม. (MTF) + แนวรับ/แนวต้าน (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"htf_bias,sr_zone,elliott_with",2.0,31,5,16.1,-0.08,-0.084,-0.258,25541,33.9,33.3,XRPUSDT
+358,Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"fvg,sr_zone,elliott_with",3.0,31,5,16.1,-0.08,-0.086,-0.289,15732,25.7,25.0,AUDUSD
+359,Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT),"premium_discount,choch_mss",2.0,31,5,16.1,-0.081,-0.087,-0.273,18852,33.4,33.3,AUDUSD
+360,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT),"structure_bias,premium_discount,choch_mss",2.0,31,5,16.1,-0.081,-0.088,-0.274,18809,33.4,33.3,AUDUSD
+361,Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA),"fvg,sr_zone,candle",2.0,31,5,16.1,-0.081,-0.086,-0.301,10772,32.8,33.3,NASDAQ
+362,ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC) + OTE 62–79% (ICT),"htf_bias,fvg,ote",2.0,31,5,16.1,-0.09,-0.127,-0.391,8229,33.0,33.3,NASDAQ
+363,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + แนวรับ/แนวต้าน (PA) + OTE 62–79% (ICT),"structure_bias,sr_zone,ote",3.0,31,5,16.1,-0.092,-0.104,-0.401,18137,25.2,25.0,NASDAQ
+364,Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"premium_discount,choch_mss,elliott_with",3.0,31,5,16.1,-0.094,-0.089,-0.385,8893,25.3,25.0,SILVER
+365,Fair Value Gap (SMC) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"fvg,killzone,elliott_with",2.0,31,5,16.1,-0.095,-0.089,-0.305,11893,33.7,33.3,AUDUSD
+366,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC) + CHoCH / MSS (SMC/ICT),"htf_bias,order_block,choch_mss",2.0,31,5,16.1,-0.096,-0.102,-0.463,5997,33.1,33.3,GOLD
+367,Order Block (SMC) + Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT),"order_block,premium_discount,choch_mss",2.0,31,5,16.1,-0.1,-0.099,-0.316,10370,33.4,33.3,XRPUSDT
+368,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"structure_bias,killzone,ote",3.0,31,5,16.1,-0.101,-0.112,-0.393,11914,24.9,25.0,NASDAQ
+369,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"structure_bias,candle,ote",3.0,31,5,16.1,-0.106,-0.105,-0.441,8358,24.7,25.0,AUDUSD
+370,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC) + Killzone London/NY (ICT),"ema_bias,order_block,killzone",2.0,31,5,16.1,-0.106,-0.104,-0.352,7842,32.7,33.3,GOLD
+371,Liquidity Sweep (SMC) + Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"liquidity_sweep,candle,elliott_with",2.0,31,5,16.1,-0.109,-0.098,-0.308,7376,33.3,33.3,SP500
+372,Order Block (SMC) + Fair Value Gap (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"order_block,fvg,elliott_with",3.0,31,5,16.1,-0.109,-0.13,-0.369,4935,24.2,25.0,AUDUSD
+373,Order Block (SMC) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"order_block,killzone,ote",3.0,31,5,16.1,-0.113,-0.143,-0.493,5845,23.8,25.0,OIL
+374,Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA),"premium_discount,choch_mss,candle",2.0,31,5,16.1,-0.115,-0.111,-0.376,5938,32.2,33.3,SILVER
+375,Fair Value Gap (SMC) + Liquidity Sweep (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"fvg,liquidity_sweep,elliott_with",3.0,31,5,16.1,-0.115,-0.117,-0.441,5214,24.7,25.0,USDJPY
+376,EMA 50/200 ตามเทรนด์ (PA) + แนวรับ/แนวต้าน (PA) + OTE 62–79% (ICT),"ema_bias,sr_zone,ote",3.0,31,5,16.1,-0.117,-0.112,-0.354,10015,25.5,25.0,NASDAQ
+377,ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC) + Liquidity Sweep (SMC),"htf_bias,fvg,liquidity_sweep",3.0,31,5,16.1,-0.118,-0.118,-0.379,9473,25.1,25.0,OIL
+378,Order Block (SMC) + Fair Value Gap (SMC) + Killzone London/NY (ICT),"order_block,fvg,killzone",2.0,31,5,16.1,-0.119,-0.116,-0.392,6558,32.8,33.3,USDJPY
+379,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + Liquidity Sweep (SMC),"structure_bias,ema_bias,liquidity_sweep",3.0,31,5,16.1,-0.122,-0.13,-0.543,11407,25.3,25.0,AUDUSD
+380,Order Block (SMC) + แนวรับ/แนวต้าน (PA) + OTE 62–79% (ICT),"order_block,sr_zone,ote",3.0,31,5,16.1,-0.126,-0.112,-0.339,9589,25.2,25.0,DOGEUSDT
+381,Pin bar / Engulfing (PA) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"candle,killzone,ote",2.0,31,5,16.1,-0.126,-0.136,-0.374,4653,32.2,33.3,DOGEUSDT
+382,EMA 50/200 ตามเทรนด์ (PA) + แนวรับ/แนวต้าน (PA) + OTE 62–79% (ICT),"ema_bias,sr_zone,ote",2.0,31,5,16.1,-0.127,-0.132,-0.398,10518,33.1,33.3,NASDAQ
+383,Order Block (SMC) + Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"order_block,candle,elliott_with",3.0,31,5,16.1,-0.128,-0.124,-0.37,4805,23.8,25.0,NASDAQ
+384,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,order_block,elliott_with",2.0,31,5,16.1,-0.136,-0.133,-0.43,7755,32.2,33.3,SP500
+385,Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT),"liquidity_sweep,choch_mss",2.0,31,5,16.1,-0.137,-0.149,-0.443,6164,32.8,33.3,GOLD
+386,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT),"structure_bias,liquidity_sweep,choch_mss",2.0,31,5,16.1,-0.143,-0.149,-0.443,6145,32.8,33.3,GOLD
+387,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"htf_bias,order_block,elliott_with",3.0,31,5,16.1,-0.15,-0.156,-0.434,10133,24.2,25.0,SP500
+388,Liquidity Sweep (SMC) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"liquidity_sweep,killzone,ote",2.0,31,5,16.1,-0.16,-0.126,-0.375,4774,32.3,33.3,USDJPY
+389,Fair Value Gap (SMC) + Liquidity Sweep (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"fvg,liquidity_sweep,elliott_with",2.0,31,5,16.1,-0.161,-0.136,-0.464,5334,32.4,33.3,SP500
+390,Order Block (SMC) + Liquidity Sweep (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"order_block,liquidity_sweep,elliott_with",3.0,31,5,16.1,-0.169,-0.178,-0.457,5046,24.2,25.0,XLMUSDT
+391,Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC),"fvg,sr_zone,liquidity_sweep",3.0,31,5,16.1,-0.178,-0.134,-0.353,11022,24.4,25.0,OIL
+392,Premium/Discount (SMC) + Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT),"premium_discount,liquidity_sweep,choch_mss",2.0,31,5,16.1,-0.181,-0.206,-0.541,4539,32.0,33.3,GOLD
+393,ทิศทาง TF 4 ชม. (MTF) + Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT),"htf_bias,liquidity_sweep,choch_mss",3.0,26,4,15.4,-0.164,-0.207,-0.936,2113,23.9,25.0,USDJPY
+394,Order Block (SMC) + Fair Value Gap (SMC) + Pin bar / Engulfing (PA),"order_block,fvg,candle",2.0,26,4,15.4,-0.174,-0.149,-0.563,2578,30.8,33.3,USDJPY
+395,CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"choch_mss,candle,ote",3.0,20,3,15.0,-0.184,-0.142,-0.46,1479,23.4,25.0,SOLUSDT
+396,Order Block (SMC) + Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"order_block,candle,ote",2.0,28,4,14.3,-0.101,-0.148,-0.672,3777,32.1,33.3,AUDUSD
+397,Order Block (SMC) + Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"order_block,candle,ote",3.0,28,4,14.3,-0.115,-0.145,-0.544,3690,24.4,25.0,DOGEUSDT
+398,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC) + OTE 62–79% (ICT),"ema_bias,order_block,ote",3.0,30,4,13.3,-0.15,-0.147,-0.515,4688,24.4,25.0,DOGEUSDT
+399,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,ema_bias,elliott_with",2.0,31,4,12.9,-0.029,-0.035,-0.171,25299,34.6,33.3,GOLD
+400,EMA 50/200 ตามเทรนด์ (PA) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,killzone,elliott_with",2.0,31,4,12.9,-0.04,-0.054,-0.216,20551,34.4,33.3,GOLD
+401,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA),"structure_bias,sr_zone,candle",2.0,31,4,12.9,-0.047,-0.044,-0.178,20391,34.0,33.3,GOLD
+402,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + แนวรับ/แนวต้าน (PA),"structure_bias,sr_zone",2.0,31,4,12.9,-0.049,-0.047,-0.153,24425,34.4,33.3,DOGEUSDT
+403,Pin bar / Engulfing (PA),candle,2.0,31,4,12.9,-0.055,-0.059,-0.19,31016,33.8,33.3,EURUSD
+404,แนวรับ/แนวต้าน (PA) + Killzone London/NY (ICT),"sr_zone,killzone",3.0,31,4,12.9,-0.064,-0.065,-0.214,23293,26.7,25.0,SILVER
+405,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + Premium/Discount (SMC),"structure_bias,ema_bias,premium_discount",3.0,31,4,12.9,-0.067,-0.092,-0.298,24978,25.8,25.0,ADAUSDT
+406,แนวรับ/แนวต้าน (PA) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"sr_zone,killzone,ote",3.0,31,4,12.9,-0.067,-0.096,-0.347,11717,25.5,25.0,AVAXUSDT
+407,แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"sr_zone,candle,elliott_with",2.0,31,4,12.9,-0.068,-0.079,-0.299,19432,33.5,33.3,GOLD
+408,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Fair Value Gap (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,fvg,elliott_with",2.0,31,4,12.9,-0.076,-0.08,-0.234,20717,33.3,33.3,USDJPY
+409,แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"sr_zone,candle,killzone",3.0,31,4,12.9,-0.076,-0.085,-0.253,17296,25.9,25.0,ADAUSDT
+410,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC) + CHoCH / MSS (SMC/ICT),"htf_bias,order_block,choch_mss",3.0,31,4,12.9,-0.076,-0.102,-0.556,5761,25.2,25.0,GOLD
+411,ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA),"htf_bias,fvg,sr_zone",2.0,31,4,12.9,-0.077,-0.086,-0.235,18891,33.4,33.3,DOW
+412,Premium/Discount (SMC),premium_discount,3.0,31,4,12.9,-0.078,-0.085,-0.193,47864,25.5,25.0,DOW
+413,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC),"structure_bias,ema_bias,order_block",2.0,31,4,12.9,-0.078,-0.093,-0.333,13360,33.3,33.3,AVAXUSDT
+414,Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"candle,killzone",3.0,31,4,12.9,-0.079,-0.073,-0.191,22298,26.5,25.0,GBPUSD
+415,Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT),"fvg,sr_zone,choch_mss",2.0,31,4,12.9,-0.08,-0.075,-0.287,9727,33.3,33.3,SILVER
+416,EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,fvg,elliott_with",2.0,31,4,12.9,-0.082,-0.08,-0.194,13994,33.7,33.3,SOLUSDT
+417,Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"premium_discount,choch_mss,elliott_with",2.0,31,4,12.9,-0.082,-0.103,-0.341,9077,33.3,33.3,SILVER
+418,Killzone London/NY (ICT) + OTE 62–79% (ICT),"killzone,ote",3.0,31,4,12.9,-0.086,-0.094,-0.292,19560,25.5,25.0,AVAXUSDT
+419,Premium/Discount (SMC) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"premium_discount,killzone,ote",3.0,31,4,12.9,-0.086,-0.094,-0.292,19560,25.5,25.0,AVAXUSDT
+420,Fair Value Gap (SMC) + Premium/Discount (SMC) + Pin bar / Engulfing (PA),"fvg,premium_discount,candle",2.0,31,4,12.9,-0.086,-0.09,-0.322,13669,33.2,33.3,NASDAQ
+421,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + Liquidity Sweep (SMC),"ema_bias,htf_bias,liquidity_sweep",3.0,31,4,12.9,-0.087,-0.1,-0.527,13782,26.0,25.0,AUDUSD
+422,Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA),"premium_discount,choch_mss,candle",3.0,31,4,12.9,-0.087,-0.096,-0.356,5808,24.8,25.0,GOLD
+423,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + OTE 62–79% (ICT),"structure_bias,ote",3.0,31,4,12.9,-0.09,-0.101,-0.317,26809,25.1,25.0,NASDAQ
+424,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Premium/Discount (SMC) + OTE 62–79% (ICT),"structure_bias,premium_discount,ote",3.0,31,4,12.9,-0.09,-0.101,-0.317,26809,25.1,25.0,NASDAQ
+425,EMA 50/200 ตามเทรนด์ (PA) + OTE 62–79% (ICT),"ema_bias,ote",3.0,31,4,12.9,-0.091,-0.1,-0.317,16246,25.5,25.0,XLMUSDT
+426,EMA 50/200 ตามเทรนด์ (PA) + Premium/Discount (SMC) + OTE 62–79% (ICT),"ema_bias,premium_discount,ote",3.0,31,4,12.9,-0.091,-0.1,-0.317,16245,25.5,25.0,XLMUSDT
+427,Fair Value Gap (SMC) + Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"fvg,candle,killzone",2.0,31,4,12.9,-0.091,-0.128,-0.5,7241,32.3,33.3,NASDAQ
+428,Fair Value Gap (SMC) + Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT),"fvg,premium_discount,choch_mss",2.0,31,4,12.9,-0.092,-0.094,-0.351,7505,33.1,33.3,AUDUSD
+429,EMA 50/200 ตามเทรนด์ (PA) + Premium/Discount (SMC) + Liquidity Sweep (SMC),"ema_bias,premium_discount,liquidity_sweep",3.0,31,4,12.9,-0.094,-0.11,-0.453,14033,25.8,25.0,NEARUSDT
+430,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,order_block,elliott_with",3.0,31,4,12.9,-0.094,-0.139,-0.449,7378,24.7,25.0,XLMUSDT
+431,EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC) + OTE 62–79% (ICT),"ema_bias,fvg,ote",2.0,31,4,12.9,-0.097,-0.09,-0.275,5645,33.5,33.3,AUDUSD
+432,Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"fvg,sr_zone,elliott_with",2.0,31,4,12.9,-0.099,-0.103,-0.275,17434,33.0,33.3,AUDUSD
+433,Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA) + CHoCH / MSS (SMC/ICT),"premium_discount,sr_zone,choch_mss",2.0,31,4,12.9,-0.101,-0.097,-0.28,14288,33.2,33.3,AUDUSD
+434,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Fair Value Gap (SMC) + OTE 62–79% (ICT),"structure_bias,fvg,ote",2.0,31,4,12.9,-0.104,-0.104,-0.377,10611,32.7,33.3,AUDUSD
+435,Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"candle,ote",2.0,31,4,12.9,-0.107,-0.105,-0.28,15328,32.9,33.3,DOW
+436,Premium/Discount (SMC) + Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"premium_discount,candle,ote",2.0,31,4,12.9,-0.107,-0.105,-0.28,15328,32.9,33.3,DOW
+437,Liquidity Sweep (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"liquidity_sweep,elliott_with",3.0,31,4,12.9,-0.109,-0.121,-0.383,16624,25.6,25.0,XLMUSDT
+438,ทิศทาง TF 4 ชม. (MTF) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"htf_bias,killzone,ote",3.0,31,4,12.9,-0.11,-0.116,-0.319,9788,25.0,25.0,NASDAQ
+439,EMA 50/200 ตามเทรนด์ (PA) + Fair Value Gap (SMC) + Liquidity Sweep (SMC),"ema_bias,fvg,liquidity_sweep",2.0,31,4,12.9,-0.11,-0.125,-0.399,5209,32.7,33.3,SP500
+440,ทิศทาง TF 4 ชม. (MTF) + OTE 62–79% (ICT),"htf_bias,ote",3.0,31,4,12.9,-0.111,-0.113,-0.368,23467,25.4,25.0,XLMUSDT
+441,ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC) + OTE 62–79% (ICT),"htf_bias,premium_discount,ote",3.0,31,4,12.9,-0.111,-0.113,-0.368,23466,25.4,25.0,XLMUSDT
+442,Order Block (SMC) + แนวรับ/แนวต้าน (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"order_block,sr_zone,elliott_with",3.0,31,4,12.9,-0.113,-0.116,-0.341,12836,24.8,25.0,DOGEUSDT
+443,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC) + Fair Value Gap (SMC),"htf_bias,order_block,fvg",3.0,31,4,12.9,-0.116,-0.124,-0.449,8193,25.0,25.0,ADAUSDT
+444,Liquidity Sweep (SMC) + Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"liquidity_sweep,candle,killzone",3.0,31,4,12.9,-0.124,-0.125,-0.326,10909,24.5,25.0,EURUSD
+445,Order Block (SMC) + แนวรับ/แนวต้าน (PA),"order_block,sr_zone",3.0,31,4,12.9,-0.126,-0.12,-0.278,26632,25.0,25.0,DOGEUSDT
+446,Premium/Discount (SMC) + Liquidity Sweep (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"premium_discount,liquidity_sweep,elliott_with",3.0,31,4,12.9,-0.126,-0.144,-0.387,16100,25.3,25.0,AVAXUSDT
+447,Order Block (SMC) + Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA),"order_block,fvg,sr_zone",2.0,31,4,12.9,-0.127,-0.129,-0.357,10097,32.2,33.3,NASDAQ
+448,แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"sr_zone,liquidity_sweep,elliott_with",3.0,31,4,12.9,-0.128,-0.133,-0.397,12765,25.1,25.0,SOLUSDT
+449,Order Block (SMC) + Fair Value Gap (SMC) + Liquidity Sweep (SMC),"order_block,fvg,liquidity_sweep",2.0,31,4,12.9,-0.131,-0.145,-0.394,4118,32.2,33.3,AUDUSD
+450,Order Block (SMC) + แนวรับ/แนวต้าน (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"order_block,sr_zone,elliott_with",2.0,31,4,12.9,-0.148,-0.134,-0.301,13799,31.8,33.3,NASDAQ
+451,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC) + OTE 62–79% (ICT),"ema_bias,order_block,ote",2.0,31,4,12.9,-0.16,-0.161,-0.363,4906,32.2,33.3,BCHUSDT
+452,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + Liquidity Sweep (SMC),"structure_bias,htf_bias,liquidity_sweep",3.0,31,4,12.9,-0.164,-0.148,-0.459,14311,24.6,25.0,AUDUSD
+453,Order Block (SMC) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"order_block,killzone,ote",2.0,31,4,12.9,-0.166,-0.164,-0.453,6001,31.1,33.3,USDCHF
+454,Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT),"liquidity_sweep,choch_mss",3.0,31,4,12.9,-0.166,-0.16,-0.667,5889,25.2,25.0,GOLD
+455,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT),"structure_bias,liquidity_sweep,choch_mss",3.0,31,4,12.9,-0.166,-0.16,-0.667,5871,25.2,25.0,GOLD
+456,ทิศทาง TF 4 ชม. (MTF) + Liquidity Sweep (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"htf_bias,liquidity_sweep,elliott_with",2.0,31,4,12.9,-0.172,-0.149,-0.337,9720,32.6,33.3,AUDUSD
+457,Order Block (SMC) + Liquidity Sweep (SMC) + Killzone London/NY (ICT),"order_block,liquidity_sweep,killzone",3.0,31,4,12.9,-0.172,-0.136,-0.286,8606,23.9,25.0,GOLD
+458,ทิศทาง TF 4 ชม. (MTF) + Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT),"htf_bias,liquidity_sweep,choch_mss",2.0,26,3,11.5,-0.157,-0.225,-0.906,2149,30.5,33.3,USDJPY
+459,CHoCH / MSS (SMC/ICT) + Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"choch_mss,candle,ote",2.0,20,2,10.0,-0.178,-0.161,-0.325,1487,30.5,33.3,SOLUSDT
+460,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,elliott_with",2.0,31,3,9.7,-0.04,-0.051,-0.167,33256,34.3,33.3,SOLUSDT
+461,ทิศทาง TF 4 ชม. (MTF) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"htf_bias,killzone,elliott_with",2.0,31,3,9.7,-0.049,-0.068,-0.267,22388,34.1,33.3,GOLD
+462,ทิศทาง TF 4 ชม. (MTF) + แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA),"htf_bias,sr_zone,candle",3.0,31,3,9.7,-0.05,-0.08,-0.23,18470,26.7,25.0,XLMUSDT
+463,EMA 50/200 ตามเทรนด์ (PA) + Premium/Discount (SMC) + Killzone London/NY (ICT),"ema_bias,premium_discount,killzone",3.0,31,3,9.7,-0.062,-0.091,-0.322,20767,26.0,25.0,ADAUSDT
+464,OTE 62–79% (ICT),ote,3.0,31,3,9.7,-0.076,-0.082,-0.328,38624,25.6,25.0,OIL
+465,Premium/Discount (SMC) + OTE 62–79% (ICT),"premium_discount,ote",3.0,31,3,9.7,-0.076,-0.082,-0.328,38623,25.6,25.0,OIL
+466,แนวรับ/แนวต้าน (PA) + OTE 62–79% (ICT),"sr_zone,ote",3.0,31,3,9.7,-0.076,-0.079,-0.257,27743,25.9,25.0,NASDAQ
+467,Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA) + OTE 62–79% (ICT),"premium_discount,sr_zone,ote",3.0,31,3,9.7,-0.076,-0.079,-0.257,27742,25.9,25.0,NASDAQ
+468,Premium/Discount (SMC) + Killzone London/NY (ICT),"premium_discount,killzone",3.0,31,3,9.7,-0.077,-0.076,-0.236,39271,25.8,25.0,EURUSD
+469,Fair Value Gap (SMC) + Killzone London/NY (ICT),"fvg,killzone",2.0,31,3,9.7,-0.077,-0.08,-0.218,22050,33.5,33.3,USDJPY
+470,Fair Value Gap (SMC) + Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA),"fvg,premium_discount,sr_zone",3.0,31,3,9.7,-0.08,-0.089,-0.292,23400,25.6,25.0,SILVER
+471,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC),"ema_bias,htf_bias,premium_discount",3.0,31,3,9.7,-0.086,-0.092,-0.366,25588,26.2,25.0,ADAUSDT
+472,แนวรับ/แนวต้าน (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"sr_zone,elliott_with",2.0,31,3,9.7,-0.089,-0.083,-0.28,33851,33.6,33.3,SILVER
+473,Order Block (SMC) + Fair Value Gap (SMC),"order_block,fvg",3.0,31,3,9.7,-0.092,-0.109,-0.404,13604,24.9,25.0,ADAUSDT
+474,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC),"structure_bias,htf_bias,premium_discount",3.0,31,3,9.7,-0.094,-0.103,-0.256,27684,25.6,25.0,SOLUSDT
+475,Fair Value Gap (SMC) + OTE 62–79% (ICT),"fvg,ote",2.0,31,3,9.7,-0.094,-0.102,-0.243,14070,33.3,33.3,NASDAQ
+476,Fair Value Gap (SMC) + Premium/Discount (SMC) + OTE 62–79% (ICT),"fvg,premium_discount,ote",2.0,31,3,9.7,-0.094,-0.102,-0.243,14068,33.3,33.3,NASDAQ
+477,แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA),"sr_zone,candle",3.0,31,3,9.7,-0.097,-0.088,-0.266,22189,26.3,25.0,TRXUSDT
+478,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC) + แนวรับ/แนวต้าน (PA),"structure_bias,order_block,sr_zone",2.0,31,3,9.7,-0.103,-0.098,-0.23,21396,33.0,33.3,DOGEUSDT
+479,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC) + Killzone London/NY (ICT),"structure_bias,order_block,killzone",3.0,31,3,9.7,-0.104,-0.097,-0.338,14872,25.5,25.0,DOGEUSDT
+480,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC) + Killzone London/NY (ICT),"structure_bias,order_block,killzone",2.0,31,3,9.7,-0.109,-0.107,-0.353,16404,32.8,33.3,DOGEUSDT
+481,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Liquidity Sweep (SMC) + Killzone London/NY (ICT),"structure_bias,liquidity_sweep,killzone",3.0,31,3,9.7,-0.112,-0.112,-0.302,11604,24.9,25.0,AUDUSD
+482,Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA) + OTE 62–79% (ICT),"fvg,sr_zone,ote",2.0,31,3,9.7,-0.112,-0.129,-0.366,8453,32.7,33.3,LINKUSDT
+483,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC),"structure_bias,htf_bias,order_block",2.0,31,3,9.7,-0.113,-0.117,-0.338,16670,32.8,33.3,XLMUSDT
+484,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC) + OTE 62–79% (ICT),"htf_bias,order_block,ote",3.0,31,3,9.7,-0.115,-0.17,-0.569,7745,24.5,25.0,FILUSDT
+485,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC) + Liquidity Sweep (SMC),"structure_bias,order_block,liquidity_sweep",3.0,31,3,9.7,-0.12,-0.123,-0.345,9467,25.0,25.0,GOLD
+486,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Liquidity Sweep (SMC) + Pin bar / Engulfing (PA),"structure_bias,liquidity_sweep,candle",3.0,31,3,9.7,-0.121,-0.119,-0.335,11921,24.4,25.0,AUDUSD
+487,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC) + Pin bar / Engulfing (PA),"structure_bias,order_block,candle",2.0,31,3,9.7,-0.124,-0.125,-0.476,11217,32.1,33.3,SP500
+488,Fair Value Gap (SMC) + Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"fvg,candle,elliott_with",2.0,31,3,9.7,-0.124,-0.122,-0.448,5586,32.4,33.3,OIL
+489,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC) + Premium/Discount (SMC),"ema_bias,order_block,premium_discount",3.0,31,3,9.7,-0.125,-0.127,-0.375,10275,24.8,25.0,AUDUSD
+490,Premium/Discount (SMC) + Liquidity Sweep (SMC) + Pin bar / Engulfing (PA),"premium_discount,liquidity_sweep,candle",3.0,31,3,9.7,-0.128,-0.129,-0.402,24497,24.5,25.0,AUDUSD
+491,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC) + Pin bar / Engulfing (PA),"structure_bias,order_block,candle",3.0,31,3,9.7,-0.129,-0.123,-0.33,10416,24.5,25.0,SP500
+492,Premium/Discount (SMC) + Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"premium_discount,candle,killzone",3.0,31,3,9.7,-0.13,-0.12,-0.347,25035,24.8,25.0,NASDAQ
+493,แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC) + Pin bar / Engulfing (PA),"sr_zone,liquidity_sweep,candle",3.0,31,3,9.7,-0.132,-0.135,-0.337,17790,24.6,25.0,AUDUSD
+494,Order Block (SMC) + Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"order_block,candle,elliott_with",2.0,31,3,9.7,-0.133,-0.129,-0.348,4966,31.5,33.3,NASDAQ
+495,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC) + Pin bar / Engulfing (PA),"htf_bias,order_block,candle",3.0,31,3,9.7,-0.134,-0.152,-0.369,8521,23.9,25.0,SP500
+496,Order Block (SMC) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"order_block,killzone,elliott_with",3.0,31,3,9.7,-0.134,-0.135,-0.539,8473,24.5,25.0,DOTUSDT
+497,Order Block (SMC) + OTE 62–79% (ICT),"order_block,ote",3.0,31,3,9.7,-0.135,-0.121,-0.332,15031,24.7,25.0,OIL
+498,Order Block (SMC) + Premium/Discount (SMC) + OTE 62–79% (ICT),"order_block,premium_discount,ote",3.0,31,3,9.7,-0.135,-0.121,-0.332,15031,24.7,25.0,OIL
+499,Fair Value Gap (SMC) + Premium/Discount (SMC) + Liquidity Sweep (SMC),"fvg,premium_discount,liquidity_sweep",3.0,31,3,9.7,-0.135,-0.118,-0.308,14785,25.3,25.0,SP500
+500,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC) + Liquidity Sweep (SMC),"htf_bias,order_block,liquidity_sweep",3.0,31,3,9.7,-0.135,-0.135,-0.497,9861,24.3,25.0,AUDUSD
+501,Order Block (SMC) + Pin bar / Engulfing (PA),"order_block,candle",2.0,31,3,9.7,-0.137,-0.131,-0.298,17728,31.9,33.3,SP500
+502,Order Block (SMC) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"order_block,killzone,elliott_with",2.0,31,3,9.7,-0.138,-0.136,-0.327,8830,31.8,33.3,NASDAQ
+503,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC) + Fair Value Gap (SMC),"htf_bias,order_block,fvg",2.0,31,3,9.7,-0.142,-0.133,-0.337,8771,32.2,33.3,NASDAQ
+504,แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"sr_zone,candle,ote",2.0,31,3,9.7,-0.144,-0.124,-0.313,8857,33.2,33.3,DOW
+505,Order Block (SMC) + Pin bar / Engulfing (PA),"order_block,candle",3.0,31,3,9.7,-0.146,-0.134,-0.328,15801,24.2,25.0,XLMUSDT
+506,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Liquidity Sweep (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,liquidity_sweep,elliott_with",3.0,31,3,9.7,-0.148,-0.146,-0.295,10472,24.9,25.0,XLMUSDT
+507,ทิศทาง TF 4 ชม. (MTF) + Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"htf_bias,candle,ote",2.0,31,3,9.7,-0.152,-0.13,-0.432,7240,32.6,33.3,AUDUSD
+508,Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC),"fvg,sr_zone,liquidity_sweep",2.0,31,3,9.7,-0.16,-0.159,-0.418,11627,31.8,33.3,OIL
+509,Order Block (SMC) + Liquidity Sweep (SMC) + Pin bar / Engulfing (PA),"order_block,liquidity_sweep,candle",3.0,31,3,9.7,-0.161,-0.152,-0.386,7559,23.7,25.0,AUDUSD
+510,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Fair Value Gap (SMC) + Liquidity Sweep (SMC),"structure_bias,fvg,liquidity_sweep",2.0,31,3,9.7,-0.166,-0.156,-0.364,8079,31.7,33.3,SP500
+511,Premium/Discount (SMC) + Liquidity Sweep (SMC) + CHoCH / MSS (SMC/ICT),"premium_discount,liquidity_sweep,choch_mss",3.0,31,3,9.7,-0.173,-0.191,-0.615,4458,24.3,25.0,GOLD
+512,Fair Value Gap (SMC) + Liquidity Sweep (SMC) + Killzone London/NY (ICT),"fvg,liquidity_sweep,killzone",3.0,31,3,9.7,-0.176,-0.143,-0.387,6530,24.4,25.0,SP500
+513,Order Block (SMC) + Liquidity Sweep (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"order_block,liquidity_sweep,elliott_with",2.0,31,3,9.7,-0.184,-0.177,-0.504,5173,31.5,33.3,DOTUSDT
+514,EMA 50/200 ตามเทรนด์ (PA) + Liquidity Sweep (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,liquidity_sweep,elliott_with",2.0,31,3,9.7,-0.185,-0.167,-0.419,6823,32.2,33.3,AVAXUSDT
+515,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Fair Value Gap (SMC) + Killzone London/NY (ICT),"structure_bias,fvg,killzone",2.0,31,2,6.5,-0.056,-0.074,-0.211,17119,33.8,33.3,USDJPY
+516,ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC) + Killzone London/NY (ICT),"htf_bias,fvg,killzone",2.0,31,2,6.5,-0.057,-0.082,-0.429,16187,33.8,33.3,UNIUSDT
+517,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,killzone,elliott_with",2.0,31,2,6.5,-0.072,-0.067,-0.165,27888,33.8,33.3,SILVER
+518,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + Premium/Discount (SMC),"structure_bias,ema_bias,premium_discount",2.0,31,2,6.5,-0.073,-0.1,-0.287,29220,33.5,33.3,ADAUSDT
+519,ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"htf_bias,fvg,elliott_with",2.0,31,2,6.5,-0.074,-0.082,-0.232,16497,33.7,33.3,SOLUSDT
+520,Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"candle,elliott_with",2.0,31,2,6.5,-0.077,-0.072,-0.209,27913,33.6,33.3,GOLD
+521,Pin bar / Engulfing (PA) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"candle,killzone,elliott_with",2.0,31,2,6.5,-0.077,-0.089,-0.285,15909,33.5,33.3,XRPUSDT
+522,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA),"structure_bias,fvg,sr_zone",2.0,31,2,6.5,-0.078,-0.071,-0.206,19389,33.4,33.3,USDJPY
+523,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + OTE 62–79% (ICT),"ema_bias,htf_bias,ote",3.0,31,2,6.5,-0.081,-0.113,-0.354,14687,25.2,25.0,XLMUSDT
+524,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC),"ema_bias,htf_bias,premium_discount",2.0,31,2,6.5,-0.084,-0.094,-0.319,31389,33.7,33.3,ADAUSDT
+525,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC),"structure_bias,order_block",2.0,31,2,6.5,-0.084,-0.091,-0.191,26228,33.1,33.3,DOGEUSDT
+526,Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA) + Killzone London/NY (ICT),"fvg,sr_zone,killzone",2.0,31,2,6.5,-0.087,-0.096,-0.236,17073,33.4,33.3,AUDUSD
+527,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Fair Value Gap (SMC) + Premium/Discount (SMC),"structure_bias,fvg,premium_discount",2.0,31,2,6.5,-0.09,-0.1,-0.285,26216,32.8,33.3,NASDAQ
+528,EMA 50/200 ตามเทรนด์ (PA) + Premium/Discount (SMC) + Pin bar / Engulfing (PA),"ema_bias,premium_discount,candle",2.0,31,2,6.5,-0.091,-0.096,-0.285,21296,33.3,33.3,AUDUSD
+529,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC) + Killzone London/NY (ICT),"htf_bias,order_block,killzone",3.0,31,2,6.5,-0.097,-0.13,-0.357,12416,24.6,25.0,NEARUSDT
+530,EMA 50/200 ตามเทรนด์ (PA) + Premium/Discount (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,premium_discount,elliott_with",3.0,31,2,6.5,-0.1,-0.101,-0.277,25161,25.7,25.0,SOLUSDT
+531,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC),"htf_bias,order_block",3.0,31,2,6.5,-0.101,-0.114,-0.366,20089,25.3,25.0,AUDUSD
+532,ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC) + Killzone London/NY (ICT),"htf_bias,premium_discount,killzone",3.0,31,2,6.5,-0.105,-0.104,-0.33,27467,25.6,25.0,XLMUSDT
+533,Order Block (SMC) + Fair Value Gap (SMC),"order_block,fvg",2.0,31,2,6.5,-0.105,-0.107,-0.283,15071,32.5,33.3,NASDAQ
+534,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,order_block,elliott_with",3.0,31,2,6.5,-0.107,-0.117,-0.327,14443,24.7,25.0,DOGEUSDT
+535,ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC) + Liquidity Sweep (SMC),"htf_bias,fvg,liquidity_sweep",2.0,31,2,6.5,-0.11,-0.135,-0.355,9928,32.6,33.3,SP500
+536,Fair Value Gap (SMC) + Liquidity Sweep (SMC),"fvg,liquidity_sweep",2.0,31,2,6.5,-0.112,-0.132,-0.355,16038,32.9,33.3,SP500
+537,Liquidity Sweep (SMC),liquidity_sweep,3.0,31,2,6.5,-0.114,-0.112,-0.277,43113,25.2,25.0,SILVER
+538,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + OTE 62–79% (ICT),"structure_bias,htf_bias,ote",3.0,31,2,6.5,-0.114,-0.133,-0.423,16268,24.8,25.0,XLMUSDT
+539,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC) + แนวรับ/แนวต้าน (PA),"htf_bias,order_block,sr_zone",3.0,31,2,6.5,-0.117,-0.149,-0.404,16716,24.5,25.0,AUDUSD
+540,Order Block (SMC) + แนวรับ/แนวต้าน (PA) + OTE 62–79% (ICT),"order_block,sr_zone,ote",2.0,31,2,6.5,-0.117,-0.138,-0.453,10118,32.6,33.3,DOGEUSDT
+541,ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"htf_bias,premium_discount,elliott_with",3.0,31,2,6.5,-0.118,-0.118,-0.348,29422,25.5,25.0,SOLUSDT
+542,Order Block (SMC) + Liquidity Sweep (SMC),"order_block,liquidity_sweep",3.0,31,2,6.5,-0.119,-0.126,-0.377,19013,24.5,25.0,GOLD
+543,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Pin bar / Engulfing (PA) + OTE 62–79% (ICT),"structure_bias,candle,ote",2.0,31,2,6.5,-0.12,-0.137,-0.516,8621,31.9,33.3,AUDUSD
+544,Order Block (SMC) + Killzone London/NY (ICT),"order_block,killzone",3.0,31,2,6.5,-0.122,-0.13,-0.349,21141,24.7,25.0,DOGEUSDT
+545,ทิศทาง TF 4 ชม. (MTF) + Liquidity Sweep (SMC) + Pin bar / Engulfing (PA),"htf_bias,liquidity_sweep,candle",2.0,31,2,6.5,-0.122,-0.127,-0.363,14151,32.6,33.3,AUDUSD
+546,Fair Value Gap (SMC) + Premium/Discount (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"fvg,premium_discount,elliott_with",2.0,31,2,6.5,-0.123,-0.118,-0.268,20393,32.8,33.3,SOLUSDT
+547,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC),"structure_bias,sr_zone,liquidity_sweep",3.0,31,2,6.5,-0.123,-0.119,-0.247,18834,25.2,25.0,GOLD
+548,Fair Value Gap (SMC) + Liquidity Sweep (SMC),"fvg,liquidity_sweep",3.0,31,2,6.5,-0.125,-0.113,-0.308,14908,25.4,25.0,SP500
+549,ทิศทาง TF 4 ชม. (MTF) + Liquidity Sweep (SMC) + Pin bar / Engulfing (PA),"htf_bias,liquidity_sweep,candle",3.0,31,2,6.5,-0.125,-0.126,-0.376,13373,24.9,25.0,AUDUSD
+550,Order Block (SMC) + Premium/Discount (SMC) + Liquidity Sweep (SMC),"order_block,premium_discount,liquidity_sweep",3.0,31,2,6.5,-0.126,-0.123,-0.359,18830,24.5,25.0,GOLD
+551,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC) + OTE 62–79% (ICT),"structure_bias,order_block,ote",3.0,31,2,6.5,-0.127,-0.123,-0.411,12753,24.8,25.0,DOGEUSDT
+552,Order Block (SMC) + Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA),"order_block,fvg,sr_zone",3.0,31,2,6.5,-0.127,-0.14,-0.473,9366,24.6,25.0,XLMUSDT
+553,Liquidity Sweep (SMC) + Pin bar / Engulfing (PA),"liquidity_sweep,candle",3.0,31,2,6.5,-0.128,-0.119,-0.288,25207,24.8,25.0,OIL
+554,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Liquidity Sweep (SMC) + Pin bar / Engulfing (PA),"structure_bias,liquidity_sweep,candle",2.0,31,2,6.5,-0.13,-0.132,-0.264,12488,31.9,33.3,AUDUSD
+555,Premium/Discount (SMC) + CHoCH / MSS (SMC/ICT) + Killzone London/NY (ICT),"premium_discount,choch_mss,killzone",2.0,31,2,6.5,-0.131,-0.132,-0.425,7510,32.8,33.3,XLMUSDT
+556,EMA 50/200 ตามเทรนด์ (PA) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"ema_bias,killzone,ote",2.0,31,2,6.5,-0.132,-0.135,-0.32,6503,32.5,33.3,NASDAQ
+557,EMA 50/200 ตามเทรนด์ (PA) + Order Block (SMC) + Premium/Discount (SMC),"ema_bias,order_block,premium_discount",2.0,31,2,6.5,-0.135,-0.14,-0.336,11138,32.4,33.3,AUDUSD
+558,ทิศทาง TF 4 ชม. (MTF) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"htf_bias,killzone,ote",2.0,31,2,6.5,-0.135,-0.134,-0.389,10122,32.4,33.3,NASDAQ
+559,Liquidity Sweep (SMC) + Killzone London/NY (ICT),"liquidity_sweep,killzone",3.0,31,2,6.5,-0.137,-0.133,-0.376,25425,24.6,25.0,NASDAQ
+560,Order Block (SMC) + Fair Value Gap (SMC) + Premium/Discount (SMC),"order_block,fvg,premium_discount",2.0,31,2,6.5,-0.137,-0.131,-0.3,13175,32.4,33.3,ADAUSDT
+561,Premium/Discount (SMC) + Liquidity Sweep (SMC) + Killzone London/NY (ICT),"premium_discount,liquidity_sweep,killzone",3.0,31,2,6.5,-0.138,-0.137,-0.34,25337,24.4,25.0,EURUSD
+562,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + Liquidity Sweep (SMC),"structure_bias,ema_bias,liquidity_sweep",2.0,31,2,6.5,-0.146,-0.149,-0.44,12048,32.4,33.3,AUDUSD
+563,Liquidity Sweep (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"liquidity_sweep,elliott_with",2.0,31,2,6.5,-0.147,-0.137,-0.322,17806,33.1,33.3,AUDUSD
+564,ทิศทาง TF 4 ชม. (MTF) + Liquidity Sweep (SMC) + Killzone London/NY (ICT),"htf_bias,liquidity_sweep,killzone",3.0,31,2,6.5,-0.149,-0.141,-0.392,12979,24.3,25.0,AUDUSD
+565,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"htf_bias,order_block,elliott_with",2.0,31,2,6.5,-0.149,-0.147,-0.414,10812,31.7,33.3,SP500
+566,Order Block (SMC) + แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC),"order_block,sr_zone,liquidity_sweep",3.0,31,2,6.5,-0.152,-0.142,-0.351,15156,24.2,25.0,GOLD
+567,Order Block (SMC) + Premium/Discount (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"order_block,premium_discount,elliott_with",2.0,31,2,6.5,-0.155,-0.152,-0.286,15122,31.6,33.3,EURUSD
+568,Order Block (SMC) + Liquidity Sweep (SMC) + Killzone London/NY (ICT),"order_block,liquidity_sweep,killzone",2.0,31,2,6.5,-0.158,-0.167,-0.333,8971,30.7,33.3,GOLD
+569,Order Block (SMC) + แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA),"order_block,sr_zone,candle",3.0,31,2,6.5,-0.162,-0.144,-0.34,11143,24.1,25.0,XLMUSDT
+570,Order Block (SMC) + Premium/Discount (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"order_block,premium_discount,elliott_with",3.0,31,2,6.5,-0.163,-0.15,-0.365,14099,24.4,25.0,DOGEUSDT
+571,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + Liquidity Sweep (SMC),"structure_bias,htf_bias,liquidity_sweep",2.0,31,2,6.5,-0.168,-0.166,-0.394,15194,31.9,33.3,AUDUSD
+572,Order Block (SMC) + Liquidity Sweep (SMC) + Pin bar / Engulfing (PA),"order_block,liquidity_sweep,candle",2.0,31,2,6.5,-0.168,-0.168,-0.353,7903,31.2,33.3,SP500
+573,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC) + Liquidity Sweep (SMC),"htf_bias,order_block,liquidity_sweep",2.0,31,2,6.5,-0.177,-0.158,-0.396,10389,31.8,33.3,AUDUSD
+574,Fair Value Gap (SMC) + Liquidity Sweep (SMC) + Killzone London/NY (ICT),"fvg,liquidity_sweep,killzone",2.0,31,2,6.5,-0.179,-0.173,-0.396,6726,31.3,33.3,SP500
+575,Order Block (SMC) + Premium/Discount (SMC) + Pin bar / Engulfing (PA),"order_block,premium_discount,candle",3.0,31,2,6.5,-0.185,-0.156,-0.327,14523,23.5,25.0,SP500
+576,Fair Value Gap (SMC) + แนวรับ/แนวต้าน (PA),"fvg,sr_zone",2.0,31,1,3.2,-0.047,-0.068,-0.227,23978,33.8,33.3,NASDAQ
+577,แนวรับ/แนวต้าน (PA),sr_zone,2.0,31,1,3.2,-0.054,-0.072,-0.211,31984,34.1,33.3,SILVER
+578,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + แนวรับ/แนวต้าน (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,sr_zone,elliott_with",2.0,31,1,3.2,-0.058,-0.07,-0.181,30146,33.7,33.3,SP500
+579,ทิศทาง TF 4 ชม. (MTF) + แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA),"htf_bias,sr_zone,candle",2.0,31,1,3.2,-0.058,-0.076,-0.206,21968,33.7,33.3,UNIUSDT
+580,Fair Value Gap (SMC) + Premium/Discount (SMC),"fvg,premium_discount",2.0,31,1,3.2,-0.067,-0.071,-0.163,31561,33.8,33.3,BCHUSDT
+581,แนวรับ/แนวต้าน (PA) + Killzone London/NY (ICT),"sr_zone,killzone",2.0,31,1,3.2,-0.069,-0.081,-0.18,28644,33.7,33.3,DOGEUSDT
+582,Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"killzone,elliott_with",2.0,31,1,3.2,-0.072,-0.073,-0.187,31328,33.8,33.3,DOTUSDT
+583,ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC),"htf_bias,premium_discount",3.0,31,1,3.2,-0.073,-0.09,-0.308,31979,26.2,25.0,SOLUSDT
+584,Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"candle,killzone",2.0,31,1,3.2,-0.074,-0.077,-0.205,27672,33.3,33.3,GBPUSD
+585,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Premium/Discount (SMC),"structure_bias,premium_discount",3.0,31,1,3.2,-0.079,-0.096,-0.233,39004,25.5,25.0,AVAXUSDT
+586,EMA 50/200 ตามเทรนด์ (PA) + Premium/Discount (SMC),"ema_bias,premium_discount",2.0,31,1,3.2,-0.082,-0.086,-0.286,34955,33.8,33.3,ADAUSDT
+587,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC),"structure_bias,order_block",3.0,31,1,3.2,-0.086,-0.094,-0.201,22031,25.5,25.0,DOGEUSDT
+588,แนวรับ/แนวต้าน (PA) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"sr_zone,killzone,elliott_with",2.0,31,1,3.2,-0.091,-0.087,-0.25,24347,33.6,33.3,SILVER
+589,Fair Value Gap (SMC) + Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA),"fvg,premium_discount,sr_zone",2.0,31,1,3.2,-0.092,-0.101,-0.295,27722,33.1,33.3,NASDAQ
+590,ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC) + Pin bar / Engulfing (PA),"htf_bias,premium_discount,candle",3.0,31,1,3.2,-0.092,-0.118,-0.415,25384,25.4,25.0,XLMUSDT
+591,แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA),"sr_zone,candle",2.0,31,1,3.2,-0.093,-0.087,-0.193,27297,33.1,33.3,SILVER
+592,EMA 50/200 ตามเทรนด์ (PA) + Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA),"ema_bias,premium_discount,sr_zone",2.0,31,1,3.2,-0.095,-0.102,-0.312,30306,33.5,33.3,SILVER
+593,แนวรับ/แนวต้าน (PA) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"sr_zone,killzone,ote",2.0,31,1,3.2,-0.095,-0.128,-0.425,12192,32.9,33.3,NASDAQ
+594,ทิศทาง TF 4 ชม. (MTF) + Fair Value Gap (SMC) + Premium/Discount (SMC),"htf_bias,fvg,premium_discount",2.0,31,1,3.2,-0.096,-0.098,-0.233,24080,33.5,33.3,AVAXUSDT
+595,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC),"htf_bias,order_block",2.0,31,1,3.2,-0.098,-0.115,-0.318,23670,32.8,33.3,DOGEUSDT
+596,Premium/Discount (SMC) + Killzone London/NY (ICT),"premium_discount,killzone",2.0,31,1,3.2,-0.099,-0.106,-0.216,50395,32.8,33.3,USDJPY
+597,Premium/Discount (SMC) + Pin bar / Engulfing (PA),"premium_discount,candle",3.0,31,1,3.2,-0.099,-0.103,-0.292,38275,25.0,25.0,ADAUSDT
+598,Killzone London/NY (ICT) + OTE 62–79% (ICT),"killzone,ote",2.0,31,1,3.2,-0.099,-0.117,-0.309,20890,32.9,33.3,OIL
+599,Premium/Discount (SMC) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"premium_discount,killzone,ote",2.0,31,1,3.2,-0.099,-0.117,-0.309,20890,32.9,33.3,OIL
+600,EMA 50/200 ตามเทรนด์ (PA) + OTE 62–79% (ICT),"ema_bias,ote",2.0,31,1,3.2,-0.099,-0.12,-0.346,17600,33.0,33.3,AUDUSD
+601,EMA 50/200 ตามเทรนด์ (PA) + Premium/Discount (SMC) + OTE 62–79% (ICT),"ema_bias,premium_discount,ote",2.0,31,1,3.2,-0.099,-0.12,-0.346,17598,33.0,33.3,AUDUSD
+602,Premium/Discount (SMC) + Pin bar / Engulfing (PA),"premium_discount,candle",2.0,31,1,3.2,-0.1,-0.099,-0.203,49595,32.7,33.3,AUDUSD
+603,Order Block (SMC),order_block,2.0,31,1,3.2,-0.1,-0.111,-0.238,36759,32.9,33.3,DOGEUSDT
+604,แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"sr_zone,candle,killzone",2.0,31,1,3.2,-0.1,-0.107,-0.256,20027,32.7,33.3,GBPUSD
+605,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + OTE 62–79% (ICT),"ema_bias,htf_bias,ote",2.0,31,1,3.2,-0.1,-0.125,-0.346,15900,32.7,33.3,AUDUSD
+606,Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA),"premium_discount,sr_zone",3.0,31,1,3.2,-0.102,-0.111,-0.324,45673,25.4,25.0,FILUSDT
+607,EMA 50/200 ตามเทรนด์ (PA) + Premium/Discount (SMC) + Killzone London/NY (ICT),"ema_bias,premium_discount,killzone",2.0,31,1,3.2,-0.102,-0.115,-0.271,23339,33.0,33.3,ADAUSDT
+608,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC) + แนวรับ/แนวต้าน (PA),"structure_bias,order_block,sr_zone",3.0,31,1,3.2,-0.102,-0.098,-0.214,18599,25.4,25.0,DOGEUSDT
+609,EMA 50/200 ตามเทรนด์ (PA) + Premium/Discount (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"ema_bias,premium_discount,elliott_with",2.0,31,1,3.2,-0.103,-0.115,-0.261,28270,33.3,33.3,SOLUSDT
+610,Fair Value Gap (SMC) + Premium/Discount (SMC) + Killzone London/NY (ICT),"fvg,premium_discount,killzone",2.0,31,1,3.2,-0.104,-0.118,-0.273,21346,32.7,33.3,AUDUSD
+611,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC) + OTE 62–79% (ICT),"structure_bias,order_block,ote",2.0,31,1,3.2,-0.106,-0.143,-0.37,13602,32.4,33.3,DOGEUSDT
+612,ทิศทาง TF 4 ชม. (MTF) + แนวรับ/แนวต้าน (PA) + OTE 62–79% (ICT),"htf_bias,sr_zone,ote",3.0,31,1,3.2,-0.108,-0.116,-0.316,15878,25.3,25.0,XLMUSDT
+613,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Killzone London/NY (ICT) + OTE 62–79% (ICT),"structure_bias,killzone,ote",2.0,31,1,3.2,-0.108,-0.145,-0.406,12383,31.9,33.3,NASDAQ
+614,แนวรับ/แนวต้าน (PA) + OTE 62–79% (ICT),"sr_zone,ote",2.0,31,1,3.2,-0.109,-0.122,-0.31,31394,33.3,33.3,NASDAQ
+615,Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA) + OTE 62–79% (ICT),"premium_discount,sr_zone,ote",2.0,31,1,3.2,-0.109,-0.122,-0.31,31393,33.3,33.3,NASDAQ
+616,EMA 50/200 ตามเทรนด์ (PA) + ทิศทาง TF 4 ชม. (MTF) + Liquidity Sweep (SMC),"ema_bias,htf_bias,liquidity_sweep",2.0,31,1,3.2,-0.111,-0.12,-0.369,14790,33.3,33.3,AUDUSD
+617,Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA),"premium_discount,sr_zone,candle",3.0,31,1,3.2,-0.112,-0.128,-0.273,30814,24.7,25.0,AUDUSD
+618,Fair Value Gap (SMC) + Premium/Discount (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"fvg,premium_discount,elliott_with",3.0,31,1,3.2,-0.112,-0.11,-0.26,18661,25.3,25.0,SOLUSDT
+619,ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"htf_bias,premium_discount,elliott_with",2.0,31,1,3.2,-0.114,-0.123,-0.276,33756,33.2,33.3,SOLUSDT
+620,Order Block (SMC) + OTE 62–79% (ICT),"order_block,ote",2.0,31,1,3.2,-0.114,-0.134,-0.326,16278,32.5,33.3,DOGEUSDT
+621,Order Block (SMC) + Premium/Discount (SMC) + OTE 62–79% (ICT),"order_block,premium_discount,ote",2.0,31,1,3.2,-0.114,-0.134,-0.326,16278,32.5,33.3,DOGEUSDT
+622,Premium/Discount (SMC) + Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"premium_discount,candle,elliott_with",3.0,31,1,3.2,-0.117,-0.13,-0.359,19927,24.7,25.0,SILVER
+623,Fair Value Gap (SMC) + Premium/Discount (SMC) + Liquidity Sweep (SMC),"fvg,premium_discount,liquidity_sweep",2.0,31,1,3.2,-0.117,-0.136,-0.357,15871,32.8,33.3,SP500
+624,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,order_block,elliott_with",2.0,31,1,3.2,-0.117,-0.119,-0.285,15648,32.2,33.3,DOGEUSDT
+625,Liquidity Sweep (SMC) + Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"liquidity_sweep,candle,killzone",2.0,31,1,3.2,-0.118,-0.131,-0.341,11485,32.1,33.3,EURUSD
+626,Premium/Discount (SMC) + Liquidity Sweep (SMC),"premium_discount,liquidity_sweep",3.0,31,1,3.2,-0.119,-0.117,-0.287,44659,25.2,25.0,AAVEUSDT
+627,ทิศทาง TF 4 ชม. (MTF) + Liquidity Sweep (SMC),"htf_bias,liquidity_sweep",3.0,31,1,3.2,-0.119,-0.117,-0.355,25904,25.3,25.0,OIL
+628,Order Block (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"order_block,elliott_with",3.0,31,1,3.2,-0.12,-0.124,-0.364,17407,24.7,25.0,DOGEUSDT
+629,EMA 50/200 ตามเทรนด์ (PA) + แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC),"ema_bias,sr_zone,liquidity_sweep",2.0,31,1,3.2,-0.12,-0.128,-0.387,11936,33.0,33.3,SILVER
+630,Order Block (SMC) + แนวรับ/แนวต้าน (PA),"order_block,sr_zone",2.0,31,1,3.2,-0.121,-0.122,-0.279,32177,32.6,33.3,DOGEUSDT
+631,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Premium/Discount (SMC) + Pin bar / Engulfing (PA),"structure_bias,premium_discount,candle",3.0,31,1,3.2,-0.121,-0.118,-0.267,24801,24.6,25.0,XLMUSDT
+632,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC) + Premium/Discount (SMC),"structure_bias,order_block,premium_discount",3.0,31,1,3.2,-0.121,-0.117,-0.281,23081,24.8,25.0,DOGEUSDT
+633,Order Block (SMC) + แนวรับ/แนวต้าน (PA) + Killzone London/NY (ICT),"order_block,sr_zone,killzone",2.0,31,1,3.2,-0.122,-0.128,-0.275,17939,32.4,33.3,DOGEUSDT
+634,Premium/Discount (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"premium_discount,elliott_with",3.0,31,1,3.2,-0.123,-0.116,-0.24,40198,25.3,25.0,SOLUSDT
+635,Order Block (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"order_block,elliott_with",2.0,31,1,3.2,-0.123,-0.126,-0.262,19165,32.0,33.3,DOGEUSDT
+636,Liquidity Sweep (SMC) + Pin bar / Engulfing (PA),"liquidity_sweep,candle",2.0,31,1,3.2,-0.124,-0.123,-0.267,28686,32.4,33.3,OIL
+637,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Liquidity Sweep (SMC),"structure_bias,liquidity_sweep",3.0,31,1,3.2,-0.124,-0.124,-0.291,23515,25.2,25.0,AUDUSD
+638,Order Block (SMC) + Fair Value Gap (SMC) + Premium/Discount (SMC),"order_block,fvg,premium_discount",3.0,31,1,3.2,-0.124,-0.129,-0.333,12121,24.7,25.0,ADAUSDT
+639,Order Block (SMC) + แนวรับ/แนวต้าน (PA) + Killzone London/NY (ICT),"order_block,sr_zone,killzone",3.0,31,1,3.2,-0.125,-0.126,-0.31,16206,24.7,25.0,DOGEUSDT
+640,Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA),"premium_discount,sr_zone,candle",2.0,31,1,3.2,-0.126,-0.135,-0.247,36939,32.1,33.3,AUDUSD
+641,Order Block (SMC) + Liquidity Sweep (SMC),"order_block,liquidity_sweep",2.0,31,1,3.2,-0.126,-0.135,-0.28,20872,32.3,33.3,GOLD
+642,Order Block (SMC) + Premium/Discount (SMC) + Liquidity Sweep (SMC),"order_block,premium_discount,liquidity_sweep",2.0,31,1,3.2,-0.126,-0.134,-0.256,20633,32.3,33.3,GOLD
+643,Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"premium_discount,sr_zone,elliott_with",3.0,31,1,3.2,-0.127,-0.132,-0.296,34384,24.9,25.0,SOLUSDT
+644,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Premium/Discount (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,premium_discount,elliott_with",3.0,31,1,3.2,-0.129,-0.127,-0.254,38478,24.8,25.0,SOLUSDT
+645,Premium/Discount (SMC) + Pin bar / Engulfing (PA) + Killzone London/NY (ICT),"premium_discount,candle,killzone",2.0,31,1,3.2,-0.131,-0.135,-0.3,28633,31.9,33.3,NASDAQ
+646,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + OTE 62–79% (ICT),"structure_bias,htf_bias,ote",2.0,31,1,3.2,-0.131,-0.146,-0.416,17784,32.2,33.3,AUDUSD
+647,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + EMA 50/200 ตามเทรนด์ (PA) + OTE 62–79% (ICT),"structure_bias,ema_bias,ote",2.0,31,1,3.2,-0.132,-0.132,-0.335,13866,32.5,33.3,AUDUSD
+648,EMA 50/200 ตามเทรนด์ (PA) + Premium/Discount (SMC) + Liquidity Sweep (SMC),"ema_bias,premium_discount,liquidity_sweep",2.0,31,1,3.2,-0.135,-0.136,-0.387,14814,33.0,33.3,AUDUSD
+649,EMA 50/200 ตามเทรนด์ (PA) + Liquidity Sweep (SMC) + Killzone London/NY (ICT),"ema_bias,liquidity_sweep,killzone",2.0,31,1,3.2,-0.135,-0.143,-0.407,7596,32.4,33.3,XLMUSDT
+650,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC) + Premium/Discount (SMC),"structure_bias,order_block,premium_discount",2.0,31,1,3.2,-0.136,-0.137,-0.3,26032,32.4,33.3,DOGEUSDT
+651,Order Block (SMC) + Killzone London/NY (ICT),"order_block,killzone",2.0,31,1,3.2,-0.139,-0.136,-0.344,24249,32.1,33.3,DOGEUSDT
+652,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC) + Pin bar / Engulfing (PA),"htf_bias,order_block,candle",2.0,31,1,3.2,-0.139,-0.15,-0.534,9085,31.5,33.3,SP500
+653,Premium/Discount (SMC) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"premium_discount,killzone,elliott_with",2.0,31,1,3.2,-0.141,-0.135,-0.255,26270,32.7,33.3,NASDAQ
+654,Order Block (SMC) + แนวรับ/แนวต้าน (PA) + Pin bar / Engulfing (PA),"order_block,sr_zone,candle",2.0,31,1,3.2,-0.141,-0.144,-0.348,12140,31.9,33.3,XLMUSDT
+655,ทิศทาง TF 4 ชม. (MTF) + แนวรับ/แนวต้าน (PA) + OTE 62–79% (ICT),"htf_bias,sr_zone,ote",2.0,31,1,3.2,-0.144,-0.133,-0.328,17005,32.9,33.3,XLMUSDT
+656,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Premium/Discount (SMC) + Liquidity Sweep (SMC),"structure_bias,premium_discount,liquidity_sweep",3.0,31,1,3.2,-0.145,-0.147,-0.413,23387,24.7,25.0,AUDUSD
+657,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC) + OTE 62–79% (ICT),"htf_bias,order_block,ote",2.0,31,1,3.2,-0.149,-0.188,-0.558,8147,32.1,33.3,FILUSDT
+658,Premium/Discount (SMC) + Liquidity Sweep (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"premium_discount,liquidity_sweep,elliott_with",2.0,31,1,3.2,-0.15,-0.15,-0.355,17038,33.0,33.3,AUDUSD
+659,แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC) + Killzone London/NY (ICT),"sr_zone,liquidity_sweep,killzone",3.0,31,1,3.2,-0.152,-0.15,-0.264,18344,24.1,25.0,GOLD
+660,Order Block (SMC) + Premium/Discount (SMC) + Killzone London/NY (ICT),"order_block,premium_discount,killzone",3.0,31,1,3.2,-0.154,-0.163,-0.36,20433,23.8,25.0,NEARUSDT
+661,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Liquidity Sweep (SMC) + Killzone London/NY (ICT),"structure_bias,liquidity_sweep,killzone",2.0,31,1,3.2,-0.163,-0.153,-0.272,12159,31.9,33.3,AUDUSD
+662,Premium/Discount (SMC) + Liquidity Sweep (SMC) + Killzone London/NY (ICT),"premium_discount,liquidity_sweep,killzone",2.0,31,1,3.2,-0.164,-0.158,-0.253,27758,31.6,33.3,USDJPY
+663,Order Block (SMC) + แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC),"order_block,sr_zone,liquidity_sweep",2.0,31,1,3.2,-0.165,-0.16,-0.272,16338,31.8,33.3,GOLD
+664,ทิศทาง TF 4 ชม. (MTF) + Liquidity Sweep (SMC) + Killzone London/NY (ICT),"htf_bias,liquidity_sweep,killzone",2.0,31,1,3.2,-0.165,-0.16,-0.359,13661,31.5,33.3,EURUSD
+665,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Order Block (SMC) + Liquidity Sweep (SMC),"structure_bias,order_block,liquidity_sweep",2.0,31,1,3.2,-0.176,-0.153,-0.289,9839,32.2,33.3,GOLD
+666,Premium/Discount (SMC),premium_discount,2.0,31,0,0.0,-0.074,-0.086,-0.229,62759,33.3,33.3,USDJPY
+667,ทิศทาง TF 4 ชม. (MTF) + แนวรับ/แนวต้าน (PA) + Killzone London/NY (ICT),"htf_bias,sr_zone,killzone",2.0,31,0,0.0,-0.076,-0.082,-0.205,25440,33.5,33.3,DOGEUSDT
+668,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC),"structure_bias,htf_bias,order_block",3.0,31,0,0.0,-0.077,-0.111,-0.375,14681,25.4,25.0,NEARUSDT
+669,ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC),"htf_bias,premium_discount",2.0,31,0,0.0,-0.085,-0.098,-0.285,41221,33.3,33.3,XLMUSDT
+670,OTE 62–79% (ICT),ote,2.0,31,0,0.0,-0.09,-0.1,-0.276,46094,33.4,33.3,OIL
+671,Premium/Discount (SMC) + OTE 62–79% (ICT),"premium_discount,ote",2.0,31,0,0.0,-0.09,-0.1,-0.276,46093,33.4,33.3,OIL
+672,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Premium/Discount (SMC),"structure_bias,premium_discount",2.0,31,0,0.0,-0.099,-0.105,-0.246,48603,33.1,33.3,AVAXUSDT
+673,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA),"structure_bias,premium_discount,sr_zone",2.0,31,0,0.0,-0.1,-0.126,-0.24,43613,32.7,33.3,SILVER
+674,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC),"structure_bias,htf_bias,premium_discount",2.0,31,0,0.0,-0.1,-0.11,-0.24,32871,33.3,33.3,ETCUSDT
+675,ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC) + Pin bar / Engulfing (PA),"htf_bias,premium_discount,candle",2.0,31,0,0.0,-0.1,-0.128,-0.277,29742,32.6,33.3,DOGEUSDT
+676,ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC) + Killzone London/NY (ICT),"htf_bias,premium_discount,killzone",2.0,31,0,0.0,-0.101,-0.115,-0.28,32489,32.8,33.3,XLMUSDT
+677,ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA),"htf_bias,premium_discount,sr_zone",3.0,31,0,0.0,-0.102,-0.116,-0.376,33795,25.4,25.0,XLMUSDT
+678,ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA),"htf_bias,premium_discount,sr_zone",2.0,31,0,0.0,-0.104,-0.12,-0.264,41571,33.0,33.3,ETCUSDT
+679,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA),"structure_bias,premium_discount,sr_zone",3.0,31,0,0.0,-0.108,-0.115,-0.233,36651,24.9,25.0,SILVER
+680,Order Block (SMC),order_block,3.0,31,0,0.0,-0.109,-0.122,-0.251,29358,25.0,25.0,AUDUSD
+681,Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA),"premium_discount,sr_zone",2.0,31,0,0.0,-0.111,-0.12,-0.257,59545,33.0,33.3,FILUSDT
+682,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + OTE 62–79% (ICT),"structure_bias,ote",2.0,31,0,0.0,-0.112,-0.123,-0.303,30231,32.5,33.3,AUDUSD
+683,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Premium/Discount (SMC) + OTE 62–79% (ICT),"structure_bias,premium_discount,ote",2.0,31,0,0.0,-0.112,-0.123,-0.303,30231,32.5,33.3,AUDUSD
+684,EMA 50/200 ตามเทรนด์ (PA) + Liquidity Sweep (SMC),"ema_bias,liquidity_sweep",2.0,31,0,0.0,-0.112,-0.115,-0.348,16571,33.4,33.3,AVAXUSDT
+685,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + แนวรับ/แนวต้าน (PA) + OTE 62–79% (ICT),"structure_bias,sr_zone,ote",2.0,31,0,0.0,-0.114,-0.133,-0.394,19633,32.6,33.3,DOGEUSDT
+686,ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC) + Liquidity Sweep (SMC),"htf_bias,premium_discount,liquidity_sweep",3.0,31,0,0.0,-0.115,-0.135,-0.359,25740,25.0,25.0,XLMUSDT
+687,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Premium/Discount (SMC) + Killzone London/NY (ICT),"structure_bias,premium_discount,killzone",3.0,31,0,0.0,-0.119,-0.113,-0.254,29207,25.1,25.0,FILUSDT
+688,ทิศทาง TF 4 ชม. (MTF) + OTE 62–79% (ICT),"htf_bias,ote",2.0,31,0,0.0,-0.12,-0.123,-0.327,25990,33.0,33.3,DOGEUSDT
+689,ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC) + OTE 62–79% (ICT),"htf_bias,premium_discount,ote",2.0,31,0,0.0,-0.12,-0.123,-0.327,25989,33.0,33.3,DOGEUSDT
+690,Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA) + Killzone London/NY (ICT),"premium_discount,sr_zone,killzone",3.0,31,0,0.0,-0.121,-0.134,-0.333,35425,24.8,25.0,DOTUSDT
+691,Order Block (SMC) + Premium/Discount (SMC),"order_block,premium_discount",3.0,31,0,0.0,-0.121,-0.133,-0.313,32928,24.6,25.0,FILUSDT
+692,Premium/Discount (SMC) + Pin bar / Engulfing (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"premium_discount,candle,elliott_with",2.0,31,0,0.0,-0.121,-0.144,-0.332,21562,32.1,33.3,SILVER
+693,Premium/Discount (SMC) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"premium_discount,killzone,elliott_with",3.0,31,0,0.0,-0.122,-0.128,-0.299,23935,25.1,25.0,NASDAQ
+694,Liquidity Sweep (SMC),liquidity_sweep,2.0,31,0,0.0,-0.123,-0.131,-0.225,52461,32.8,33.3,UNIUSDT
+695,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC) + Premium/Discount (SMC),"htf_bias,order_block,premium_discount",3.0,31,0,0.0,-0.123,-0.148,-0.339,20117,24.5,25.0,NEARUSDT
+696,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Premium/Discount (SMC) + Killzone London/NY (ICT),"structure_bias,premium_discount,killzone",2.0,31,0,0.0,-0.124,-0.136,-0.252,32893,32.2,33.3,AAVEUSDT
+697,Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC),"premium_discount,sr_zone,liquidity_sweep",3.0,31,0,0.0,-0.125,-0.133,-0.319,35797,24.8,25.0,XLMUSDT
+698,แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC),"sr_zone,liquidity_sweep",3.0,31,0,0.0,-0.125,-0.122,-0.309,34361,25.0,25.0,OIL
+699,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC) + แนวรับ/แนวต้าน (PA),"htf_bias,order_block,sr_zone",2.0,31,0,0.0,-0.126,-0.14,-0.409,19067,32.3,33.3,ETCUSDT
+700,Premium/Discount (SMC) + Liquidity Sweep (SMC),"premium_discount,liquidity_sweep",2.0,31,0,0.0,-0.127,-0.136,-0.25,54327,32.8,33.3,UNIUSDT
+701,Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA) + Killzone London/NY (ICT),"premium_discount,sr_zone,killzone",2.0,31,0,0.0,-0.128,-0.143,-0.262,42643,32.2,33.3,OIL
+702,ทิศทาง TF 4 ชม. (MTF) + Liquidity Sweep (SMC),"htf_bias,liquidity_sweep",2.0,31,0,0.0,-0.128,-0.135,-0.282,28809,32.8,33.3,OIL
+703,Premium/Discount (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"premium_discount,elliott_with",2.0,31,0,0.0,-0.13,-0.126,-0.228,48276,32.9,33.3,SOLUSDT
+704,Order Block (SMC) + Premium/Discount (SMC),"order_block,premium_discount",2.0,31,0,0.0,-0.13,-0.132,-0.223,40294,32.6,33.3,DOGEUSDT
+705,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Premium/Discount (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,premium_discount,elliott_with",2.0,31,0,0.0,-0.131,-0.132,-0.282,43789,32.6,33.3,AVAXUSDT
+706,แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC),"sr_zone,liquidity_sweep",2.0,31,0,0.0,-0.132,-0.138,-0.258,40364,32.7,33.3,UNIUSDT
+707,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC) + Killzone London/NY (ICT),"htf_bias,order_block,killzone",2.0,31,0,0.0,-0.136,-0.143,-0.348,13521,31.7,33.3,NEARUSDT
+708,Order Block (SMC) + Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA),"order_block,premium_discount,sr_zone",2.0,31,0,0.0,-0.137,-0.14,-0.313,33753,32.5,33.3,DOGEUSDT
+709,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Premium/Discount (SMC) + Pin bar / Engulfing (PA),"structure_bias,premium_discount,candle",2.0,31,0,0.0,-0.14,-0.14,-0.25,27731,31.9,33.3,DOGEUSDT
+710,Premium/Discount (SMC) + Liquidity Sweep (SMC) + Pin bar / Engulfing (PA),"premium_discount,liquidity_sweep,candle",2.0,31,0,0.0,-0.14,-0.134,-0.282,27443,32.3,33.3,AUDUSD
+711,ทิศทาง TF 4 ชม. (MTF) + Order Block (SMC) + Premium/Discount (SMC),"htf_bias,order_block,premium_discount",2.0,31,0,0.0,-0.14,-0.151,-0.302,22957,32.1,33.3,NEARUSDT
+712,ทิศทาง TF 4 ชม. (MTF) + แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC),"htf_bias,sr_zone,liquidity_sweep",3.0,31,0,0.0,-0.14,-0.138,-0.366,21261,24.8,25.0,OIL
+713,Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA) + ปลายคลื่น 2 หรือ 4 (Elliott),"premium_discount,sr_zone,elliott_with",2.0,31,0,0.0,-0.142,-0.139,-0.276,39342,32.7,33.3,SILVER
+714,Order Block (SMC) + Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA),"order_block,premium_discount,sr_zone",3.0,31,0,0.0,-0.142,-0.133,-0.265,28674,24.7,25.0,ETCUSDT
+715,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Liquidity Sweep (SMC),"structure_bias,liquidity_sweep",2.0,31,0,0.0,-0.143,-0.149,-0.234,25684,32.3,33.3,AUDUSD
+716,ทิศทาง TF 4 ชม. (MTF) + Premium/Discount (SMC) + Liquidity Sweep (SMC),"htf_bias,premium_discount,liquidity_sweep",2.0,31,0,0.0,-0.144,-0.151,-0.276,28421,32.5,33.3,AAVEUSDT
+717,Liquidity Sweep (SMC) + Killzone London/NY (ICT) + ปลายคลื่น 2 หรือ 4 (Elliott),"liquidity_sweep,killzone,elliott_with",2.0,31,0,0.0,-0.146,-0.157,-0.385,7990,32.5,33.3,XRPUSDT
+718,แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC) + Pin bar / Engulfing (PA),"sr_zone,liquidity_sweep,candle",2.0,31,0,0.0,-0.148,-0.15,-0.328,19383,32.1,33.3,OIL
+719,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC),"structure_bias,sr_zone,liquidity_sweep",2.0,31,0,0.0,-0.15,-0.148,-0.248,20324,32.4,33.3,GOLD
+720,Premium/Discount (SMC) + แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC),"premium_discount,sr_zone,liquidity_sweep",2.0,31,0,0.0,-0.151,-0.151,-0.293,41668,32.5,33.3,XLMUSDT
+721,Liquidity Sweep (SMC) + Killzone London/NY (ICT),"liquidity_sweep,killzone",2.0,31,0,0.0,-0.153,-0.153,-0.246,28018,31.8,33.3,USDJPY
+722,แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"sr_zone,liquidity_sweep,elliott_with",2.0,31,0,0.0,-0.156,-0.156,-0.38,13454,32.6,33.3,NEARUSDT
+723,Order Block (SMC) + Premium/Discount (SMC) + Pin bar / Engulfing (PA),"order_block,premium_discount,candle",2.0,31,0,0.0,-0.158,-0.157,-0.346,15880,31.2,33.3,SP500
+724,ทิศทาง TF 4 ชม. (MTF) + แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC),"htf_bias,sr_zone,liquidity_sweep",2.0,31,0,0.0,-0.162,-0.16,-0.331,23147,32.2,33.3,EURUSD
+725,แนวรับ/แนวต้าน (PA) + Liquidity Sweep (SMC) + Killzone London/NY (ICT),"sr_zone,liquidity_sweep,killzone",2.0,31,0,0.0,-0.164,-0.17,-0.281,19754,31.4,33.3,GOLD
+726,Order Block (SMC) + Premium/Discount (SMC) + Killzone London/NY (ICT),"order_block,premium_discount,killzone",2.0,31,0,0.0,-0.168,-0.172,-0.297,22728,31.1,33.3,DOGEUSDT
+727,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Premium/Discount (SMC) + Liquidity Sweep (SMC),"structure_bias,premium_discount,liquidity_sweep",2.0,31,0,0.0,-0.169,-0.166,-0.263,24847,32.0,33.3,NEARUSDT
+728,โครงสร้างตลาดตามเทรนด์ (PA/SMC) + Liquidity Sweep (SMC) + ปลายคลื่น 2 หรือ 4 (Elliott),"structure_bias,liquidity_sweep,elliott_with",2.0,31,0,0.0,-0.174,-0.165,-0.278,10884,32.1,33.3,XLMUSDT

@@ -67,3 +67,8 @@ Add **Browser Source** → `http://localhost:8765/` ขนาด 1080×1920 ว�
     python -m tarot_live.gen_avatar loop
 ได้ `overlay/avatar/portrait.png`, `overlay/cards/back.png` และ `loop.mp4` ถ้าตัดไม่ตรง ปรับสัดส่วนด้วย `--reader-box X0 Y0 X1 Y1` / `--back-box ...` (ค่า 0-1 ของความกว้าง/สูงภาพ)
 ไพ่ในชีตตัวเล็กและมีตัวอักษรฝังในภาพ จึงไม่ได้นำมาใช้เป็นหน้าไพ่ ถ้าอยากได้หน้าไพ่สไตล์เดียวกัน ใช้ `gen_cards` (สไตล์ตั้งค่าไว้ให้เข้ากับชีตนี้แล้ว)
+
+## ใช้รูปแม่หมอที่เสร็จแล้ว (ขนาด/สัดส่วนอะไรก็ได้)
+    python -m tarot_live.gen_avatar fit my_reader.png   # จัดลงกรอบ 9:16 ไม่ตัดตัวแม่หมอ ส่วนล่างเป็นสีม่วงเข้มไล่เนียน
+    python -m tarot_live.gen_avatar loop                # ทำคลิปวนลูป
+ถ้ารูปสูงพอ (สูงกว่า 9:16) จะตัดแบบเต็มกรอบแทน

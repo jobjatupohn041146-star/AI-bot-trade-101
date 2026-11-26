@@ -277,3 +277,14 @@ def test_build_from_sheet(tmp_path):
     assert back.height == 640 and back.width < back.height
     assert gen_avatar.main(["sheet", str(tmp_path / "missing.png"), "--out", str(out)]) == 2
     assert gen_avatar.main(["sheet", str(sheet), "--out", str(out)]) == 0
+
+
+def test_fit_any_shape_into_portrait(tmp_path):
+    pil = pytest.importorskip("PIL.Image")
+    for size in [(1145, 1374), (400, 900), (3000, 1000)]:   # square-ish, very tall, wide
+        img = tmp_path / "r.png"
+        pil.new("RGB", size, (90, 30, 120)).save(img)
+        out = tmp_path / f"o{size[0]}"
+        assert gen_avatar.main(["fit", str(img), "--out", str(out)]) == 0
+        assert pil.open(out / "portrait.png").size == (1080, 1920)
+    assert gen_avatar.main(["fit", str(tmp_path / "nope.png"), "--out", str(out)]) == 2

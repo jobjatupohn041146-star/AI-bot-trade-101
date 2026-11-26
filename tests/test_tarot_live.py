@@ -288,3 +288,38 @@ def test_fit_any_shape_into_portrait(tmp_path):
         assert gen_avatar.main(["fit", str(img), "--out", str(out)]) == 0
         assert pil.open(out / "portrait.png").size == (1080, 1920)
     assert gen_avatar.main(["fit", str(tmp_path / "nope.png"), "--out", str(out)]) == 2
+
+
+# --- card art from a sheet / style reference ----------------------------
+def test_extract_major_from_sheet_any_resolution(tmp_path):
+    pil = pytest.importorskip("PIL.Image")
+    for size in [(1536, 1024), (768, 512)]:
+        sheet = tmp_path / f"s{size[0]}.png"
+        pil.new("RGB", size, (50, 20, 80)).save(sheet)
+        out = tmp_path / f"c{size[0]}"
+        done = gen_cards.extract_major_from_sheet(sheet, out)
+        assert len(done) == 22 and sorted(p.name for p in out.glob("*.png")) == [f"{i:02d}.png" for i in range(22)]
+        assert pil.open(out / "21.png").size == gen_cards.CARD_OUT
+        assert gen_cards.extract_major_from_sheet(sheet, out) == []          # existing files kept
+
+
+def test_multipart_body():
+    body, ctype = gen_cards._multipart({"model": "m", "prompt": "p"}, [("image[]", "a.png", b"\x89PNGdata")])
+    boundary = ctype.split("boundary=")[1].encode()
+    assert body.count(b"--" + boundary) == 4 and b'name="image[]"; filename="a.png"' in body
+    assert b"\x89PNGdata" in body and body.endswith(b"--" + boundary + b"--\r\n")
+
+
+def test_cli_from_sheet_and_minors(tmp_path, monkeypatch):
+    pil = pytest.importorskip("PIL.Image")
+    sheet = tmp_path / "s.png"; pil.new("RGB", (1536, 1024)).save(sheet)
+    assert gen_cards.main(["--from-sheet", str(sheet), "--out", str(tmp_path / "o")]) == 0
+    assert gen_cards.main(["--from-sheet", str(tmp_path / "no.png"), "--out", str(tmp_path / "o")]) == 2
+    # --minors skips ids 0-21 and the back; dry-run still writes prompts
+    assert gen_cards.main(["--minors", "--dry-run", "--out", str(tmp_path / "m")]) == 0
+    import json
+    ids = list(json.loads((tmp_path / "m" / "prompts.json").read_text()))
+    assert ids[0] == "22" and ids[-1] == "77" and len(ids) == 56
+    for k in ("OPENAI_API_KEY", "REPLICATE_API_TOKEN"): monkeypatch.delenv(k, raising=False)
+    monkeypatch.setenv("REPLICATE_API_TOKEN", "x")
+    assert gen_cards.main(["--minors", "--style-ref", str(sheet), "--out", str(tmp_path / "m")]) == 2   # needs OpenAI

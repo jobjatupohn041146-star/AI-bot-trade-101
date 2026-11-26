@@ -46,7 +46,10 @@
   .face.art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .face.art img.rev{transform:rotate(180deg)}
   .face.art .cap{position:relative;width:100%;background:linear-gradient(transparent,rgba(12,5,24,.92));color:var(--ink);padding:14px 4px 4px;text-align:center;font-size:12px}
-  .face b{font-size:15px}.face small{margin-top:4px;opacity:.7}
+  .face.svg{padding:0;overflow:hidden;background:#140a2a;justify-content:flex-end}
+  .face.svg>svg{position:absolute;inset:0;width:100%;height:100%}
+  .face.svg .cap{position:relative;width:100%;padding:0 3px 5px;text-align:center;font-size:12px;font-weight:600;color:#f3e3b0;text-shadow:0 1px 3px #000;line-height:1.15}
+  #reader{position:absolute;inset:0;width:100%;height:100%}
   #text{font-size:16px;line-height:1.45;overflow:auto;min-height:0}
   #reading.many .card{width:76px;height:122px}
   #reading.many #text{font-size:14px}
@@ -54,6 +57,34 @@
 </head>
 <body>
 <div id="stage">
+  <svg id="reader" viewBox="0 0 540 960" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <radialGradient id="halo" cx="50%" cy="34%" r="45%"><stop offset="0" stop-color="#f6dcff" stop-opacity=".85"/><stop offset=".45" stop-color="#9b6bff" stop-opacity=".35"/><stop offset="1" stop-color="#1a0c33" stop-opacity="0"/></radialGradient>
+      <linearGradient id="veil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#cdb8ff" stop-opacity=".25"/></linearGradient>
+      <linearGradient id="gown" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1e8ff"/><stop offset="1" stop-color="#6a45b5"/></linearGradient>
+    </defs>
+    <rect width="540" height="960" fill="url(#halo)"/>
+    <g opacity=".5" stroke="#cdb8ff" fill="none"><path d="M60 0V700M110 0V700M430 0V700M480 0V700"/></g>
+    <circle cx="270" cy="300" r="150" fill="none" stroke="#e8c46a" stroke-width="1.5" opacity=".35"/>
+    <circle cx="270" cy="300" r="175" fill="none" stroke="#e8c46a" stroke-width=".8" stroke-dasharray="4 8" opacity=".3"/>
+    <path d="M182 330C176 205 226 142 270 142C314 142 364 205 358 330C364 450 384 560 410 650L130 650C156 560 176 450 182 330Z" fill="#1b1030"/>
+    <path d="M205 195C165 320 160 500 148 650L192 650C202 500 216 340 228 235Z" fill="#fff" opacity=".28"/>
+    <path d="M335 195C375 320 380 500 392 650L348 650C338 500 324 340 312 235Z" fill="#fff" opacity=".28"/>
+    <path d="M118 960C128 720 190 540 270 505C350 540 412 720 422 960Z" fill="url(#gown)"/>
+    <path d="M248 340H292L298 470C285 485 255 485 242 470Z" fill="#e9c9b3"/>
+    <path d="M200 478C232 540 308 540 340 478C322 448 218 448 200 478Z" fill="#fff" opacity=".92"/>
+    <path d="M214 492q8 14 20 6q10 14 22 6q14 12 28 0q12 8 22-6q12 8 20-6" fill="none" stroke="#cdb8ff" stroke-width="2"/>
+    <ellipse cx="270" cy="300" rx="50" ry="64" fill="#f3d9c4"/>
+    <path d="M220 290C226 232 314 232 320 290C300 258 240 258 220 290Z" fill="#1b1030"/>
+    <path d="M204 330C200 410 208 500 220 570L244 570C238 490 234 400 230 320Z" fill="#1b1030"/>
+    <path d="M336 330C340 410 332 500 320 570L296 570C302 490 306 400 310 320Z" fill="#1b1030"/>
+    <g fill="#2b1648"><ellipse cx="251" cy="308" rx="7" ry="3.5"/><ellipse cx="289" cy="308" rx="7" ry="3.5"/></g>
+    <path d="M244 298q7-5 14 0M282 298q7-5 14 0" stroke="#2b1648" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M256 344Q270 353 284 344" stroke="#b3475f" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M214 196L226 142L249 174L270 128L291 174L314 142L326 196Z" fill="#fff" stroke="#e8c46a" stroke-width="3"/>
+    <g fill="#e8c46a"><circle cx="270" cy="134" r="6"/><circle cx="226" cy="148" r="4"/><circle cx="314" cy="148" r="4"/></g>
+    <g fill="#fff" opacity=".8"><circle cx="90" cy="220" r="3"/><circle cx="460" cy="260" r="2.5"/><circle cx="70" cy="420" r="2"/><circle cx="480" cy="480" r="3"/><circle cx="130" cy="120" r="2"/></g>
+  </svg>
   <video id="avatar" src="/avatar/loop.mp4" autoplay loop muted playsinline onerror="this.remove()"></video>
   <h1>✦ วิหารทาโร่ต์ ✦</h1>
 
@@ -78,13 +109,55 @@
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let ws, tiersDone = false;
+const ROMAN=['0','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX','XXI'];
+const MAJOR_GLYPH=['✧','☿','☽','♀','♈','♉','♊','♋','♌','♍','♃','♎','♆','♏','♐','♑','♂','★','♓','☉','♇','♄'];
+const SUITS=[{c:'#ff9a5c',s:'wand'},{c:'#6cc4ff',s:'cup'},{c:'#d7defc',s:'sword'},{c:'#86e0a0',s:'pent'}];
+const PIPS={1:[[50,82]],2:[[50,56],[50,108]],3:[[50,48],[50,82],[50,116]],4:[[34,60],[66,60],[34,104],[66,104]],
+ 5:[[34,58],[66,58],[50,82],[34,106],[66,106]],6:[[34,52],[66,52],[34,82],[66,82],[34,112],[66,112]],
+ 7:[[34,52],[66,52],[50,67],[34,82],[66,82],[34,112],[66,112]],8:[[34,48],[66,48],[50,62],[34,76],[66,76],[50,98],[34,112],[66,112]],
+ 9:[[34,46],[66,46],[34,70],[66,70],[50,82],[34,94],[66,94],[34,118],[66,118]],10:[[34,44],[66,44],[50,58],[34,72],[66,72],[34,92],[66,92],[50,106],[34,120],[66,120]]};
+const SYMS=`<svg width="0" height="0" style="position:absolute"><defs>
+ <g id="wand"><path d="M0-13V13" stroke-width="2.6" stroke-linecap="round" fill="none" stroke="currentColor"/><path d="M0-3q-7-3-6-10q7 1 6 10zM0 3q7-3 6-10q-7 1-6 10z" fill="currentColor"/></g>
+ <g id="cup"><path d="M-9-11h18q0 13-9 15q-9-2-9-15z" fill="currentColor"/><rect x="-1.2" y="4" width="2.4" height="6" fill="currentColor"/><rect x="-6" y="10" width="12" height="2.4" rx="1" fill="currentColor"/></g>
+ <g id="sword"><path d="M0-14l3.4 17h-6.8z" fill="currentColor"/><rect x="-8" y="3" width="16" height="2.4" rx="1" fill="currentColor"/><rect x="-1.2" y="5" width="2.4" height="7" fill="currentColor"/></g>
+ <g id="pent"><circle r="10.5" fill="none" stroke="currentColor" stroke-width="1.8"/><polygon points="0,-8 4.7,6.5 -7.6,-2.5 7.6,-2.5 -4.7,6.5" fill="none" stroke="currentColor" stroke-width="1.6"/></g>
+</defs></svg>`;
+document.body.insertAdjacentHTML('afterbegin', SYMS);
+
+// Procedural card face: gold frame, suit pips / major-arcana glyph. Used until generated art exists.
+function cardSVG(id, rev){
+  const frame=`<defs><linearGradient id="cg${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1352"/><stop offset="1" stop-color="#120826"/></linearGradient></defs>
+   <rect width="100" height="160" fill="url(#cg${id})"/>
+   <rect x="3" y="3" width="94" height="154" rx="6" fill="none" stroke="#e8c46a" stroke-width="2"/>
+   <rect x="7" y="7" width="86" height="146" rx="4" fill="none" stroke="#e8c46a" stroke-width=".6" opacity=".7"/>
+   <g fill="#e8c46a"><circle cx="12" cy="12" r="1.6"/><circle cx="88" cy="12" r="1.6"/><circle cx="12" cy="130" r="1.6"/><circle cx="88" cy="130" r="1.6"/></g>`;
+  let art;
+  if(id<22){
+    art=`<g transform="${rev?'rotate(180 50 72)':''}"><text x="50" y="26" text-anchor="middle" font-size="11" fill="#e8c46a" font-family="serif" letter-spacing="1">${ROMAN[id]}</text>
+     <circle cx="50" cy="72" r="30" fill="none" stroke="#e8c46a" stroke-width=".8"/><circle cx="50" cy="72" r="24" fill="#3b1d6e" opacity=".7"/>
+     <g stroke="#e8c46a" stroke-width=".5" opacity=".8">${[0,45,90,135].map(a=>`<line x1="50" y1="36" x2="50" y2="108" transform="rotate(${a} 50 72)"/>`).join('')}</g>
+     <text x="50" y="84" text-anchor="middle" font-size="34" fill="#fff3c9" font-family="'Segoe UI Symbol','DejaVu Sans',serif">${MAJOR_GLYPH[id]}</text></g>`;
+  } else {
+    const i=id-22, suit=SUITS[Math.floor(i/14)], r=i%14;
+    let inner='';
+    if(r<10){ const pts=PIPS[r+1], big=r===0;
+      inner=pts.map(([x,y])=>`<use href="#${suit.s}" transform="translate(${x} ${y}) scale(${big?2.4:(r>=7?.85:1.05)})"/>`).join('');
+    } else {
+      const crown=['♙','♞','♛','♚'][r-10];
+      inner=`<text x="50" y="62" text-anchor="middle" font-size="26" fill="#fff3c9" font-family="'Segoe UI Symbol','DejaVu Sans',serif">${crown}</text>
+             <use href="#${suit.s}" transform="translate(50 98) scale(1.9)"/>`;
+    }
+    art=`<g color="${suit.c}" transform="${rev?'rotate(180 50 72)':''}">${inner}</g>`;
+  }
+  return `<svg viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">${frame}<g transform="translate(11 5) scale(.78)">${art}</g></svg>`;
+}
 const backFace = '<div class="back">✦</div>';
 // Use generated art (python -m tarot_live.gen_cards) when present; otherwise keep the text card.
 function addArt(face){
   const id = String(face.dataset.id).padStart(2,'0'), rev = face.dataset.rev === '1';
   const img = new Image(); img.src = `/cards/${id}.png`; if(rev) img.className = 'rev';
   img.onload = () => {
-    const name = face.querySelector('.nm').textContent, th = face.querySelector('small').textContent;
+    const name = face.dataset.name;
     face.className = 'face art'; face.innerHTML = '';
     face.append(img);
     const cap = document.createElement('div'); cap.className = 'cap'; cap.textContent = `${name} · ${rev?'กลับหัว':'ตั้งตรง'}`; face.append(cap);
@@ -118,7 +191,7 @@ function handle(d){
     $('who').textContent = d.free ? '✨ ไพ่ประจำวันสำหรับทุกคน' : `🔮 ไพ่ของคุณ ${d.user}` + (d.question?` — “${d.question}”`:'');
     $('text').textContent = 'แม่หมอกำลังตั้งจิต...';
     $('cards').innerHTML = d.cards.map(c=>`<div class="card"><div>${backFace}
-      <div class="face" data-id="${c.id}" data-rev="${c.reversed?1:0}"><span class="nm"><b>${esc(c.name_th)}</b></span><small>${esc(c.name_en)}</small><small>${c.reversed?'กลับหัว':'ตั้งตรง'}</small></div></div></div>`).join('');
+      <div class="face svg" data-id="${c.id}" data-rev="${c.reversed?1:0}" data-name="${esc(c.name_th)}">${cardSVG(c.id, c.reversed)}<div class="cap">${esc(c.name_th)}<br><span style="font-weight:400;opacity:.8">${c.reversed?'กลับหัว':'ตั้งตรง'}</span></div></div></div></div>`).join('');
     document.querySelectorAll('#cards .face').forEach(addArt);
     $('reading').classList.toggle('many', d.cards.length > 3);
     $('reading').classList.add('show'); $('avatar')?.classList.add('speaking');

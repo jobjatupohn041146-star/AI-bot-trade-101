@@ -72,3 +72,7 @@ Add **Browser Source** → `http://localhost:8765/` ขนาด 1080×1920 ว�
     python -m tarot_live.gen_avatar fit my_reader.png   # จัดลงกรอบ 9:16 ไม่ตัดตัวแม่หมอ ส่วนล่างเป็นสีม่วงเข้มไล่เนียน
     python -m tarot_live.gen_avatar loop                # ทำคลิปวนลูป
 ถ้ารูปสูงพอ (สูงกว่า 9:16) จะตัดแบบเต็มกรอบแทน
+
+## ฟอนต์และชื่อวิหาร
+ชื่อบนจอคือ "วิหารจันทรามนตรา" (TEMPLE OF THE MOON) แก้ได้ใน `overlay/index.html` (`<h1>` กับ `#latin`)
+ฟอนต์อยู่ใน `overlay/fonts/` (ใบอนุญาต OFL): Charmonman สำหรับหัวข้อ, Niramit สำหรับเนื้อหา, Cinzel Decorative สำหรับตัวอักษรละติน ฝังมาในโปรเจกต์ ไม่ต้องต่อเน็ตตอนไลฟ์

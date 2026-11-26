@@ -221,3 +221,46 @@ def test_cli_dry_run_and_missing_key(tmp_path, monkeypatch):
     import json
     assert set(json.loads((tmp_path / "prompts.json").read_text())) == {"00", "back"}
     assert gen_cards.main(["--out", str(tmp_path)]) == 2
+
+
+# --- gen_avatar ---------------------------------------------------------
+import shutil
+import subprocess
+from pathlib import Path
+
+import pytest
+
+from tarot_live import gen_avatar
+
+
+def test_loop_params_are_periodic():
+    a = gen_avatar.frame_params(0, 300, 1080, 1920)
+    b = gen_avatar.frame_params(300, 300, 1080, 1920)  # "frame N" must equal frame 0
+    assert all(abs(x - y) < 1e-9 for x, y in zip(a, b))
+    assert max(gen_avatar.frame_params(n, 300, 1080, 1920)[0] for n in range(300)) > 1.09
+
+
+def test_pingpong_cmd_reverses():
+    cmd = gen_avatar.pingpong_cmd(Path("a.mp4"), Path("b.mp4"))
+    assert "reverse" in " ".join(cmd) and cmd[-1] == "b.mp4"
+
+
+@pytest.mark.skipif(not shutil.which("ffmpeg") or not shutil.which("ffprobe"), reason="needs ffmpeg")
+def test_local_loop_renders_expected_video(tmp_path):
+    pil = pytest.importorskip("PIL.Image")
+    img = tmp_path / "p.png"
+    pil.new("RGB", (200, 300), (90, 40, 140)).save(img)
+    out = tmp_path / "loop.mp4"
+    gen_avatar.render_local_loop(img, out, seconds=1, fps=10, width=90, height=160)
+    info = subprocess.run(["ffprobe", "-v", "error", "-count_frames", "-select_streams", "v:0", "-show_entries",
+                           "stream=width,height,nb_read_frames,codec_name", "-of", "csv=p=0", str(out)],
+                          capture_output=True, text=True).stdout.strip()
+    assert info == "h264,90,160,10"
+
+
+def test_avatar_cli_requires_image_and_keys(tmp_path, monkeypatch):
+    for k in ("OPENAI_API_KEY", "REPLICATE_API_TOKEN"): monkeypatch.delenv(k, raising=False)
+    assert gen_avatar.main(["loop", "--out", str(tmp_path)]) == 2          # no portrait yet
+    assert gen_avatar.main(["portrait", "--out", str(tmp_path)]) == 2      # no API key
+    (tmp_path / "portrait.png").write_bytes(b"x")
+    assert gen_avatar.main(["loop", "--mode", "api", "--out", str(tmp_path)]) == 2

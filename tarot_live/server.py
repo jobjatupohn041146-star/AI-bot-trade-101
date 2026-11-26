@@ -111,6 +111,8 @@ class App:
         app.router.add_get("/", lambda r: web.FileResponse(OVERLAY / "index.html"))
         (OVERLAY / "audio").mkdir(exist_ok=True)
         app.router.add_static("/audio", OVERLAY / "audio")
+        (OVERLAY / "avatar").mkdir(exist_ok=True)
+        app.router.add_static("/avatar", OVERLAY / "avatar")  # optional loop from gen_avatar
         (OVERLAY / "cards").mkdir(exist_ok=True)
         app.router.add_static("/cards", OVERLAY / "cards")  # optional art from gen_cards
         app.on_startup.append(self.start_tasks)

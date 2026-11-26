@@ -8,21 +8,26 @@ from pathlib import Path
 
 from aiohttp import WSMsgType, web
 
-from . import reader, tts
+from . import reader, safety, tts
 from .cards import draw
 from .engine import Engine
+from .store import Store
 
 OVERLAY = Path(__file__).parent / "overlay"
 
 
 class App:
     def __init__(self, source, engine: Engine | None = None, use_tts: bool = False,
-                 display_secs: float = 12.0, rng: random.Random | None = None):
+                 display_secs: float = 12.0, rng: random.Random | None = None,
+                 store: Store | None = None):
         self.source = source
         self.engine = engine or Engine()
         self.use_tts = use_tts
         self.display_secs = display_secs
         self.rng = rng
+        self.store = store
+        if store:
+            store.load(self.engine)
         self.clients: set[web.WebSocketResponse] = set()
         self.wake = asyncio.Event()
 
@@ -42,13 +47,18 @@ class App:
         t = ev.get("type")
         if t == "comment":
             e.on_comment(ev["user"], ev["text"])
-            await self.broadcast({"event": "chat", "user": ev["user"], "text": ev["text"]})
+            shown = safety.chat_visible(ev["text"])
+            if shown:
+                await self.broadcast({"event": "chat", "user": safety.mask_profanity(safety.clean_name(ev["user"])),
+                                      "text": shown})
         elif t == "likes":
             e.on_likes(int(ev["total"]))
         elif t == "gift":
             job = e.on_gift(ev["user"], int(ev["coins"]))
             await self.broadcast({"event": "gift", "user": ev["user"], "coins": ev["coins"],
                                   "queued": job is not None})
+        if self.store:
+            self.store.save(e)
         self.wake.set()
         await self.push_state()
 
@@ -63,9 +73,11 @@ class App:
                 self.wake.clear()
                 await self.wake.wait()
                 continue
+            if self.store:
+                self.store.save(self.engine)
             drawn = draw(job.cards, self.rng)
             await self.push_state()
-            await self.broadcast({"event": "reading_start", "user": job.user, "free": job.free,
+            await self.broadcast({"event": "reading_start", "user": safety.mask_profanity(job.user), "free": job.free,
                                   "question": job.question, "cards": [d.to_dict() for d in drawn]})
             text = await reader.read(job, drawn)
             audio = await tts.speak(text) if self.use_tts else None

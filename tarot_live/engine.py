@@ -5,6 +5,8 @@ import time
 from collections import deque
 from dataclasses import dataclass, field
 
+from . import safety
+
 
 @dataclass(frozen=True)
 class Tier:
@@ -32,6 +34,7 @@ class Job:
     question: str = ""
     bonus: bool = False
     free: bool = False
+    sensitive: bool = False  # viewer asked about a topic we do not give verdicts on
     created: float = field(default_factory=time.time)
 
     def to_dict(self) -> dict:
@@ -52,9 +55,13 @@ class Engine:
 
     # --- inputs -------------------------------------------------
     def on_comment(self, user: str, text: str, now: float | None = None) -> None:
-        text = text.strip()
-        if text:
-            self._questions[user] = (text[:200], now if now is not None else time.time())
+        user = safety.clean_name(user)
+        if not safety.clean(text):
+            return
+        self._questions[user] = (text, now if now is not None else time.time())
+        if len(self._questions) > 500:  # bound memory on busy rooms
+            oldest = min(self._questions, key=lambda u: self._questions[u][1])
+            del self._questions[oldest]
 
     def tier_for(self, coins: int) -> Tier | None:
         best = None
@@ -67,14 +74,16 @@ class Engine:
         """Queue a reading if the gift value reaches a tier. Returns the Job or None."""
         if coins <= 0:
             return None
+        user = safety.clean_name(user)
         self.coins[user] = self.coins.get(user, 0) + coins
         tier = self.tier_for(coins)
         if tier is None or len(self.queue) >= self.max_queue:
             return None
         now = now if now is not None else time.time()
         q, ts = self._questions.get(user, ("", 0.0))
-        question = q if now - ts <= QUESTION_TTL else ""
-        job = Job(user=user, cards=tier.cards, question=question, bonus=tier.bonus)
+        question, flag = safety.classify_question(q) if now - ts <= QUESTION_TTL else ("", "ok")
+        job = Job(user=user, cards=tier.cards, question=question, bonus=tier.bonus,
+                  sensitive=flag == "sensitive")
         self.queue.append(job)
         self.rituals[user] = self.rituals.get(user, 0) + 1
         return job
@@ -92,6 +101,19 @@ class Engine:
 
     def next_job(self) -> Job | None:
         return self.queue.popleft() if self.queue else None
+
+    # --- persistence (see store.py) ------------------------------
+    def dump(self) -> dict:
+        return {"likes": self.likes, "goal": self.goal, "coins": self.coins, "rituals": self.rituals,
+                "queue": [{"user": j.user, "cards": j.cards, "question": j.question, "bonus": j.bonus,
+                           "free": j.free, "sensitive": j.sensitive} for j in self.queue]}
+
+    def restore(self, d: dict) -> None:
+        self.likes = int(d.get("likes", 0))
+        self.goal = int(d.get("goal", self.goal_step))
+        self.coins = {str(k): int(v) for k, v in d.get("coins", {}).items()}
+        self.rituals = {str(k): int(v) for k, v in d.get("rituals", {}).items()}
+        self.queue = deque(Job(**j) for j in d.get("queue", []))
 
     # --- views --------------------------------------------------
     def leaderboard(self, n: int = 5) -> list[dict]:

@@ -26,10 +26,13 @@ Add **Browser Source** → `http://localhost:8765/` ขนาด 1080×1920 ว�
 | `engine.py` | ตารางราคา (`DEFAULT_TIERS`), คิว, ลีดเดอร์บอร์ด, เป้าไลก์ |
 | `reader.py` | เขียนคำทำนาย (Claude / เทมเพลต) |
 | `sources.py` | แหล่งอีเวนต์: mock และ TikTok |
+| `safety.py` | กรองข้อความผู้ชม: ลบลิงก์/อักขระควบคุม, กัน prompt injection, คำหยาบ, หัวข้อละเอียดอ่อน |
+| `store.py` | เก็บคิว/ลีดเดอร์บอร์ด/เป้าไลก์ใน SQLite (`--db`, ค่าเริ่มต้น `data/tarot_live.db`) |
 | `server.py` | aiohttp + WebSocket + ตัวทำงานคิว |
 | `overlay/index.html` | หน้าโอเวอร์เลย์ |
 
 ## สถานะ
+- คำถามที่เป็น injection/คำหยาบ/หัวข้อละเอียดอ่อน (สุขภาพ หวย การลงทุน ฯลฯ) จะไม่ถูกส่งให้ LLM ระบบตอบภาพรวมและไม่ฟันธง รายการคำอยู่ใน `safety.py` ปรับเพิ่มได้
 - ทดสอบแล้ว: ตรรกะทั้งหมด (`pytest tests/test_tarot_live.py`) และหน้าโอเวอร์เลย์กับ mock
 - **ยังไม่ได้ทดสอบ**: `tiktok_source` กับห้องไลฟ์จริง, `--tts`, การเรียก Claude จริง
 - TikTokLive เป็นไลบรารีไม่เป็นทางการ อาจพังเมื่อ TikTok อัปเดต

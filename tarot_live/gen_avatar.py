@@ -1,5 +1,6 @@
 """Make the looping fortune-teller video for the overlay background.
 
+    python -m tarot_live.gen_avatar sheet my_deck_sheet.png   # reuse a picture you already have
     python -m tarot_live.gen_avatar portrait                  # AI portrait (needs OPENAI_API_KEY / REPLICATE_API_TOKEN)
     python -m tarot_live.gen_avatar loop                      # offline: seamless "breathing" loop from the portrait (ffmpeg)
     python -m tarot_live.gen_avatar loop --mode api           # real motion via a Replicate image-to-video model
@@ -31,10 +32,10 @@ from . import gen_cards
 OUT = Path(__file__).parent / "overlay" / "avatar"
 
 PORTRAIT_PROMPT = (
-    "Portrait of a mysterious Thai fortune teller woman, long black hair, wearing an ornate white lace "
-    "crown and veil with silver filigree, dark violet temple with misty pillars behind her, soft ethereal "
-    "glow, calm gaze toward the viewer, centered, upper body, vertical 9:16 composition with empty space "
-    "at the bottom third, photorealistic fantasy, cinematic lighting. No text, no watermark."
+    "Glamorous mysterious tarot reader woman, long wavy dark hair, off-shoulder black lace gown with gold "
+    "jewelry, crescent moon earrings and choker, a glowing giant crescent moon behind her, black cat beside "
+    "her, hanging star garlands, black and violet palette, one hand resting on her chin, vertical 9:16 "
+    "composition with calm empty space in the bottom half, cinematic lighting. No text, no watermark."
 )
 MOTION_PROMPT = ("She breathes slowly and blinks softly, a gentle smile, hair and veil drift slightly, "
                  "glowing particles float in the air. Camera static, seamless calm loop.")
@@ -87,6 +88,53 @@ def render_local_loop(image: Path, out: Path, seconds: float = 10, fps: int = 30
         raise SystemExit(f"ffmpeg failed:\n{err[-800:]}")
 
 
+# Crop boxes as fractions of a "card sheet" picture (reader on top, deck grid below), x0 y0 x1 y1.
+READER_BOX = (0.195, 0.0, 0.54, 0.408)
+BACK_BOX = (0.032, 0.098, 0.14, 0.332)
+
+
+def _frac_crop(img, box):
+    w, h = img.size
+    return img.crop((round(box[0] * w), round(box[1] * h), round(box[2] * w), round(box[3] * h)))
+
+
+def build_from_sheet(sheet: Path, out: Path, reader_box=READER_BOX, back_box=BACK_BOX,
+                     width: int = 1080, height: int = 1920) -> None:
+    """Cut the reader and the card back out of a deck 'sheet' picture.
+
+    portrait.png: 9:16 frame, reader at the top, the bottom a dark violet gradient so the
+    overlay panels sit on a calm area.
+    back.png (in ../cards/): the card back, for the flip animation.
+    """
+    from PIL import Image
+
+    src = Image.open(sheet).convert("RGB")
+    reader = _frac_crop(src, reader_box)
+    scale = width / reader.width
+    reader = reader.resize((width, round(reader.height * scale)), Image.LANCZOS)
+    rh = reader.height
+    if rh >= height:
+        canvas = reader.crop((0, 0, width, height))
+    else:
+        # Below the reader: dark violet gradient seeded from the picture's own bottom edge colour.
+        edge = reader.crop((0, rh - 30, width, rh)).resize((1, 1), Image.BOX).getpixel((0, 0))
+        base = (14, 6, 30)
+        canvas = Image.new("RGB", (width, height), base)
+        grad = Image.linear_gradient("L").rotate(180).resize((width, 700))  # 255 at top -> 0
+        top_col = tuple(round(c * 0.55) for c in edge)
+        canvas.paste(Image.new("RGB", (width, 700), top_col), (0, rh - 120), grad)
+        fade = Image.linear_gradient("L").rotate(180).resize((width, 160))  # opaque -> transparent
+        mask = Image.new("L", (width, rh), 255)
+        mask.paste(fade, (0, rh - 160))
+        canvas.paste(reader, (0, 0), mask)
+    out.mkdir(parents=True, exist_ok=True)
+    canvas.save(out / "portrait.png")
+    back = _frac_crop(src, back_box)
+    cards = out.parent / "cards"
+    cards.mkdir(parents=True, exist_ok=True)
+    back.resize((round(back.width * 640 / back.height), 640), Image.LANCZOS).save(cards / "back.png")
+
+
 def pingpong_cmd(src: Path, out: Path) -> list[str]:
     """Play forward then backward so any clip loops without a jump cut."""
     return ["ffmpeg", "-y", "-loglevel", "error", "-i", str(src), "-filter_complex",
@@ -130,6 +178,11 @@ def main(argv: list[str] | None = None) -> int:
     sp = sub.add_parser("portrait", help="generate the reader's portrait image")
     sp.add_argument("--provider", choices=gen_cards.PROVIDERS)
     sp.add_argument("--prompt", default=PORTRAIT_PROMPT)
+    ss = sub.add_parser("sheet", help="cut the reader + card back out of a deck sheet picture you already have")
+    ss.add_argument("sheet", type=Path)
+    ss.add_argument("--reader-box", type=float, nargs=4, default=READER_BOX, metavar=("X0", "Y0", "X1", "Y1"))
+    ss.add_argument("--back-box", type=float, nargs=4, default=BACK_BOX, metavar=("X0", "Y0", "X1", "Y1"))
+    ss.add_argument("--out", type=Path, default=OUT)
     sl = sub.add_parser("loop", help="turn the portrait into a looping mp4")
     sl.add_argument("--mode", choices=["local", "api"], default="local")
     sl.add_argument("--image", type=Path, help="default: overlay/avatar/portrait.png")
@@ -142,6 +195,14 @@ def main(argv: list[str] | None = None) -> int:
         s.add_argument("--out", type=Path, default=OUT)
     a = p.parse_args(argv)
     a.out.mkdir(parents=True, exist_ok=True)
+
+    if a.cmd == "sheet":
+        if not a.sheet.exists():
+            print(f"{a.sheet} not found", file=sys.stderr)
+            return 2
+        build_from_sheet(a.sheet, a.out, tuple(a.reader_box), tuple(a.back_box))
+        print(f"wrote {a.out / 'portrait.png'} and {a.out.parent / 'cards' / 'back.png'}")
+        return 0
 
     if a.cmd == "portrait":
         name = a.provider or ("openai" if os.environ.get("OPENAI_API_KEY") else "replicate")

@@ -29,14 +29,15 @@ from .cards import DECK, MAJOR, SUITS
 OUT = Path(__file__).parent / "overlay" / "cards"
 
 STYLE = (
-    "Ornate fantasy tarot card illustration, vertical portrait, mystical temple theme, "
-    "deep violet and antique gold palette, soft glowing light, delicate filigree border, "
-    "painterly, highly detailed, consistent art style across a full deck. "
+    "Dark romantic fantasy tarot card illustration, vertical portrait, black and deep violet palette with "
+    "gold filigree frame, glowing crescent moons, purple roses, candlelight and crystals, glamorous "
+    "painterly anime-realism, rich detail, soft magical glow, consistent art style across a full deck. "
     "No text, no letters, no numbers, no watermark."
 )
 BACK_PROMPT = (
-    "Tarot card back design, symmetrical, deep violet background with gold mandala, crescent moon "
-    "and stars, delicate filigree border, mystical temple theme. No text, no letters, no watermark."
+    "Tarot card back design, symmetrical, black and violet background, ornate gold filigree frame, large "
+    "glowing crescent moon at the center with a radiant sunburst, small crescent moon above, sparkling "
+    "stars. No text, no letters, no watermark."
 )
 
 # Scene per Major Arcana (same order as cards.MAJOR)

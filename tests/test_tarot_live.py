@@ -264,3 +264,16 @@ def test_avatar_cli_requires_image_and_keys(tmp_path, monkeypatch):
     assert gen_avatar.main(["portrait", "--out", str(tmp_path)]) == 2      # no API key
     (tmp_path / "portrait.png").write_bytes(b"x")
     assert gen_avatar.main(["loop", "--mode", "api", "--out", str(tmp_path)]) == 2
+
+
+def test_build_from_sheet(tmp_path):
+    pil = pytest.importorskip("PIL.Image")
+    sheet = tmp_path / "sheet.png"
+    pil.new("RGB", (1536, 1024), (60, 20, 90)).save(sheet)
+    out = tmp_path / "avatar"
+    gen_avatar.build_from_sheet(sheet, out)
+    assert pil.open(out / "portrait.png").size == (1080, 1920)
+    back = pil.open(tmp_path / "cards" / "back.png")
+    assert back.height == 640 and back.width < back.height
+    assert gen_avatar.main(["sheet", str(tmp_path / "missing.png"), "--out", str(out)]) == 2
+    assert gen_avatar.main(["sheet", str(sheet), "--out", str(out)]) == 0

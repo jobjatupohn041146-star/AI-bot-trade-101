@@ -11,7 +11,7 @@
   #stage{position:relative;width:100%;height:100%;max-width:540px;aspect-ratio:9/16;margin:auto;
     background:radial-gradient(ellipse at 50% 30%,#4b2a78 0,#1a0c33 60%,#0c0518 100%)}
   /* Replace with your AI reader video: <video id="avatar" src="avatar.mp4" autoplay loop muted> */
-  #avatar{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9}
+  #avatar{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   #avatar.speaking{animation:talk 1.1s ease-in-out infinite}
   @keyframes talk{50%{filter:brightness(1.12) saturate(1.15)}}
   h1{position:absolute;top:2%;left:0;right:0;margin:0;text-align:center;color:var(--gold);font-size:28px;letter-spacing:1px;text-shadow:0 0 12px #000}
@@ -31,9 +31,10 @@
   #toast{position:absolute;top:26%;left:50%;transform:translateX(-50%);color:var(--gold);font-size:20px;opacity:0;transition:opacity .4s;text-shadow:0 0 10px #000;white-space:nowrap}
   #toast.show{opacity:1}
   /* reading overlay */
-  #reading{position:absolute;inset:8% 4% 14% 4%;display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;
-    background:rgba(12,5,24,.82);border:1px solid var(--line);border-radius:16px;padding:14px;text-align:center}
+  #reading{position:absolute;left:4%;right:4%;bottom:13%;display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+    background:rgba(12,5,24,.74);border:1px solid var(--line);border-radius:16px;padding:10px 12px;text-align:center}
   #reading.show{display:flex}
+  #stage.busy #prices{opacity:0}
   #who{color:var(--gold);font-size:18px}
   #cards{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
   .card{width:104px;height:166px;perspective:600px}
@@ -51,8 +52,11 @@
   .face.svg .cap{position:relative;width:100%;padding:0 3px 5px;text-align:center;font-size:12px;font-weight:600;color:#f3e3b0;text-shadow:0 1px 3px #000;line-height:1.15}
   #reader{position:absolute;inset:0;width:100%;height:100%}
   #text{font-size:16px;line-height:1.45;overflow:auto;min-height:0}
-  #reading.many .card{width:76px;height:122px}
-  #reading.many #text{font-size:14px}
+  #reading .card{width:82px;height:131px}
+  #reading.many .card{width:68px;height:109px}
+  #reading #text{font-size:14.5px;line-height:1.4}
+  #reading #who{font-size:15px}
+  #cards{gap:8px}
 </style>
 </head>
 <body>
@@ -194,14 +198,14 @@ function handle(d){
       <div class="face svg" data-id="${c.id}" data-rev="${c.reversed?1:0}" data-name="${esc(c.name_th)}">${cardSVG(c.id, c.reversed)}<div class="cap">${esc(c.name_th)}<br><span style="font-weight:400;opacity:.8">${c.reversed?'กลับหัว':'ตั้งตรง'}</span></div></div></div></div>`).join('');
     document.querySelectorAll('#cards .face').forEach(addArt);
     $('reading').classList.toggle('many', d.cards.length > 3);
-    $('reading').classList.add('show'); $('avatar')?.classList.add('speaking');
+    $('reading').classList.add('show'); $('stage').classList.add('busy'); $('avatar')?.classList.add('speaking');
     [...document.querySelectorAll('.card')].forEach((el,i)=>setTimeout(()=>el.classList.add('flip'), 700+i*500));
     break;
   case 'reading':
     $('text').textContent = d.text;
     if(d.audio){ const a=$('voice'); a.src=d.audio; a.play().catch(()=>{}); }
     break;
-  case 'reading_end': $('reading').classList.remove('show'); $('avatar')?.classList.remove('speaking'); break;
+  case 'reading_end': $('reading').classList.remove('show'); $('stage').classList.remove('busy'); $('avatar')?.classList.remove('speaking'); break;
   }
 }
 connect();

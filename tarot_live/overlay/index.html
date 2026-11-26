@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>วิหารทาโร่ต์</title>
+<style>
+  :root{--gold:#e8c46a;--ink:#f3eaff;--panel:rgba(30,14,58,.78);--line:rgba(232,196,106,.45)}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:#120826;color:var(--ink);font-family:"Noto Sans Thai","Sarabun",system-ui,sans-serif;overflow:hidden}
+  #stage{position:relative;width:100%;height:100%;max-width:540px;aspect-ratio:9/16;margin:auto;
+    background:radial-gradient(ellipse at 50% 30%,#4b2a78 0,#1a0c33 60%,#0c0518 100%)}
+  /* Replace with your AI reader video: <video id="avatar" src="avatar.mp4" autoplay loop muted> */
+  #avatar{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9}
+  h1{position:absolute;top:2%;left:0;right:0;margin:0;text-align:center;color:var(--gold);font-size:28px;letter-spacing:1px;text-shadow:0 0 12px #000}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 10px;font-size:13px;backdrop-filter:blur(4px)}
+  #side{position:absolute;left:8px;top:11%;width:38%;display:flex;flex-direction:column;gap:8px}
+  .bar{height:8px;border-radius:5px;background:rgba(255,255,255,.15);overflow:hidden;margin:4px 0}
+  .bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#8f5bff,#e58cff);transition:width .5s}
+  .row{display:flex;justify-content:space-between;gap:6px;padding:2px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .dim{opacity:.6}
+  #prices{position:absolute;left:5%;right:5%;bottom:24%;text-align:center}
+  #prices h3{margin:0 0 6px;color:var(--gold)}
+  #prices .grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  #prices .grid div{border:1px solid var(--line);border-radius:8px;padding:6px;font-size:13px}
+  #chat{position:absolute;left:8px;right:8px;bottom:2%;display:flex;flex-direction:column;gap:4px;font-size:14px;max-height:20%;overflow:hidden;justify-content:flex-end}
+  #chat div{background:rgba(0,0,0,.35);border-radius:10px;padding:3px 8px}
+  #toast{position:absolute;top:26%;left:50%;transform:translateX(-50%);color:var(--gold);font-size:20px;opacity:0;transition:opacity .4s;text-shadow:0 0 10px #000;white-space:nowrap}
+  #toast.show{opacity:1}
+  /* reading overlay */
+  #reading{position:absolute;inset:8% 4% 14% 4%;display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+    background:rgba(12,5,24,.82);border:1px solid var(--line);border-radius:16px;padding:14px;text-align:center}
+  #reading.show{display:flex}
+  #who{color:var(--gold);font-size:18px}
+  #cards{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .card{width:92px;height:150px;perspective:600px}
+  .card>div{position:relative;width:100%;height:100%;transition:transform .9s;transform-style:preserve-3d}
+  .card.flip>div{transform:rotateY(180deg)}
+  .face,.back{position:absolute;inset:0;border-radius:10px;border:2px solid var(--gold);backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px;font-size:13px}
+  .back{background:repeating-linear-gradient(45deg,#3a1c6b,#3a1c6b 8px,#2a1350 8px,#2a1350 16px);color:var(--gold);font-size:30px}
+  .face{background:#f6ecd0;color:#2b1648;transform:rotateY(180deg)}
+  .face b{font-size:15px}.face small{margin-top:4px;opacity:.7}
+  #text{font-size:17px;line-height:1.5;max-height:34%;overflow:auto}
+</style>
+</head>
+<body>
+<div id="stage">
+  <video id="avatar" autoplay loop muted playsinline></video>
+  <h1>✦ วิหารทาโร่ต์ ✦</h1>
+
+  <div id="side">
+    <div class="panel"><div class="row"><b>♥ <span id="likes">0</span> / <span id="goal">300</span></b></div>
+      <div class="bar"><i id="gbar"></i></div><div class="dim">ครบเป้า = ไพ่ประจำวัน ✨</div></div>
+    <div class="panel"><div class="dim">ผู้ที่ทำพิธีที่วิหาร</div><div id="lb"></div></div>
+    <div class="panel"><div class="dim">คิวเปิดไพ่ (<span id="qlen">0</span>)</div><div id="queue"></div></div>
+  </div>
+
+  <div id="prices" class="panel"><h3>✦ พิธีเปิดไพ่ ✦</h3><div class="grid" id="tiers"></div></div>
+  <div id="toast"></div>
+  <div id="chat"></div>
+
+  <div id="reading">
+    <div id="who"></div><div id="cards"></div><div id="text"></div>
+  </div>
+  <audio id="voice"></audio>
+</div>
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let ws, tiersDone = false;
+
+function connect(){
+  ws = new WebSocket((location.protocol==='https:'?'wss://':'ws://')+location.host+'/ws');
+  ws.onmessage = m => handle(JSON.parse(m.data));
+  ws.onclose = () => setTimeout(connect, 1500);
+}
+function toast(t){ const e=$('toast'); e.textContent=t; e.classList.add('show'); setTimeout(()=>e.classList.remove('show'),3000); }
+
+function handle(d){
+  switch(d.event){
+  case 'state':
+    $('likes').textContent = d.likes; $('goal').textContent = d.goal;
+    $('gbar').style.width = Math.min(100, d.goal_progress / d.goal_step * 100) + '%';
+    $('lb').innerHTML = d.leaderboard.map((r,i)=>`<div class="row"><span>${i+1} ${esc(r.user)}</span><span>×${r.rituals}</span></div>`).join('') || '<div class="dim">ยังไม่มี</div>';
+    $('qlen').textContent = d.queue_len;
+    $('queue').innerHTML = d.queue.map(j=>`<div class="row"><span>${esc(j.user)}</span><span>${j.cards} ใบ</span></div>`).join('') || '<div class="dim">ยังไม่มีคิว</div>';
+    if(!tiersDone){ $('tiers').innerHTML = d.tiers.map(t=>`<div>${esc(t)}</div>`).join(''); tiersDone = true; }
+    break;
+  case 'chat': {
+    const c=$('chat'); const e=document.createElement('div'); e.innerHTML=`<b>${esc(d.user)}</b> ${esc(d.text)}`;
+    c.appendChild(e); while(c.children.length>4) c.firstChild.remove(); break; }
+  case 'gift': toast(`🌹 ${d.user} ส่งของขวัญ ${d.coins} เหรียญ${d.queued?'':' (คิวเต็ม/ยังไม่ถึงขั้น)'}`); break;
+  case 'reading_start':
+    $('who').textContent = d.free ? '✨ ไพ่ประจำวันสำหรับทุกคน' : `🔮 ไพ่ของคุณ ${d.user}` + (d.question?` — “${d.question}”`:'');
+    $('text').textContent = 'แม่หมอกำลังตั้งจิต...';
+    $('cards').innerHTML = d.cards.map(c=>`<div class="card"><div><div class="back">✦</div>
+      <div class="face ${c.reversed?'rev':''}"><span class="nm"><b>${esc(c.name_th)}</b></span><small>${esc(c.name_en)}</small><small>${c.reversed?'กลับหัว':'ตั้งตรง'}</small></div></div></div>`).join('');
+    $('reading').classList.add('show');
+    [...document.querySelectorAll('.card')].forEach((el,i)=>setTimeout(()=>el.classList.add('flip'), 700+i*500));
+    break;
+  case 'reading':
+    $('text').textContent = d.text;
+    if(d.audio){ const a=$('voice'); a.src=d.audio; a.play().catch(()=>{}); }
+    break;
+  case 'reading_end': $('reading').classList.remove('show'); break;
+  }
+}
+connect();
+</script>
+</body>
+</html>

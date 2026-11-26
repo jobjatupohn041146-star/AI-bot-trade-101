@@ -18,3 +18,6 @@ data/scans/
 
 # tarot_live generated speech
 tarot_live/overlay/audio/
+
+# generated card art (python -m tarot_live.gen_cards)
+tarot_live/overlay/cards/

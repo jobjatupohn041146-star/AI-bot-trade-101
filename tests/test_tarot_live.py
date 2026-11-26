@@ -157,3 +157,67 @@ def test_store_corrupt_state_is_ignored(tmp_path):
 
 def test_clean_chat_text_not_altered():
     assert safety.chat_visible("ขอบคุณค่ะ คำถาม") == "ขอบคุณค่ะ คำถาม"
+
+
+# --- gen_cards -----------------------------------------------------------
+import urllib.error
+
+from tarot_live import gen_cards
+
+PNG = gen_cards.PNG_MAGIC + b"fake"
+
+
+def test_prompts_unique_complete_and_textfree():
+    jobs = gen_cards.all_jobs()
+    assert len(jobs) == 79 and jobs[-1][0] == "back"
+    assert len({p for _, p in jobs}) == 79
+    assert all("No text" in p for _, p in jobs)
+    by_name = {c.name_en: f"{c.id:02d}" for c in DECK}
+    assert "tower struck by lightning" in dict(jobs)[by_name["The Tower"]]
+    assert "queen" in dict(jobs)[by_name["Queen of Cups"]] and "golden cup" in dict(jobs)[by_name["Queen of Cups"]]
+
+
+def test_generate_resume_and_force(tmp_path):
+    calls = []
+    def prov(prompt, seed): calls.append(seed); return PNG
+    jobs = gen_cards.all_jobs()[:3]
+    r = gen_cards.generate(jobs, prov, tmp_path, workers=1)
+    assert len(r["done"]) == 3 and (tmp_path / "00.png").read_bytes() == PNG
+    r = gen_cards.generate(jobs, prov, tmp_path, workers=1)
+    assert len(r["skipped"]) == 3 and len(calls) == 3        # nothing regenerated
+    gen_cards.generate(jobs, prov, tmp_path, force=True, workers=1)
+    assert len(calls) == 6
+
+
+def test_generate_retries_then_succeeds_and_rejects_non_png(tmp_path):
+    n = {"i": 0}
+    def flaky(prompt, seed):
+        n["i"] += 1
+        if n["i"] == 1: raise urllib.error.URLError("boom")
+        if n["i"] == 2: return b"<html>error</html>"
+        return PNG
+    waits = []
+    r = gen_cards.generate([("00", "p")], flaky, tmp_path, retries=3, sleep=waits.append, log=lambda m: None)
+    assert r["done"] == ["00"] and waits == [2, 4]
+    assert not list(tmp_path.glob("*.tmp"))
+
+
+def test_generate_gives_up_and_does_not_retry_auth_errors(tmp_path):
+    def always_fail(prompt, seed): raise urllib.error.URLError("down")
+    r = gen_cards.generate([("00", "p")], always_fail, tmp_path, retries=2, sleep=lambda s: None, log=lambda m: None)
+    assert "00" in r["failed"] and not (tmp_path / "00.png").exists()
+
+    calls = []
+    def unauthorized(prompt, seed):
+        calls.append(1)
+        raise urllib.error.HTTPError("u", 401, "no", {}, __import__("io").BytesIO(b"bad key"))
+    r = gen_cards.generate([("01", "p")], unauthorized, tmp_path, retries=3, sleep=lambda s: None, log=lambda m: None)
+    assert len(calls) == 1 and "401" in r["failed"]["01"]
+
+
+def test_cli_dry_run_and_missing_key(tmp_path, monkeypatch):
+    for k in ("OPENAI_API_KEY", "REPLICATE_API_TOKEN"): monkeypatch.delenv(k, raising=False)
+    assert gen_cards.main(["--dry-run", "--out", str(tmp_path), "--only", "0", "back"]) == 0
+    import json
+    assert set(json.loads((tmp_path / "prompts.json").read_text())) == {"00", "back"}
+    assert gen_cards.main(["--out", str(tmp_path)]) == 2

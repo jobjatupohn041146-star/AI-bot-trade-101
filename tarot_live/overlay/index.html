@@ -34,14 +34,20 @@
   #reading.show{display:flex}
   #who{color:var(--gold);font-size:18px}
   #cards{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-  .card{width:92px;height:150px;perspective:600px}
+  .card{width:104px;height:166px;perspective:600px}
   .card>div{position:relative;width:100%;height:100%;transition:transform .9s;transform-style:preserve-3d}
   .card.flip>div{transform:rotateY(180deg)}
   .face,.back{position:absolute;inset:0;border-radius:10px;border:2px solid var(--gold);backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px;font-size:13px}
-  .back{background:repeating-linear-gradient(45deg,#3a1c6b,#3a1c6b 8px,#2a1350 8px,#2a1350 16px);color:var(--gold);font-size:30px}
+  .back{background:var(--back,none) center/cover,repeating-linear-gradient(45deg,#3a1c6b,#3a1c6b 8px,#2a1350 8px,#2a1350 16px);color:var(--gold);font-size:30px}
   .face{background:#f6ecd0;color:#2b1648;transform:rotateY(180deg)}
+  .face.art{padding:0;overflow:hidden;background:#1a0c33;justify-content:flex-end}
+  .face.art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .face.art img.rev{transform:rotate(180deg)}
+  .face.art .cap{position:relative;width:100%;background:linear-gradient(transparent,rgba(12,5,24,.92));color:var(--ink);padding:14px 4px 4px;text-align:center;font-size:12px}
   .face b{font-size:15px}.face small{margin-top:4px;opacity:.7}
-  #text{font-size:17px;line-height:1.5;max-height:34%;overflow:auto}
+  #text{font-size:16px;line-height:1.45;overflow:auto;min-height:0}
+  #reading.many .card{width:76px;height:122px}
+  #reading.many #text{font-size:14px}
 </style>
 </head>
 <body>
@@ -70,6 +76,20 @@
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let ws, tiersDone = false;
+const backFace = '<div class="back">✦</div>';
+// Use generated art (python -m tarot_live.gen_cards) when present; otherwise keep the text card.
+function addArt(face){
+  const id = String(face.dataset.id).padStart(2,'0'), rev = face.dataset.rev === '1';
+  const img = new Image(); img.src = `/cards/${id}.png`; if(rev) img.className = 'rev';
+  img.onload = () => {
+    const name = face.querySelector('.nm').textContent, th = face.querySelector('small').textContent;
+    face.className = 'face art'; face.innerHTML = '';
+    face.append(img);
+    const cap = document.createElement('div'); cap.className = 'cap'; cap.textContent = `${name} · ${rev?'กลับหัว':'ตั้งตรง'}`; face.append(cap);
+  };
+}
+const backImg = new Image(); backImg.src = '/cards/back.png';
+backImg.onload = () => document.documentElement.style.setProperty('--back', `url(/cards/back.png)`);
 
 function connect(){
   ws = new WebSocket((location.protocol==='https:'?'wss://':'ws://')+location.host+'/ws');
@@ -95,8 +115,10 @@ function handle(d){
   case 'reading_start':
     $('who').textContent = d.free ? '✨ ไพ่ประจำวันสำหรับทุกคน' : `🔮 ไพ่ของคุณ ${d.user}` + (d.question?` — “${d.question}”`:'');
     $('text').textContent = 'แม่หมอกำลังตั้งจิต...';
-    $('cards').innerHTML = d.cards.map(c=>`<div class="card"><div><div class="back">✦</div>
-      <div class="face ${c.reversed?'rev':''}"><span class="nm"><b>${esc(c.name_th)}</b></span><small>${esc(c.name_en)}</small><small>${c.reversed?'กลับหัว':'ตั้งตรง'}</small></div></div></div>`).join('');
+    $('cards').innerHTML = d.cards.map(c=>`<div class="card"><div>${backFace}
+      <div class="face" data-id="${c.id}" data-rev="${c.reversed?1:0}"><span class="nm"><b>${esc(c.name_th)}</b></span><small>${esc(c.name_en)}</small><small>${c.reversed?'กลับหัว':'ตั้งตรง'}</small></div></div></div>`).join('');
+    document.querySelectorAll('#cards .face').forEach(addArt);
+    $('reading').classList.toggle('many', d.cards.length > 3);
     $('reading').classList.add('show');
     [...document.querySelectorAll('.card')].forEach((el,i)=>setTimeout(()=>el.classList.add('flip'), 700+i*500));
     break;

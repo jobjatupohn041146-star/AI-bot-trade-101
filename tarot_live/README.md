@@ -28,6 +28,7 @@ Add **Browser Source** → `http://localhost:8765/` ขนาด 1080×1920 ว�
 | `sources.py` | แหล่งอีเวนต์: mock และ TikTok |
 | `safety.py` | กรองข้อความผู้ชม: ลบลิงก์/อักขระควบคุม, กัน prompt injection, คำหยาบ, หัวข้อละเอียดอ่อน |
 | `store.py` | เก็บคิว/ลีดเดอร์บอร์ด/เป้าไลก์ใน SQLite (`--db`, ค่าเริ่มต้น `data/tarot_live.db`) |
+| `gen_cards.py` | สร้างภาพไพ่ 78 ใบ + หลังไพ่ ด้วย OpenAI หรือ Replicate (Flux) |
 | `server.py` | aiohttp + WebSocket + ตัวทำงานคิว |
 | `overlay/index.html` | หน้าโอเวอร์เลย์ |
 
@@ -37,3 +38,12 @@ Add **Browser Source** → `http://localhost:8765/` ขนาด 1080×1920 ว�
 - **ยังไม่ได้ทดสอบ**: `tiktok_source` กับห้องไลฟ์จริง, `--tts`, การเรียก Claude จริง
 - TikTokLive เป็นไลบรารีไม่เป็นทางการ อาจพังเมื่อ TikTok อัปเดต
 - คำทำนายเพื่อความบันเทิง ควรแปะป้ายว่าเป็นเนื้อหา AI ตามนโยบาย TikTok
+
+## สร้างภาพไพ่
+    python -m tarot_live.gen_cards --dry-run        # ดูพรอมต์ทั้ง 79 อัน (prompts.json) ไม่เสียเงิน
+    export OPENAI_API_KEY=...                       # หรือ REPLICATE_API_TOKEN
+    python -m tarot_live.gen_cards --only 0 16 back # ลอง 3 ใบก่อน ดูสไตล์ถูกใจไหม
+    python -m tarot_live.gen_cards                  # ที่เหลือทั้งหมด (รันซ้ำได้ ข้ามใบที่ทำแล้ว)
+ผลลัพธ์อยู่ที่ `overlay/cards/NN.png` (NN = เลขไพ่ใน `cards.py`) + `back.png` โอเวอร์เลย์จะใช้ภาพเองถ้ามี ไม่มีก็ใช้การ์ดตัวอักษรเดิม
+ปรับสไตล์ที่ตัวแปร `STYLE` ใน `gen_cards.py` ก่อนรันทั้งหมด ราคาต่อภาพดูที่หน้าราคาของผู้ให้บริการ (ราว 79 ภาพ)
+ภาพ AI สไตล์อาจไม่เหมือนกันเป๊ะทุกใบ ถ้าใบไหนหลุดให้รันใหม่ด้วย `--only N --force`
